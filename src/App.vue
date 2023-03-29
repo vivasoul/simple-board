@@ -6,7 +6,7 @@ import BoardMain from "./components/BoardList.vue";
 
 <template>
   <header>
-    THIS IS TEST BOARD.
+    THIS IS TEST BOARD-LOW.
   </header>
 
   <main>

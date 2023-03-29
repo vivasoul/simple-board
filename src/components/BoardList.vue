@@ -6,8 +6,10 @@
 </template>
 
 <script>
-import {getBoards, getTotCount} from "@/database/board";
+import {getBoards, getTotCount} from "@/data/mock/board";
 import Pagination from "@/components/Pagination.vue";
+
+import {getBoard as getBoard2 } from "@/data/api/board"
 
 const ROW_PER_PAGE = 10
 
@@ -24,6 +26,8 @@ export default {
     loadBoards(pageNo) {
       this.curPage = pageNo
       this.boards = getBoards(pageNo)
+
+      getBoard2();
     },
     loadBoardDetail(brdNo) {
       this.$router.push(`/board/${brdNo}`)

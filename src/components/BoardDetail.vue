@@ -4,12 +4,13 @@
     <div class="board-content">{{ content }}</div>
   </div>
   <div class="board-detail-addon">
+    <button class="board-update-btn" @click="updateBoard">수정</button>
     <button class="board-detail-btn" @click="goToList">목록</button>
   </div>
 </template>
 
 <script>
-import {getBoard} from "@/database/board";
+import {getBoard} from "@/data/mock/board";
 
 export default {
   name: "BoardDetail",
@@ -28,6 +29,9 @@ export default {
     },
     goToList() {
       this.$router.push("/")
+    },
+    updateBoard() {
+
     }
   },
   mounted() {
