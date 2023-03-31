@@ -1,24 +1,37 @@
 <template>
   <div class="board-detail">
     <div class="board-title">{{ title }}</div>
-    <div class="board-content">{{ content }}</div>
+    <tiny-editor v-if="editable" api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig" v-model="content" />
+    <div v-else class="board-content">{{ content }}</div>
   </div>
   <div class="board-detail-addon">
-    <button class="board-update-btn" @click="updateBoard">수정</button>
+    <button class="board-update-btn" @click="toggleEdit(true)">수정</button>
     <button class="board-detail-btn" @click="goToList">목록</button>
   </div>
 </template>
 
 <script>
-import {getBoard} from "@/data/mock/board";
+import {getBoard} from "@/data/mock/board"
+import Editor from '@tinymce/tinymce-vue'
 
 export default {
   name: "BoardDetail",
+  components: {
+    "tiny-editor": Editor
+  },
   props: ["brdNo"],
   data() {
     return {
       title: "",
-      content: ""
+      content: "",
+      editable: false,
+      editorConfig: {
+        plugins: "lists link image table code wordcount",
+        toolbar: "styles | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table",
+        images_upload_url: "http://localhost",
+        menubar: false,
+        language: "ko_KR"
+      }
     }
   },
   methods: {
@@ -32,6 +45,9 @@ export default {
     },
     updateBoard() {
 
+    },
+    toggleEdit(editable) {
+      this.editable = editable
     }
   },
   mounted() {
