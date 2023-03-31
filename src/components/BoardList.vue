@@ -23,11 +23,10 @@ export default {
     }
   },
   methods: {
-    loadBoards(pageNo) {
+    async loadBoards(pageNo) {
       this.curPage = pageNo
-      this.boards = getBoards(pageNo)
-
-      getBoard2();
+      //this.boards = getBoards(pageNo)
+      this.boards = await getBoard2(pageNo)
     },
     loadBoardDetail(brdNo) {
       this.$router.push(`/board/${brdNo}`)

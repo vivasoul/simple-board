@@ -1,7 +1,8 @@
 <template>
   <div class="board-detail">
     <div class="board-title">{{ title }}</div>
-    <tiny-editor v-if="editable" api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig" v-model="content" />
+    <tiny-editor v-if="editable" api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
+                 v-model="content"/>
     <div v-else class="board-content">{{ content }}</div>
   </div>
   <div class="board-detail-addon">
@@ -12,6 +13,7 @@
 
 <script>
 import {getBoard} from "@/data/mock/board"
+import {getBoardDetail} from "@/data/api/board"
 import Editor from '@tinymce/tinymce-vue'
 
 export default {
@@ -35,8 +37,8 @@ export default {
     }
   },
   methods: {
-    loadBoard() {
-      const {title, content} = getBoard(this.brdNo)
+    async loadBoard() {
+      const {title, content} = await getBoardDetail(this.brdNo)
       this.title = title
       this.content = content
     },
@@ -76,7 +78,7 @@ export default {
 }
 
 .board-detail-addon {
-  text-align:right;
+  text-align: right;
   margin: 20px 10px;
 }
 
