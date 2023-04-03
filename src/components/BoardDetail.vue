@@ -12,6 +12,7 @@
       <div class="board-content" v-html="content"></div>
     </div>
   </div>
+  <ReplyList  v-if="!editable" :brd-no="brdNo" />
   <div class="board-detail-addon">
     <button v-if="editable" class="board-update-btn" @click="updateBoard">저장</button>
     <button v-else class="board-update-btn" @click="toggleEdit(true)">수정</button>
@@ -24,10 +25,12 @@
 import {getBoard} from "@/data/mock/board"
 import {getBoardDetail, updateBoard, deleteBoard} from "@/data/api/board"
 import Editor from '@tinymce/tinymce-vue'
+import ReplyList from "@/components/ReplyList.vue";
 
 export default {
   name: "BoardDetail",
   components: {
+    ReplyList,
     "tiny-editor": Editor
   },
   props: ["brdNo"],
@@ -73,7 +76,7 @@ export default {
       })
     },
     goToList() {
-      this.$router.push("/")
+      this.$router.push("/board")
     },
     toggleEdit(editable) {
       this.editable = editable

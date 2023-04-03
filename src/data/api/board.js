@@ -40,7 +40,7 @@ export async function updateBoard({brdNo, title, content}) {
     }
 }
 
-export async function deleteBoard({brdNo, title, content}) {
+export async function deleteBoard(brdNo) {
     const res = await axios.delete(`/board/${brdNo}`)
 
     if(res.status == 200) {
