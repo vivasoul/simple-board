@@ -1,19 +1,28 @@
 <template>
   <div class="board-detail">
-    <div class="board-title">{{ title }}</div>
-    <tiny-editor v-if="editable" api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
-                 v-model="content"/>
-    <div v-else class="board-content">{{ content }}</div>
+    <div v-if="editable">
+      <div>
+        <input class="board-title" type="text" v-model="title"/>
+      </div>
+      <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
+                   v-model="content"/>
+    </div>
+    <div v-else>
+      <div class="board-title">{{ title }}</div>
+      <div class="board-content" v-html="content"></div>
+    </div>
   </div>
   <div class="board-detail-addon">
-    <button class="board-update-btn" @click="toggleEdit(true)">수정</button>
+    <button v-if="editable" class="board-update-btn" @click="updateBoard">저장</button>
+    <button v-else class="board-update-btn" @click="toggleEdit(true)">수정</button>
+    <button class="board-delete-btn" @click="deleteBoard">삭제</button>
     <button class="board-detail-btn" @click="goToList">목록</button>
   </div>
 </template>
 
 <script>
 import {getBoard} from "@/data/mock/board"
-import {getBoardDetail} from "@/data/api/board"
+import {getBoardDetail, updateBoard, deleteBoard} from "@/data/api/board"
 import Editor from '@tinymce/tinymce-vue'
 
 export default {
@@ -42,11 +51,29 @@ export default {
       this.title = title
       this.content = content
     },
+    async updateBoard() {
+      const {brdNo, title, content} = this;
+      updateBoard({brdNo, title, content}).then((result) => {
+        if (result) {
+          console.log("수정 성공")
+          this.toggleEdit(false)
+        } else {
+          alert("수정 실패")
+        }
+      })
+    },
+    async deleteBoard() {
+      deleteBoard(this.brdNo).then((result) => {
+        if (result) {
+          console.log("삭제 성공")
+          this.goToList()
+        } else {
+          alert("삭제 실패")
+        }
+      })
+    },
     goToList() {
       this.$router.push("/")
-    },
-    updateBoard() {
-
     },
     toggleEdit(editable) {
       this.editable = editable
@@ -66,6 +93,7 @@ export default {
 
 .board-title {
   border-bottom: 1px solid black;
+  width: 100%;
   font-size: 15px;
   font-weight: 900;
   line-height: 30px;

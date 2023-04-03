@@ -2,6 +2,9 @@
     <div class="board-list" v-for="({brdNo, title}) in boards" @click="loadBoardDetail(brdNo)">
       {{ brdNo }} {{ title }}
     </div>
+    <div class="board-list-addon">
+      <button class="board-create-btn" @click="createBoard">신규</button>
+    </div>
     <Pagination :curPage="curPage" :maxPage="maxPage" @page-click="loadBoards"/>
 </template>
 
@@ -30,7 +33,10 @@ export default {
     },
     loadBoardDetail(brdNo) {
       this.$router.push(`/board/${brdNo}`)
-    }
+    },
+    createBoard() {
+      this.$router.push("/board-new")
+    },
   },
   computed: {
     maxPage() {
@@ -49,5 +55,8 @@ export default {
 .board-list {
   padding: 20px 10px;
   border-bottom: 1px solid black;
+}
+.board-list-addon {
+  text-align: right;
 }
 </style>
