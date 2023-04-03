@@ -1,12 +1,16 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 import BoardMain from "./components/BoardList.vue";
+
+const goHome = function() {
+
+}
 </script>
 
 <template>
   <header>
-    THIS IS TEST BOARD-LOW.
+    <router-link to="/">
+    OUTDOERTH HOME
+    </router-link>
   </header>
 
   <main>
