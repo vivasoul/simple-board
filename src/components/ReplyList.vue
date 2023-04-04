@@ -2,16 +2,18 @@
   <div class="reply-list-title">댓글</div>
   <div class="reply-list">
     <ReplyBox v-for="(item) in replies" :reply="item" :key="item.replNo"/>
+    <ReplyNewBox :brdNo="brdNo" @reply-created="loadReply"/>
   </div>
 </template>
 
 <script>
 import {getReply} from "@/data/api/reply";
 import ReplyBox from "@/components/ReplyBox.vue";
+import ReplyNewBox from "@/components/ReplyNewBox.vue";
 
 export default {
   name: "ReplyList",
-  components: {ReplyBox},
+  components: {ReplyBox, ReplyNewBox},
   props: ["brdNo"],
   data() {
     return {

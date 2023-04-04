@@ -19,7 +19,7 @@ export default {
   padding:10px;
 }
 .reply-desc {
-  padding: 5px;
+  margin: 5px;
   text-align: right;
 }
 .reply-content {
