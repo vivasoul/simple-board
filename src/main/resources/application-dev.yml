@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: OYWMS Develop Server
+  output:
+    ansi:
+      enabled: always
+
+  datasource:
+    hikari:
+      master:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        #        driver-class-name: oracle.jdbc.xa.client.OracleXADataSource
+        jdbc-url: jdbc:log4jdbc:oracle:thin:@121.254.164.75:1533/PNBDEV
+        username: OYWMSDEV
+        password: oywmsdev05!%
+        minimumIdle: 10
+        maximumPoolSize: 100
+        maxLifetime: 3540000
+        mybatis:
+          config-location: classpath:mybatis-config-master.xml
+      slave:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        url: jdbc:log4jdbc:mariadb://mrlee-database-test.cl1qpbs1xffv.ap-northeast-2.rds.amazonaws.com/tempdb
+        username: vivas
+        password: 123456
+        minimumIdle: 10
+        maximumPoolSize: 100
+        maxLifetime: 3540000
+        mybatis:
+          config-location: classpath:mybatis-config-slave.xml
+    #    auto-commit: false
+
+  web:
+    resources:
+      chain:
+        cache: false
+        strategy:
+          content:
+            paths: /nexa/**
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

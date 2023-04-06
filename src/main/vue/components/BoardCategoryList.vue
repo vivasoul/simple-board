@@ -18,11 +18,11 @@ export default {
   data() {
     return {
       items: [
-        {"title": "등산",     "path": "/board", "background": "red"},
-        {"title": "낚시",     "path": "/board", "background": "blue"},
-        {"title": "캠핑",     "path": "/board", "background": "yellow"},
-        {"title": "액티비티",  "path": "/board", "background": "green"},
-        {"title": "유머",     "path": "/board", "background": "white"}
+        {"title": "등산0",     "path": "/board", "background": "red"},
+        {"title": "낚시0",     "path": "/board", "background": "blue"},
+        {"title": "캠핑1",     "path": "/board", "background": "yellow"},
+        {"title": "액티비티1",  "path": "/board", "background": "green"},
+        {"title": "유머12",     "path": "/board", "background": "white"}
       ]
     }
   },

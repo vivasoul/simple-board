@@ -1,5 +1,4 @@
 <script setup>
-import BoardMain from "./components/BoardList.vue";
 
 const goHome = function() {
 

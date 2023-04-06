@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.odth.reply.ReplyMapper">
+    <select id="selectReply" parameterType="int" resultType="com.odth.reply.ReplyVO">
+        SELECT
+             brd_no
+             ,repl_no
+             ,content
+             ,reg_dt
+             ,upd_dt
+        FROM tb_reply
+        WHERE 1=1
+        AND brd_no = #{brdNo}
+    </select>
+
+    <insert id="insertReply" parameterType="com.odth.reply.ReplyVO">
+        INSERT INTO tb_reply (
+              brd_no
+             ,repl_no
+             ,content
+        )
+        SELECT
+             #{brdNo} AS brd_no
+            ,(SELECT NVL(MAX(repl_no),0) + 1 FROM tb_reply WHERE brd_no = #{brdNo}) AS repl_no
+            ,#{content} AS content
+    </insert>
+
+    <update id="updateReply" parameterType="com.odth.reply.ReplyVO">
+        UPDATE tb_reply
+        SET
+           content = #{content}
+          ,upd_dt = current_timestamp()
+        WHERE 1=1
+        AND brd_no = #{brdNo}
+        AND repl_no = #{replNo}
+    </update>
+
+    <delete id="deleteReply" parameterType="com.odth.reply.ReplyVO">
+        DELETE FROM tb_reply
+        WHERE 1=1
+        AND brd_no = #{brdNo}
+        AND repl_no = #{replNo}
+    </delete>
+</mapper>

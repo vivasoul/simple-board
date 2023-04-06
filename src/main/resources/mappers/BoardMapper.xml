@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.odth.board.BoardMapper">
+
+    <select id="selectBoard" resultType="com.odth.board.BoardVO">
+        WITH TOT AS (
+            SELECT COUNT(*) AS tot_cnt FROM tb_board
+        )
+        SELECT
+             a.brd_no
+            ,a.title
+            ,t.tot_cnt
+        FROM tb_board a
+        CROSS JOIN TOT t
+    </select>
+
+    <select id="selectBoardDetail" parameterType="int" resultType="com.odth.board.BoardVO">
+        SELECT
+             brd_no
+            ,title
+            ,content
+            ,reg_dt
+            ,upd_dt
+        FROM tb_board
+        WHERE 1=1
+        AND brd_no = #{brdNo}
+    </select>
+
+    <insert id="insertBoard" parameterType="com.odth.board.BoardVO">
+        INSERT INTO tb_board (
+           title
+          ,content
+        ) VALUES (
+           #{title}
+          ,#{content}
+        )
+    </insert>
+
+    <update id="updateBoard" parameterType="com.odth.board.BoardVO">
+        UPDATE tb_board
+        SET
+             title = #{title}
+            ,content = #{content}
+            ,upd_dt = current_timestamp()
+        WHERE 1=1
+        AND brd_no = #{brdNo}
+    </update>
+
+    <delete id="deleteBoard" parameterType="int">
+        DELETE FROM tb_board
+        WHERE 1=1
+        AND brdNo = #{brdNo}
+    </delete>
+</mapper>

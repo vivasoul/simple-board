@@ -11,7 +11,6 @@
 <script>
 import {getBoards, getTotCount} from "@/data/mock/board";
 import Pagination from "@/components/Pagination.vue";
-
 import {getBoard as getBoard2 } from "@/data/api/board"
 
 const ROW_PER_PAGE = 10

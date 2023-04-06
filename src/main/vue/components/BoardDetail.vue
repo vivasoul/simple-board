@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import {getBoard} from "@/data/mock/board"
 import {getBoardDetail, updateBoard, deleteBoard} from "@/data/api/board"
 import Editor from '@tinymce/tinymce-vue'
 import ReplyList from "@/components/ReplyList.vue";
