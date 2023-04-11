@@ -23,6 +23,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${nexacro.main.path}")
     private String mainUri;
 
+    @Value("${upload.temp-path}")
+    private String UPLOAD_TEMP_ROOT;
+
+    @Value("${upload.down-path}")
+    private String DOWNLOAD_ROOT;
+
     @Value("${nexacro.exception.default.message}")
     private String nexacroExceptionDefaultMessage;
 
@@ -63,6 +69,9 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("/nowhere");
+
+        registry.addResourceHandler(DOWNLOAD_ROOT+"/**")
+                .addResourceLocations("file:///"+UPLOAD_TEMP_ROOT+"/");
 
     }
 

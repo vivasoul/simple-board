@@ -5,6 +5,7 @@
     </div>
     <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
                  v-model="content"/>
+    <ImageUploader />
   </div>
   <div class="board-detail-addon">
     <button class="board-create-btn" @click="createBoard">등록</button>
@@ -16,10 +17,12 @@
 import {createBoard} from "@/data/api/board"
 import Editor from '@tinymce/tinymce-vue'
 import axios from "axios";
+import ImageUploader from "@/components/ImageUploader.vue";
 
 export default {
   name: "BoardDetail",
   components: {
+    ImageUploader,
     "tiny-editor": Editor
   },
   data() {
