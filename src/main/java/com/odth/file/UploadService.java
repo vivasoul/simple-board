@@ -16,32 +16,41 @@ import java.util.UUID;
 @Service("uploadService")
 public class UploadService {
 
-    @Value("${upload.temp-path}")
+    @Value("${upload.temp.up-path}")
     private String UPLOAD_TEMP_ROOT;
 
-    @Value("${upload.down-path}")
+    @Value("${upload.temp.down-path}")
+    private String DOWNLOAD_TEMP_ROOT;
+
+    @Value("${upload.ops.up-path}")
+    private String UPLOAD_ROOT;
+
+    @Value("${upload.ops.down-path}")
     private String DOWNLOAD_ROOT;
 
     public List<FileVO> uploadFiles(MultipartFile[] files) throws IllegalStateException, IOException{
         List<FileVO> fileList = new ArrayList<>();
 
         for(MultipartFile mf : files) {
-           FileVO vo = uploadTempFile(mf);
+           FileVO vo = uploadFile(mf);
            fileList.add(vo);
         }
 
         return fileList;
     }
 
-    private FileVO uploadTempFile(MultipartFile mFile) throws IllegalStateException, IOException {
-        return uploadFile(UPLOAD_TEMP_ROOT, mFile);
+    private FileVO uploadFile(MultipartFile mFile) throws IllegalStateException, IOException {
+        return uploadFile(UPLOAD_ROOT, DOWNLOAD_ROOT, mFile);
     }
 
-    private FileVO uploadFile(String rootPath, MultipartFile mFile) throws IllegalStateException, IOException {
-        String subPath = generateSubPath();
-        String uploadPath = rootPath + File.separator + subPath;
-        String downloadPath = DOWNLOAD_ROOT + "/" + subPath.replace(File.separator, "/");
+    private FileVO uploadTempFile(MultipartFile mFile) throws IllegalStateException, IOException {
+        return uploadFile(UPLOAD_TEMP_ROOT, DOWNLOAD_TEMP_ROOT, mFile);
+    }
 
+    private FileVO uploadFile(String uploadRoot, String downloadRoot, MultipartFile mFile) throws IllegalStateException, IOException {
+        String subPath = generateSubPath();
+        String uploadPath = uploadRoot + File.separator + subPath;
+        String downloadPath = downloadRoot + "/" + subPath.replace(File.separator, "/");
 
         String extension = "";
         String downloadNm = mFile.getOriginalFilename(); // file_name for download
@@ -65,7 +74,7 @@ public class UploadService {
 
         FileVO vo = new FileVO();
         vo.setFileNm(fileNm);
-        vo.setFilePath(file.getAbsolutePath());
+        vo.setFilePath(subPath);
         vo.setFileExt(extension);
         vo.setFileSize(file.length());
         vo.setDownFilePath(downloadPath+"/"+fileNm);
@@ -77,7 +86,7 @@ public class UploadService {
     private String generateSubPath() {
         Calendar c = Calendar.getInstance();
         int yyyy = c.get(Calendar.YEAR);
-        int mm = c.get(Calendar.MONTH);
+        int mm = c.get(Calendar.MONTH) + 1;
 
         return yyyy+File.separator+mm;
     }

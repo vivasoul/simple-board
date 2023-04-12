@@ -5,7 +5,7 @@
     </div>
     <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
                  v-model="content"/>
-    <ImageUploader />
+    <image-uploader @preview-click="handlePreviewClick"/>
   </div>
   <div class="board-detail-addon">
     <button class="board-create-btn" @click="createBoard">등록</button>
@@ -16,7 +16,7 @@
 <script>
 import {createBoard} from "@/data/api/board"
 import Editor from '@tinymce/tinymce-vue'
-import axios from "axios";
+import { getTinymce } from '@tinymce/tinymce-vue/lib/cjs/main/ts/TinyMCE'
 import ImageUploader from "@/components/ImageUploader.vue";
 
 export default {
@@ -32,7 +32,7 @@ export default {
       editorConfig: {
         plugins: "lists link image table code wordcount",
         toolbar: "styles | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table",
-        images_upload_url: "http://localhost",
+       //images_upload_url: "http://localhost",
         menubar: false,
         language: "ko_KR"
       }
@@ -56,6 +56,9 @@ export default {
     },
     toggleEdit(editable) {
       this.editable = editable
+    },
+    handlePreviewClick(imgSrc) {
+      getTinymce().activeEditor.insertContent(`<img src="${imgSrc}" />`)
     }
   },
   mounted() {

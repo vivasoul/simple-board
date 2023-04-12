@@ -2,7 +2,7 @@
   <input type="file" class="hidden-uploader" ref="fileInput" @change="handleFileChange"/>
   <button type="button" @click="popupFileDialog">이미지 첨부</button>
   <div class="upload-preview-list">
-    <img class="upload-preview-item" v-for="({downFilePath}) in filesUploaded" :src="downFilePath" />
+    <img class="upload-preview-item" v-for="({downFilePath}) in filesUploaded" :src="downFilePath" @click="handleImgClick" />
   </div>
 </template>
 
@@ -10,6 +10,7 @@
 import { uploadFiles } from "@/data/api/file"
 export default {
   name: "ImageUploader",
+  emits:["previewClick"],
   data() {
     return {
       files: [],
@@ -19,6 +20,9 @@ export default {
   methods: {
     popupFileDialog() {
       this.$refs.fileInput.click()
+    },
+    handleImgClick(e) {
+      this.$emit("previewClick", e.target.src)
     },
     handleFileChange(e) {
       const file = e.target.files[0]
@@ -35,7 +39,6 @@ export default {
               }
             }
         )
-
       }
     },
     async _uploadFiles(files) {
@@ -72,5 +75,6 @@ export default {
   margin: 3px;
   width: 100px;
   height: 100px;
+  cursor: pointer;
 }
 </style>

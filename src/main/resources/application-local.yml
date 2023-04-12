@@ -34,6 +34,9 @@ springdoc:
     enabled: true
 
 upload:
-  down-path: /download
-  temp-path: D:/upload/temp
-  real-path: D:/upload/app
+  temp:
+    down-path: /download/temp
+    up-path: D:/upload/temp
+  ops:
+    down-path: /download/ops
+    up-path: D:/upload/ops
