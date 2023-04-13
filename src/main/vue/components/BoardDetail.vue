@@ -5,7 +5,7 @@
         <q-input filled v-model="title" label="게시글 제목"/>
       </div>
       <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
-                   v-model="content"/>
+                   v-model="editContent"/>
       <image-uploader @preview-click="handlePreviewClick"/>
     </div>
     <div v-else>
@@ -45,6 +45,7 @@ export default {
     return {
       title: "",
       content: "",
+      editContent: "",
       editable: false,
       editorConfig: {
         plugins: "lists link image table code wordcount",
@@ -60,10 +61,13 @@ export default {
       const {title, content} = await getBoardDetail(this.brdNo)
       this.title = title
       this.content = content
+      this.editContent = content
     },
     async updateBoard() {
-      const {brdNo, title, content} = this;
-      updateBoard({brdNo, title, content}).then((result) => {
+      const {brdNo, title, editContent} = this;
+      this.content = editContent
+
+      updateBoard({brdNo, title, content: this.content}).then((result) => {
         if (result) {
           console.log("수정 성공")
           this.toggleEdit(false)
@@ -87,6 +91,9 @@ export default {
     },
     toggleEdit(editable) {
       this.editable = editable
+      if(!editable) {
+        this.editContent = this.content
+      }
     },
     handlePreviewClick(imgSrc) {
       getTinymce().activeEditor.insertContent(`<img src="${imgSrc}" />`)
