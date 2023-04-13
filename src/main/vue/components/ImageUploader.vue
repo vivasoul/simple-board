@@ -1,6 +1,12 @@
 <template>
-  <input type="file" class="hidden-uploader" ref="fileInput" @change="handleFileChange"/>
-  <button type="button" @click="popupFileDialog">이미지 첨부</button>
+  <input type="file" class="hidden-uploader" ref="fileInput" accept=".jpeg,.jpg,.png,.bmp,.webp,.gif" @change="handleFileChange"/>
+  <div class="q-pa-md q-gutter-y-md column items-start">
+    <q-btn-group>
+      <q-btn color="secondary" label="이미지 첨부" icon="camera_enhance" @click="popupFileDialog"/>
+    </q-btn-group>
+  </div>
+  <div :style="{color:'red', fontSize:'11px'}">* 업로드된 미리보기를 클릭하여야 본문에 실제로 첨부 됩니다.</div>
+  <div :style="{fontSize:'11px'}">* 업로드 가능한 이미지 사이즈는 파일당 1MB가 최대입니다.</div>
   <div class="upload-preview-list">
     <img class="upload-preview-item" v-for="({downFilePath}) in filesUploaded" :src="downFilePath" @click="handleImgClick" />
   </div>

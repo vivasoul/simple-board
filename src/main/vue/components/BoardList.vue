@@ -1,11 +1,25 @@
 <template>
-    <div class="board-list" v-for="({brdNo, title}) in boards" @click="loadBoardDetail(brdNo)">
-      {{ brdNo }} {{ title }}
-    </div>
-    <div class="board-list-addon">
-      <button class="board-create-btn" @click="createBoard">신규</button>
-    </div>
-    <Pagination :curPage="curPage" :maxPage="maxPage" @page-click="loadBoards"/>
+    <q-list padding>
+      <q-item v-for="({brdNo, title}) in boards" class="border-item"  style="">
+        <q-item-section>
+          <q-item-label>
+            <div class="board-detail-link" @click="loadBoardDetail(brdNo)">{{title}}</div>
+          </q-item-label>
+          <q-item-label caption lines="2">내용 미리보기 들어갈 곳</q-item-label>
+        </q-item-section>
+
+        <q-item-section side top>
+          <q-item-label caption>게시글번호:  {{brdNo}}</q-item-label>
+          <q-icon name="star" color="yellow"></q-icon>
+        </q-item-section>
+      </q-item>
+    </q-list>
+  <div class="q-pa-md q-gutter-y-md column items-end">
+    <q-btn-group>
+      <q-btn color="secondary" label="신규" @click="createBoard"/>
+    </q-btn-group>
+  </div>
+<!--    <Pagination :curPage="curPage" :maxPage="maxPage" @page-click="loadBoards"/>-->
 </template>
 
 <script>
@@ -50,12 +64,19 @@ export default {
 }
 </script>
 
-<style scoped>
-.board-list {
+<style scoped lang="scss">
+/*.board-list {
   padding: 20px 10px;
   border-bottom: 1px solid black;
+}*/
+.border-item {
+  border-bottom:1px solid $border-grey;
 }
 .board-list-addon {
   text-align: right;
+}
+.board-detail-link:hover{
+  text-decoration: underline;
+  cursor:pointer;
 }
 </style>

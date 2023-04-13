@@ -1,16 +1,22 @@
 <template>
   <div class="board-detail">
-    <div>
-      <input class="board-title" type="text" v-model="title" />
+    <div class="q-pa-xs">
+      <q-input filled v-model="title" label="게시글 제목" />
     </div>
     <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
                  v-model="content"/>
     <image-uploader @preview-click="handlePreviewClick"/>
   </div>
-  <div class="board-detail-addon">
+  <div class="q-pa-md q-gutter-y-md column items-end">
+    <q-btn-group>
+      <q-btn style="background:#69D44A;color:white;" label="등록" @click="createBoard"/>
+      <q-btn style="background:#5DEB6B;color:white;" label="취소" @click="goToList"/>
+    </q-btn-group>
+  </div>
+<!--  <div class="board-detail-addon">
     <button class="board-create-btn" @click="createBoard">등록</button>
     <button class="board-detail-btn" @click="goToList">취소</button>
-  </div>
+  </div>-->
 </template>
 
 <script>
@@ -67,32 +73,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.board-detail {
-  margin: 0 auto;
-  width: 100%;
-}
-
-.board-title {
-  border-bottom: 1px solid black;
-  width:100%;
-  font-size: 15px;
-  font-weight: 900;
-  line-height: 30px;
-  height: 30px;
-}
-
-.board-content {
-  border-bottom: 1px solid black;
-  min-height: 500px;
-}
-
-.board-detail-addon {
-  text-align: right;
-  margin: 20px 10px;
-}
-
-.board-detail-btn {
-
-}
+<style scoped lang="scss">
+@import "@/assets/css/board.scss";
 </style>

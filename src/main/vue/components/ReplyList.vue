@@ -38,6 +38,6 @@ export default {
   font-weight: 700;
 }
 .reply-list {
-  margin: 10px 20px;
+  padding: 10px 20px;
 }
 </style>

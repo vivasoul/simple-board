@@ -1,0 +1,25 @@
+.reply-container {
+  padding:10px;
+}
+.reply-desc {
+  margin: 5px;
+  text-align: right;
+}
+.reply-content {
+  margin: 5px;
+  border: 1px solid $border-grey;
+  border-radius: 5px;
+  padding: 10px 15px;
+  background:white;
+  white-space: pre;
+  font-size:12px;
+}
+
+.reply-edit-box{
+  padding: 10px 10px;
+  height: 50px;
+  resize: none;
+}
+.reply-addon {
+  text-align: right;
+}

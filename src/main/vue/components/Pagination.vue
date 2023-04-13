@@ -14,7 +14,8 @@ export default {
 
 <style scoped>
 .pagination-widget {
-  margin: 20px auto;
+  margin: 0px auto;
+  padding:20px 0px;
   text-align:center;
 
 }

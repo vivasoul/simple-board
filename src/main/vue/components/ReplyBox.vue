@@ -14,19 +14,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.reply-container {
-  padding:10px;
-}
-.reply-desc {
-  margin: 5px;
-  text-align: right;
-}
-.reply-content {
-  margin: 5px;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 10px 15px;
-  background:#f9f2c075;
-}
+<style scoped lang="scss">
+@import "@/assets/css/reply.scss";
 </style>

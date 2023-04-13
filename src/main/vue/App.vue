@@ -1,51 +1,27 @@
 <script setup>
+import HeaderPart from "@/components/layout/HeaderPart.vue"
+import BodyPart from "@/components/layout/BodyPart.vue"
+import FooterPart from "@/components/layout/FooterPart.vue"
 
-const goHome = function() {
-
-}
 </script>
 
 <template>
+  <div class="main-background">
+
+  </div>
   <header>
-    <router-link to="/">
-    OUTDOERTH HOME
-    </router-link>
+    <header-part/>
   </header>
 
   <main>
 <!--    <TheWelcome />-->
-    <router-view></router-view>
+    <body-part />
   </main>
+  <footer>
+    <footer-part/>
+  </footer>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<style scoped lang="scss">
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-/*
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}*/
-main {
-  width: 800px;
-}
 </style>

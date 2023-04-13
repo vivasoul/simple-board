@@ -1,0 +1,27 @@
+//@import '@/quasar-variables.sass';
+.board-detail {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.board-title {
+  border-bottom: 1px solid $border-grey;
+  padding:0px 15px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 50px;
+  height: 50px;
+}
+
+.board-content {
+  border-bottom: 1px solid $border-grey;
+  padding: 15px;
+  min-height: 500px;
+  overflow-x:auto;
+}
+
+.board-detail-addon {
+  text-align: right;
+  padding: 20px 10px;
+}

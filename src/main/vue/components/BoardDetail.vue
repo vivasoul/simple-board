@@ -1,8 +1,8 @@
 <template>
   <div class="board-detail">
     <div v-if="editable">
-      <div>
-        <input class="board-title" type="text" v-model="title"/>
+      <div class="q-pa-xs">
+        <q-input filled v-model="title" label="게시글 제목"/>
       </div>
       <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
                    v-model="content"/>
@@ -13,13 +13,17 @@
       <div class="board-content" v-html="content"></div>
     </div>
   </div>
-  <reply-list  v-if="!editable" :brd-no="brdNo" />
-  <div class="board-detail-addon">
-    <button v-if="editable" class="board-update-btn" @click="updateBoard">저장</button>
-    <button v-else class="board-update-btn" @click="toggleEdit(true)">수정</button>
-    <button class="board-delete-btn" @click="deleteBoard">삭제</button>
-    <button class="board-detail-btn" @click="goToList">목록</button>
+  <div class="q-pa-md q-gutter-y-md column items-end">
+    <q-btn-group>
+      <q-btn v-if="editable"  style="background:#69D44A;color:white;" label="저장" @click="updateBoard"/>
+      <q-btn v-else           style="background:#69D44A;color:white;" label="수정" @click="toggleEdit(true)"/>
+      <q-btn                  style="background:#4AD47F;color:white;" label="삭제" @click="deleteBoard"/>
+      <q-btn v-if="editable"  style="background:#5DEB6B;color:white;" label="취소" @click="toggleEdit(false)"/>
+      <q-btn v-else           style="background:#5DEB6B;color:white;" label="목록" @click="goToList"/>
+    </q-btn-group>
   </div>
+
+  <reply-list  v-if="!editable" :brd-no="brdNo" />
 </template>
 
 <script>
@@ -94,32 +98,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.board-detail {
-  margin: 0 auto;
-  width: 100%;
-}
-
-.board-title {
-  border-bottom: 1px solid black;
-  width: 100%;
-  font-size: 15px;
-  font-weight: 900;
-  line-height: 30px;
-  height: 30px;
-}
-
-.board-content {
-  border-bottom: 1px solid black;
-  min-height: 500px;
-}
-
-.board-detail-addon {
-  text-align: right;
-  margin: 20px 10px;
-}
-
-.board-detail-btn {
-
-}
+<style scoped lang="scss">
+@import "@/assets/css/board.scss";
 </style>
