@@ -7,7 +7,7 @@ import BoardCategoryList from "@/components/BoardCategoryList.vue"
 
 const routes = [
     {path: "/", component: BoardList},
-    {path: "/board", component: BoardList},
+    {path: "/board", component: BoardList, props: (route) => ({ catNo: route.query.catNo })},
     {path: "/board-new", component: BoardRegist},
     {path: "/board/:brdNo", component: BoardDetail, props: true},
 ]

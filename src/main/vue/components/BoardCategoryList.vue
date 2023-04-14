@@ -1,40 +1,33 @@
 <template>
-  <div class="board-category-list">
-    <BoardCategory v-for="({title, background, path}) in items"
-                   :key="title"
-                   :width="itemWidth"
-                   :title="title"
-                   :path="path"
-                   :background="background"/>
+  <div class="q-pa-md">
+    <BoardCategory v-for="({catNo, catNm, url}) in items"
+                   :key="catNo"
+                   :title="catNm"
+                   :url="url"/>
   </div>
 </template>
 
 <script>
 import BoardCategory from "@/components/BoardCategory.vue";
+import {getCategories} from "@/data/api/category"
 
 export default {
   name: "BoardCategories",
   components: {BoardCategory},
   data() {
     return {
-      items: [
-        {"title": "등산",     "path": "/board", "background": "red"},
-        {"title": "낚시",     "path": "/board", "background": "blue"},
-        {"title": "캠핑",     "path": "/board", "background": "yellow"},
-        {"title": "액티비티",  "path": "/board", "background": "green"},
-        {"title": "유머",     "path": "/board", "background": "white"}
-      ]
+      items: []
     }
   },
-  computed: {
-    itemWidth() {
-      const len = this.items.length
-      if(len > 0) {
-        return (100/len) + "%"
-      } else {
-        return "0"
-      }
+  methods: {
+    async loadCategories() {
+      const data = await getCategories()
+      console.log(data)
+      this.items = data;
     }
+  },
+  mounted() {
+    this.loadCategories()
   }
 }
 </script>

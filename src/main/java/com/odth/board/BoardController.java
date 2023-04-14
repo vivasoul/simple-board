@@ -13,9 +13,9 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public List<BoardVO> getBoard() {
+    public List<BoardVO> getBoard(@RequestParam(value = "catNo",required = false) Integer catNo) {
 
-        return boardService.getBoard();
+        return boardService.getBoard(catNo);
     }
 
     @GetMapping("/{brdNo}")

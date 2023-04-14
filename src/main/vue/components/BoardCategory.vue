@@ -1,38 +1,30 @@
 <template>
-  <div class="board-category-item" @click="onCategoryClick">
-    {{title}}
-  </div>
+  <q-chip square @click="handleCategoryClick" clickable>{{title}}</q-chip>
 </template>
 
 <script>
 export default {
   name: "BoardCategory",
   props: {
-      "width": String,
-      "background": {
+      "title": String,
+      "icon": String,
+      "color": {
         "type": String,
         "default": "white"
       },
-      "title": String,
-      "path": {
+      "url": {
         "type": String,
         "default": "/"
       }
   },
   methods:{
-    onCategoryClick(){
-      this.$router.push(this.path)
+    handleCategoryClick(){
+      this.$router.push(this.url)
     }
   }
 }
 </script>
 
 <style scoped>
-.board-category-item {
-  display: inline-block;
-  width: v-bind(width);
-  height: 90vh;
-  color: black;
-  background: v-bind(background)
-}
+
 </style>

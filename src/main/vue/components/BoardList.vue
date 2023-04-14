@@ -23,15 +23,15 @@
 </template>
 
 <script>
-import {getBoards, getTotCount} from "@/data/mock/board";
-import Pagination from "@/components/Pagination.vue";
-import {getBoard as getBoard2 } from "@/data/api/board"
+//import Pagination from "@/components/Pagination.vue";
+import {getBoard } from "@/data/api/board"
 
 const ROW_PER_PAGE = 10
 
 export default {
   name: "BoardList",
-  components: {Pagination},
+  //components: {Pagination},
+  props:["catNo"],
   data() {
     return {
       curPage: 1,
@@ -39,10 +39,10 @@ export default {
     }
   },
   methods: {
-    async loadBoards(pageNo) {
-      this.curPage = pageNo
+    async loadBoards(catNo) {
+      //this.curPage = pageNo
       //this.boards = getBoards(pageNo)
-      this.boards = await getBoard2(pageNo)
+      this.boards = await getBoard(catNo)
     },
     loadBoardDetail(brdNo) {
       this.$router.push(`/board/${brdNo}`)
@@ -52,14 +52,17 @@ export default {
     },
   },
   computed: {
-    maxPage() {
+/*    maxPage() {
       const totCnt = getTotCount() || 0;
       const maxPage= Math.ceil(totCnt / ROW_PER_PAGE);
       return maxPage
-    }
+    }*/
   },
   mounted() {
-   this.loadBoards(this.curPage)
+   this.loadBoards()
+  },
+  updated() {
+    this.loadBoards(this.catNo)
   }
 }
 </script>

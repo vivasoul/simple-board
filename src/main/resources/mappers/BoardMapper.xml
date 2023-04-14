@@ -14,6 +14,28 @@
         CROSS JOIN TOT t
     </select>
 
+    <select id="selectBoardByCategory" parameterType="int" resultType="com.odth.board.BoardVO">
+        WITH TOT AS (
+            SELECT COUNT(*) AS tot_cnt
+            FROM tb_board a
+            INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
+            INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
+            WHERE 1=1
+            AND c.cat_no = #{catNo}
+        )
+        SELECT
+             a.brd_no
+             ,a.title
+             ,t.tot_cnt
+        FROM tb_board a
+        INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
+        INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
+        CROSS JOIN TOT t
+        WHERE 1=1
+          AND c.cat_no = #{catNo}
+    </select>
+
+
     <select id="selectBoardDetail" parameterType="int" resultType="com.odth.board.BoardVO">
         SELECT
              brd_no
@@ -24,6 +46,15 @@
         FROM tb_board
         WHERE 1=1
         AND brd_no = #{brdNo}
+    </select>
+
+    <select id="selectBoardCategory" parameterType="int" resultType="int">
+        SELECT
+            b.cat_no
+        FROM tb_board a
+        INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
+        WHERE 1=1
+        AND a.brd_no = #{brdNo}
     </select>
 
     <insert id="insertBoard" parameterType="com.odth.board.BoardVO">

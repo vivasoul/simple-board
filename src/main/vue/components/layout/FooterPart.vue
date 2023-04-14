@@ -5,12 +5,19 @@
       <q-breadcrumbs-el label="개인정보처리방침" />
       <q-breadcrumbs-el label="이용약관" />
     </q-breadcrumbs>
+    <q-ajax-bar :hijack-filter="myFilterFn" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "FooterPart"
+  name: "FooterPart",
+  methods:{
+    myFilterFn(url){
+      console.log("filtered="+url)
+      return /^http:\/\/localhost:8080/.test(url)
+    }
+  }
 }
 </script>
 

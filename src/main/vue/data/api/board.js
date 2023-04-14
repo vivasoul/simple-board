@@ -1,7 +1,7 @@
 import axios from "axios"
 
-export async function getBoard() {
-    const res = await axios.get("/board")
+export async function getBoard(catNo) {
+    const res = await axios.get(`/board?catNo=${catNo || ''}`)
 
     if(res.status == 200) {
         return  res.data

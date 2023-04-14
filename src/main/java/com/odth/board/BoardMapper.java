@@ -8,7 +8,11 @@ import java.util.List;
 public interface BoardMapper {
     List<BoardVO> selectBoard();
 
+    List<BoardVO> selectBoardByCategory(int catNo);
+
     BoardVO selectBoardDetail(int brdNo);
+
+    List<Integer> selectBoardCategory(int brdNo);
 
     int insertBoard(BoardVO vo);
 
