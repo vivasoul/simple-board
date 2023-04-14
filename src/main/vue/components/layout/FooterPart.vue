@@ -14,7 +14,7 @@ export default {
   name: "FooterPart",
   methods:{
     myFilterFn(url){
-      console.log("filtered="+url)
+      // console.log("filtered="+url)
       return /^http:\/\/localhost:8080/.test(url)
     }
   }

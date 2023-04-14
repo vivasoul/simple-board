@@ -3,6 +3,7 @@
     <div class="q-pa-xs">
       <q-input filled v-model="title" label="게시글 제목" />
     </div>
+    <board-cat-box v-model="catNo" @update:model-value="handleCatNoChange"/>
     <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
                  v-model="content"/>
     <image-uploader @preview-click="handlePreviewClick"/>
@@ -23,11 +24,13 @@
 import {createBoard} from "@/data/api/board"
 import Editor from '@tinymce/tinymce-vue'
 import { getTinymce } from '@tinymce/tinymce-vue/lib/cjs/main/ts/TinyMCE'
-import ImageUploader from "@/components/ImageUploader.vue";
+import ImageUploader from "@/components/ImageUploader.vue"
+import BoardCatBox from "@/components/BoardCatBox.vue"
 
 export default {
   name: "BoardDetail",
   components: {
+    BoardCatBox,
     ImageUploader,
     "tiny-editor": Editor
   },
@@ -35,6 +38,7 @@ export default {
     return {
       title: "",
       content: "",
+      catNo: 0,
       editorConfig: {
         plugins: "lists link image table code wordcount",
         toolbar: "styles | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table",
@@ -65,6 +69,9 @@ export default {
     },
     handlePreviewClick(imgSrc) {
       getTinymce().activeEditor.insertContent(`<img src="${imgSrc}" />`)
+    },
+    handleCatNoChange(catNo) {
+      this.catNo = catNo
     }
   },
   mounted() {
