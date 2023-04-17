@@ -5,6 +5,8 @@ import { createApp } from 'vue'
 import { Quasar, Notify } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'   // Import icon libraries
 import 'quasar/src/css/index.sass'  // Import Quasar css
+/* mobile-detect */
+import VueMobileDetection from 'vue-mobile-detection'
 /* user-defined  */
 import './assets/main.scss'
 import router from "@/route";
@@ -22,6 +24,7 @@ app.use(Quasar, {
         }
     }
 })
+app.use(VueMobileDetection)
 /*app.use(Meta, {
 
 })*/

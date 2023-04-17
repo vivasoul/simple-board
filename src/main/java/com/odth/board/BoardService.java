@@ -3,7 +3,10 @@ package com.odth.board;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,18 +31,38 @@ public class BoardService {
         return board;
     }
 
+    @Transactional
     public int insertBoard(BoardVO vo) {
 
-        return boardMapper.insertBoard(vo);
+        int res = boardMapper.insertBoard(vo);
+        int brdNo = boardMapper.getInsertedBrdNo();
+        vo.setBrdNo(brdNo);
+
+        if(!CollectionUtils.isEmpty(vo.getCatNos())) {
+            res += boardMapper.mergeBoardCategory(vo);
+        }
+
+        return res;
     }
 
+    @Transactional
     public int updateBoard(BoardVO vo) {
+        int res = boardMapper.updateBoard(vo);
 
-        return boardMapper.updateBoard(vo);
+        if(!CollectionUtils.isEmpty(vo.getCatNos())) {
+            res += boardMapper.mergeBoardCategory(vo);
+            res += boardMapper.deleteUnusedCategory(vo);
+        }
+
+        return res;
     }
 
+    @Transactional
     public int deleteBoard(int brdNo) {
 
-        return boardMapper.deleteBoard(brdNo);
+        int res = boardMapper.deleteBoardCategory(brdNo);
+        res = boardMapper.deleteBoard(brdNo);
+
+        return res;
     }
 }

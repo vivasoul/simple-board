@@ -1,8 +1,10 @@
 <template>
-  <q-chip square @click="handleCategoryClick" clickable>{{title}}</q-chip>
+  <q-chip square @click="handleCategoryClick" clickable :color="category == catNo ? 'amber-7': ''">{{title}}</q-chip>
 </template>
 
 <script>
+import useCategory from "@/composables/useCategory";
+
 export default {
   name: "BoardCategory",
   props: {
@@ -15,7 +17,15 @@ export default {
       "url": {
         "type": String,
         "default": "/"
-      }
+      },
+      "catNo": String
+  },
+  setup() {
+    const { category } = useCategory()
+
+    return {
+      category
+    }
   },
   methods:{
     handleCategoryClick(){

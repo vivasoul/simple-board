@@ -1,7 +1,8 @@
 <template>
   <div class="q-pa-md">
-    <BoardCategory v-for="({catNo, catNm, url}) in items"
+    <board-category v-for="({catNo, catNm, url}) in items"
                    :key="catNo"
+                   :catNo="catNo"
                    :title="catNm"
                    :url="url"/>
   </div>
@@ -10,24 +11,31 @@
 <script>
 import BoardCategory from "@/components/BoardCategory.vue";
 import {getCategories} from "@/data/api/category"
+import useCategory from "@/composables/useCategory";
 
 export default {
   name: "BoardCategories",
   components: {BoardCategory},
+  setup(){
+    const { categories }= useCategory()
+    return {
+      items : categories
+    }
+  },
   data() {
     return {
-      items: []
+      //items: []
     }
   },
   methods: {
     async loadCategories() {
-      const data = await getCategories()
-      console.log(data)
-      this.items = data;
+      //const data = await getCategories()
+      //console.log(data)
+      //this.items = data;
     }
   },
   mounted() {
-    this.loadCategories()
+    //this.loadCategories()
   }
 }
 </script>

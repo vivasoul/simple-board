@@ -3,26 +3,46 @@
     <q-select
         outlined dense
         v-model="catNo"
-        :options="[]"
-        label="태그 선택"
+        :options="categories"
+        label="카테고리"
         bg-color="lime-3"
-        on-update:model-value="handleCatNoChange"></q-select>
+        @update:model-value="handleCatNoChange"></q-select>
   </div>
 </template>
 
 <script>
+import useCategory from "@/composables/useCategory";
+
 export default {
   name: "BoardCatBox",
   props:["modelValue"],
   emits:["update:modelValue"],
-  data() {
+  setup() {
+    const { categories }= useCategory()
     return {
-      catNo: 0
+      items : categories
+    }
+  },
+  data() {
+    const value = this.modelValue
+
+    return {
+      catNo: { label: this.getLabel(value), value }
     }
   },
   methods: {
-    handleCatNoChange(catNo) {
-      this.$emit("update:modelValue", catNo)
+    handleCatNoChange(val) {
+      console.log("c="+val.value)
+      this.$emit("update:modelValue", val.value)
+    },
+    getLabel(val) {
+      const cat = this.items.find((e) => e.catNo == val)
+      return cat ? cat.catNm : ""
+    }
+  },
+  computed: {
+    categories() {
+      return this.items.map( e => ({ "label": e.catNm, "value": e.catNo }) )
     }
   }
 }

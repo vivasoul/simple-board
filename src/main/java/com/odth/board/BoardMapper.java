@@ -19,4 +19,12 @@ public interface BoardMapper {
     int updateBoard(BoardVO vo);
 
     int deleteBoard(int brdNo);
+
+    int getInsertedBrdNo();
+
+    int mergeBoardCategory(BoardVO vo);
+
+    int deleteUnusedCategory(BoardVO vo);
+
+    int deleteBoardCategory(int brdNo);
 }

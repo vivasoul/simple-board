@@ -82,4 +82,34 @@
         WHERE 1=1
         AND brdNo = #{brdNo}
     </delete>
+
+    <select id="getInsertedBrdNo" resultType="int">
+        SELECT LAST_INSERT_ID() AS brd_no
+    </select>
+
+    <insert id="mergeBoardCategory" parameterType="com.odth.board.BoardVO">
+        INSERT INTO tb_board_category ( cat_no, brd_no )
+        VALUES
+        <foreach item="catNo" collection="catNos" separator=",">
+        (#{catNo}, #{brdNo})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        reg_dt = reg_dt
+    </insert>
+
+    <delete id="deleteUnusedCategory" parameterType="com.odth.board.BoardVO">
+        DELETE FROM tb_board_category
+        WHERE brd_no = #{brdNo}
+        <if test="catNos != null">
+            AND cat_no NOT IN
+            <foreach item="catNo" collection="catNos" open="(" separator="," close=")">
+                #{catNo}
+            </foreach>
+        </if>
+    </delete>
+
+    <delete id="deleteBoardCategory" parameterType="int">
+        DELETE FROM tb_board_category
+        WHERE brd_no = #{brdNo}
+    </delete>
 </mapper>

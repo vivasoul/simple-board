@@ -25,6 +25,7 @@
 <script>
 //import Pagination from "@/components/Pagination.vue";
 import {getBoard } from "@/data/api/board"
+import useCategory from "@/composables/useCategory";
 
 const ROW_PER_PAGE = 10
 
@@ -32,6 +33,12 @@ export default {
   name: "BoardList",
   //components: {Pagination},
   props:["catNo"],
+  setup() {
+    const { category } = useCategory()
+    return {
+      category
+    }
+  },
   data() {
     return {
       curPage: 1,
@@ -40,6 +47,7 @@ export default {
   },
   methods: {
     async loadBoards(catNo) {
+      this.category = catNo
       //this.curPage = pageNo
       //this.boards = getBoards(pageNo)
       this.boards = await getBoard(catNo)
@@ -59,7 +67,7 @@ export default {
     }*/
   },
   mounted() {
-   this.loadBoards()
+    this.loadBoards(this.catNo)
   },
   updated() {
     this.loadBoards(this.catNo)

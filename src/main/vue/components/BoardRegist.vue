@@ -1,11 +1,10 @@
 <template>
   <div class="board-detail">
     <div class="q-pa-xs">
-      <q-input filled v-model="title" label="게시글 제목" />
+      <q-input filled v-model="title" label="제목" />
     </div>
     <board-cat-box v-model="catNo" @update:model-value="handleCatNoChange"/>
-    <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
-                 v-model="content"/>
+    <board-content-editor v-model="content" @update:model-value="handleContentChange" />
     <image-uploader @preview-click="handlePreviewClick"/>
   </div>
   <div class="q-pa-md q-gutter-y-md column items-end">
@@ -22,37 +21,39 @@
 
 <script>
 import {createBoard} from "@/data/api/board"
-import Editor from '@tinymce/tinymce-vue'
+import BoardContentEditor from "@/components/BoardContentEditor.vue"
 import { getTinymce } from '@tinymce/tinymce-vue/lib/cjs/main/ts/TinyMCE'
 import ImageUploader from "@/components/ImageUploader.vue"
 import BoardCatBox from "@/components/BoardCatBox.vue"
+import useCategory from "@/composables/useCategory"
 
 export default {
   name: "BoardDetail",
   components: {
+    BoardContentEditor,
     BoardCatBox,
-    ImageUploader,
-    "tiny-editor": Editor
+    ImageUploader
+  },
+  setup() {
+    const { category } = useCategory();
+    console.log(category)
+    return {
+      category
+    }
   },
   data() {
     return {
       title: "",
       content: "",
-      catNo: 0,
-      editorConfig: {
-        plugins: "lists link image table code wordcount",
-        toolbar: "styles | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table",
-       //images_upload_url: "http://localhost",
-        menubar: false,
-        language: "ko_KR"
-      }
+      catNo: this.category || "",
     }
   },
   methods: {
     async createBoard() {
       const { title, content } = this;
+      const catNos = [this.catNo];
 
-      createBoard({ title, content }).then((result) => {
+      createBoard({ title, content, catNos }).then((result) => {
         if(result) {
           console.log("등록 성공")
           this.goToList()
@@ -62,7 +63,7 @@ export default {
       })
     },
     goToList() {
-      this.$router.push("/")
+      this.$router.go(-1)
     },
     toggleEdit(editable) {
       this.editable = editable
@@ -72,6 +73,9 @@ export default {
     },
     handleCatNoChange(catNo) {
       this.catNo = catNo
+    },
+    handleContentChange(content) {
+      this.content = content
     }
   },
   mounted() {

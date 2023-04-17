@@ -36,7 +36,7 @@ springdoc:
 upload:
   temp:
     down-path: /download/temp
-    up-path: C:/upload/temp
+    up-path: D:/upload/temp
   ops:
     down-path: /download/ops
-    up-path: C:/upload/ops
+    up-path: D:/upload/ops

@@ -1,0 +1,60 @@
+<template>
+  <div class="q-pa-xs">
+    <q-input
+        v-if="$isMobile()"
+        v-model="content"
+        filled
+        type="textarea"
+        :input-style="{resize:'none',height:'300px'}"
+        clearable
+        @change="handleChange"
+    />
+    <tiny-editor
+        v-else
+        :init="editorConfig"
+        v-model="content"
+        api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6"
+        @change="handleChange"
+    />
+  </div>
+</template>
+
+<script>
+import Editor from '@tinymce/tinymce-vue'
+export default {
+  name: "BoardContentEditor",
+  props:["modelValue"],
+  emits:["update:modelValue"],
+  components: {
+    "tiny-editor": Editor
+  },
+  data(){
+    return {
+      content: this.modelValue,
+      editorConfig: {
+        plugins: "lists link image table code wordcount",
+        toolbar: "styles | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link table",
+        //images_upload_url: "http://localhost",
+        menubar: false,
+        language: "ko_KR"
+      }
+    }
+  },
+  methods: {
+    handleChange(e, el) {
+      let val = ""
+
+      if(el && e.target === el) {
+        val = el.getContent()
+      } else {
+        val = e
+      }
+      this.$emit('update:modelValue', val)
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

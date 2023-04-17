@@ -2,11 +2,10 @@
   <div class="board-detail">
     <div v-if="editable">
       <div class="q-pa-xs">
-        <q-input filled v-model="title" label="게시글 제목"/>
+        <q-input filled v-model="title" label="제목"/>
       </div>
       <board-cat-box v-model="catNo" @update:model-value="handleCatNoChange"/>
-      <tiny-editor api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6" :init="editorConfig"
-                   v-model="editContent"/>
+      <board-content-editor v-model="editContent" @update:model-value="handleContentChange" />
       <image-uploader @preview-click="handlePreviewClick"/>
     </div>
     <div v-else>
@@ -29,49 +28,45 @@
 
 <script>
 import {getBoardDetail, updateBoard, deleteBoard} from "@/data/api/board"
-import Editor from '@tinymce/tinymce-vue'
+import BoardContentEditor from "@/components/BoardContentEditor.vue";
 import { getTinymce } from '@tinymce/tinymce-vue/lib/cjs/main/ts/TinyMCE'
 import ReplyList from "@/components/ReplyList.vue";
 import ImageUploader from "@/components/ImageUploader.vue";
 import BoardCatBox from "@/components/BoardCatBox.vue"
+import useCategory from "@/composables/useCategory";
 
 export default {
   name: "BoardDetail",
   components: {
+    BoardContentEditor,
     ReplyList,
     BoardCatBox,
-    ImageUploader,
-    "tiny-editor": Editor
+    ImageUploader
   },
   props: ["brdNo"],
   data() {
     return {
       title: "",
       content: "",
-      catNo: 0,
+      catNo: undefined,
       editContent: "",
-      editable: false,
-      editorConfig: {
-        plugins: "lists link image table code wordcount",
-        toolbar: "styles | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table",
-        //images_upload_url: "http://localhost",
-        menubar: false,
-        language: "ko_KR"
-      }
+      editable: false
     }
   },
   methods: {
     async loadBoard() {
-      const {title, content} = await getBoardDetail(this.brdNo)
+      const {title, content, catNos} = await getBoardDetail(this.brdNo)
       this.title = title
       this.content = content
       this.editContent = content
+      if(catNos.length) this.catNo = catNos[0]
     },
     async updateBoard() {
       const {brdNo, title, editContent} = this;
       this.content = editContent
+      const catNos = [this.catNo];
 
-      updateBoard({brdNo, title, content: this.content}).then((result) => {
+      updateBoard({brdNo, title, content: this.content, catNos}).then((result) => {
         if (result) {
           console.log("수정 성공")
           this.toggleEdit(false)
@@ -91,7 +86,7 @@ export default {
       })
     },
     goToList() {
-      this.$router.push("/board")
+      this.$router.go(-1)
     },
     toggleEdit(editable) {
       this.editable = editable
@@ -103,7 +98,11 @@ export default {
       getTinymce().activeEditor.insertContent(`<img src="${imgSrc}" />`)
     },
     handleCatNoChange(catNo) {
+      console.log("catNo="+catNo)
       this.catNo = catNo
+    },
+    handleContentChange(content) {
+      this.editContent = content
     }
   },
   mounted() {
