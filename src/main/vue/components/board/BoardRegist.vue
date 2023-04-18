@@ -21,10 +21,10 @@
 
 <script>
 import {createBoard} from "@/data/api/board"
-import BoardContentEditor from "@/components/BoardContentEditor.vue"
+import BoardContentEditor from "@/components/board/BoardContentEditor.vue"
 import { getTinymce } from '@tinymce/tinymce-vue/lib/cjs/main/ts/TinyMCE'
-import ImageUploader from "@/components/ImageUploader.vue"
-import BoardCatBox from "@/components/BoardCatBox.vue"
+import ImageUploader from "@/components/board/ImageUploader.vue"
+import BoardCatBox from "@/components/board/BoardCatBox.vue"
 import useCategory from "@/composables/useCategory"
 
 export default {
@@ -36,7 +36,7 @@ export default {
   },
   setup() {
     const { category } = useCategory();
-    console.log(category)
+
     return {
       category
     }

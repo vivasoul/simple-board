@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import BoardCategories from "@/components/BoardCategoryList.vue";
+import BoardCategories from "@/components/category/BoardCategoryList.vue";
 
 export default {
   name: "BodyPart",

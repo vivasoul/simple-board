@@ -1,7 +1,7 @@
 <script setup>
-import HeaderPart from "@/components/layout/HeaderPart.vue"
-import BodyPart from "@/components/layout/BodyPart.vue"
-import FooterPart from "@/components/layout/FooterPart.vue"
+import HeaderPart from "@/components/_layout/HeaderPart.vue"
+import BodyPart from "@/components/_layout/BodyPart.vue"
+import FooterPart from "@/components/_layout/FooterPart.vue"
 
 </script>
 

@@ -12,32 +12,29 @@
 
 <script>
 import useCategory from "@/composables/useCategory";
+import useCategories from "@/composables/useCategories";
 
 export default {
   name: "BoardCatBox",
   props:["modelValue"],
   emits:["update:modelValue"],
   setup() {
-    const { categories }= useCategory()
+    const { categories, categoryMap }= useCategories()
     return {
-      items : categories
+      items : categories,
+      catMap: categoryMap
     }
   },
   data() {
     const value = this.modelValue
 
     return {
-      catNo: { label: this.getLabel(value), value }
+      catNo: { label: this.catMap[value], value }
     }
   },
   methods: {
     handleCatNoChange(val) {
-      console.log("c="+val.value)
       this.$emit("update:modelValue", val.value)
-    },
-    getLabel(val) {
-      const cat = this.items.find((e) => e.catNo == val)
-      return cat ? cat.catNm : ""
     }
   },
   computed: {

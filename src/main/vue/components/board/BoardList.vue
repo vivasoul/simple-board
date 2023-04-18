@@ -1,11 +1,13 @@
 <template>
     <q-list padding>
-      <q-item v-for="({brdNo, title}) in boards" class="border-item"  style="">
+      <q-item v-for="({brdNo, title, catNostr}) in boards" class="border-item"  style="">
         <q-item-section>
           <q-item-label>
             <div class="board-detail-link" @click="loadBoardDetail(brdNo)">{{title}}</div>
           </q-item-label>
-          <q-item-label caption lines="2">내용 미리보기 들어갈 곳</q-item-label>
+          <q-item-label caption lines="2">
+            <board-cat-sum :cat-nos="makeCatNoList(catNostr)" />
+          </q-item-label>
         </q-item-section>
 
         <q-item-section side top>
@@ -26,12 +28,13 @@
 //import Pagination from "@/components/Pagination.vue";
 import {getBoard } from "@/data/api/board"
 import useCategory from "@/composables/useCategory";
+import BoardCatSum from "@/components/board/BoardCatSum.vue";
 
 const ROW_PER_PAGE = 10
 
 export default {
   name: "BoardList",
-  //components: {Pagination},
+  components: {BoardCatSum},
   props:["catNo"],
   setup() {
     const { category } = useCategory()
@@ -58,6 +61,10 @@ export default {
     createBoard() {
       this.$router.push("/board-new")
     },
+    makeCatNoList(catNos) {
+      if(catNos)  return catNos.split(",")
+      else        return null
+    }
   },
   computed: {
 /*    maxPage() {

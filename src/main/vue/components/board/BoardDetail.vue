@@ -9,7 +9,10 @@
       <image-uploader @preview-click="handlePreviewClick"/>
     </div>
     <div v-else>
-      <div class="board-title">{{ title }}</div>
+      <div class="board-title">
+        {{ title }}
+        <board-cat-sum :cat-nos="[catNo]" inline />
+      </div>
       <div class="board-content" v-html="content"></div>
     </div>
   </div>
@@ -28,17 +31,18 @@
 
 <script>
 import {getBoardDetail, updateBoard, deleteBoard} from "@/data/api/board"
-import BoardContentEditor from "@/components/BoardContentEditor.vue";
+import BoardContentEditor from "@/components/board/BoardContentEditor.vue";
 import { getTinymce } from '@tinymce/tinymce-vue/lib/cjs/main/ts/TinyMCE'
-import ReplyList from "@/components/ReplyList.vue";
-import ImageUploader from "@/components/ImageUploader.vue";
-import BoardCatBox from "@/components/BoardCatBox.vue"
-import useCategory from "@/composables/useCategory";
+import ReplyList from "@/components/reply/ReplyList.vue";
+import ImageUploader from "@/components/board/ImageUploader.vue";
+import BoardCatBox from "@/components/board/BoardCatBox.vue"
+import BoardCatSum from "@/components/board/BoardCatSum.vue";
 
 export default {
   name: "BoardDetail",
   components: {
     BoardContentEditor,
+    BoardCatSum,
     ReplyList,
     BoardCatBox,
     ImageUploader

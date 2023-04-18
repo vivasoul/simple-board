@@ -12,7 +12,9 @@ public class BoardVO {
     private String title;
     private String content;
     private List<Integer> catNos;
+    private String catNostr;
     private String regDt;
     private String updDt;
     private int totCnt;
+    private int replyCnt;
 }

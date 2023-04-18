@@ -1,9 +1,9 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
 
-import BoardList from "@/components/BoardList.vue"
-import BoardDetail from "@/components/BoardDetail.vue"
-import BoardRegist from "@/components/BoardRegist.vue"
-import BoardCategoryList from "@/components/BoardCategoryList.vue"
+import BoardList from "@/components/board/BoardList.vue"
+import BoardDetail from "@/components/board/BoardDetail.vue"
+import BoardRegist from "@/components/board/BoardRegist.vue"
+import BoardCategoryList from "@/components/category/BoardCategoryList.vue"
 
 const routes = [
     {path: "/", component: BoardList},

@@ -9,15 +9,16 @@
 </template>
 
 <script>
-import BoardCategory from "@/components/BoardCategory.vue";
+import BoardCategory from "@/components/category/BoardCategory.vue";
 import {getCategories} from "@/data/api/category"
 import useCategory from "@/composables/useCategory";
+import useCategories from "@/composables/useCategories";
 
 export default {
   name: "BoardCategories",
   components: {BoardCategory},
   setup(){
-    const { categories }= useCategory()
+    const { categories }= useCategories()
     return {
       items : categories
     }

@@ -8,8 +8,8 @@
 
 <script>
 import {getReply} from "@/data/api/reply";
-import ReplyBox from "@/components/ReplyBox.vue";
-import ReplyNewBox from "@/components/ReplyNewBox.vue";
+import ReplyBox from "@/components/reply/ReplyBox.vue";
+import ReplyNewBox from "@/components/reply/ReplyNewBox.vue";
 
 export default {
   name: "ReplyList",
