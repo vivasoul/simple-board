@@ -10,6 +10,7 @@
              a.brd_no
             ,a.title
             ,sf_get_cat_nos(a.brd_no) AS cat_nostr
+            ,sf_get_rpl_cnt(a.brd_no) AS reply_cnt
             ,t.tot_cnt
         FROM tb_board a
         CROSS JOIN TOT t
@@ -29,6 +30,7 @@
              a.brd_no
              ,a.title
              ,sf_get_cat_nos(a.brd_no) AS cat_nostr
+             ,sf_get_rpl_cnt(a.brd_no) AS reply_cnt
              ,t.tot_cnt
         FROM tb_board a
         INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)

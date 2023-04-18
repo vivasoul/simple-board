@@ -10,8 +10,8 @@ export async function getReply(brdNo) {
     }
 }
 
-export async function createReply({brdNo, content}) {
-    const res = await axios.post(`/board/${brdNo}/reply`, {brdNo, content})
+export async function createReply({brdNo, content, passwd}) {
+    const res = await axios.post(`/board/${brdNo}/reply`, {brdNo, content, passwd})
 
     if(res.status == 200) {
         return true;
@@ -30,11 +30,21 @@ export async function updateReply({brdNo, replNo, content}) {
     }
 }
 
-export async function deleteReply(brdNo, replNo) {
+export async function deleteReply({brdNo, replNo}) {
     const res = await axios.delete(`/board/${brdNo}/reply/${replNo}`)
 
     if(res.status == 200) {
         return true;
+    } else {
+        return false;
+    }
+}
+
+export async function checkReply({brdNo, replNo, passwd}) {
+    const res = await axios.post(`/board/${brdNo}/reply/${replNo}/check-pass`, {brdNo, replNo, passwd})
+
+    if(res.status == 200) {
+        return res.data;
     } else {
         return false;
     }

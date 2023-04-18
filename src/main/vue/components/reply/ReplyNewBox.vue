@@ -9,9 +9,12 @@
           :input-style="{resize:'none',height:'100px'}"
           clearable
       />
-    </div>
-    <div class="reply-addon">
-      <q-btn color="brown-5" label="댓글" @click="createReplyBox"/>
+      <div class="reply-addon">
+        <div class="reply-pass">
+          <q-input v-model="passwd" type="password" label="댓글 비밀번호" maxlength="10" outlined dense/>
+        </div>
+        <q-btn color="brown-5" label="댓글" @click="createReplyBox"/>
+      </div>
     </div>
   </div>
 </template>
@@ -30,12 +33,13 @@ export default {
   emits:["replyCreated"],
   data() {
     return {
-      content: ""
+      content: "",
+      passwd: ""
     }
   },
   methods : {
     async createReplyBox() {
-      const {brdNo, content} = this
+      const {brdNo, content, passwd} = this
 
       if(!content) {
         this.$q.notify({
@@ -43,7 +47,7 @@ export default {
           message: "빈 댓글은 달 수 없습니다."
         })
       } else {
-        const result = await createReply({brdNo, content})
+        const result = await createReply({brdNo, content, passwd})
 
         if(result) {
           this.content = ""

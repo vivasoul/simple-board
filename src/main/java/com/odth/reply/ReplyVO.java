@@ -9,6 +9,7 @@ public class ReplyVO {
     private int brdNo;
     private int replNo;
     private String content;
+    private String passwd;
     private String regDt;
     private String updDt;
 }

@@ -22,4 +22,24 @@
 }
 .reply-addon {
   text-align: right;
+  margin-top:5px;
+}
+
+.reply-pass {
+  display:inline-block;
+  vertical-align: middle;
+  width:150px;
+  margin-right:5px;
+}
+
+.reply-del-btn {
+  display: inline-block;
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  opacity: 0;
+  cursor:pointer;
+}
+.reply-del-btn:hover {
+  opacity: 1.0;
 }

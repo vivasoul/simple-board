@@ -13,4 +13,6 @@ public interface ReplyMapper {
     int updateReply(ReplyVO vo);
 
     int deleteReply(ReplyVO vo);
+
+    boolean checkPassword(ReplyVO vo);
 }

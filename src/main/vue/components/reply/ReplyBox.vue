@@ -1,7 +1,8 @@
 <template>
   <div class="reply-container">
-    <div class="reply-desc">{{reply.updDt}}</div>
-    <div class="reply-content">{{reply.content}}</div>
+    <div class="reply-desc">{{desc}}</div>
+    <div class="reply-content">{{content}}</div>
+    <div class="reply-del-btn" @click="handleDelPop">x</div>
   </div>
 </template>
 
@@ -9,7 +10,16 @@
 export default {
   name: "ReplyBox",
   props: {
-    reply: Object
+    replNo: Number,
+    desc: String,
+    content: String
+  },
+  emits:["reqReplDelete"],
+  methods: {
+    handleDelPop() {
+      console.log("---")
+      this.$emit("reqReplDelete", this.replNo)
+    }
   }
 }
 </script>

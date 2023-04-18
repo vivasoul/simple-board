@@ -1,6 +1,6 @@
 <template>
     <q-list padding>
-      <q-item v-for="({brdNo, title, catNostr}) in boards" class="border-item"  style="">
+      <q-item v-for="({brdNo, title, catNostr, replyCnt}) in boards" class="border-item"  style="">
         <q-item-section>
           <q-item-label>
             <div class="board-detail-link" @click="loadBoardDetail(brdNo)">{{title}}</div>
@@ -11,7 +11,7 @@
         </q-item-section>
 
         <q-item-section side top>
-          <q-item-label caption>게시글번호:  {{brdNo}}</q-item-label>
+          <q-item-label caption>{{replyCnt}} 댓글</q-item-label>
           <q-icon name="star" color="yellow"></q-icon>
         </q-item-section>
       </q-item>

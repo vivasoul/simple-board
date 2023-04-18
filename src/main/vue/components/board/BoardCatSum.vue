@@ -1,6 +1,6 @@
 <template>
   <div :style="{ display: inline ? 'inline-block' : 'block' }">
-    <q-chip v-for="(catNm, idx) in boardCats" :key="idx" dense>{{catNm}}</q-chip>
+    <q-badge v-for="(catNm, idx) in boardCats" :key="idx">{{catNm}}</q-badge>
   </div>
 </template>
 

@@ -18,11 +18,13 @@
               brd_no
              ,repl_no
              ,content
+             ,passwd
         )
         SELECT
              #{brdNo} AS brd_no
             ,(SELECT NVL(MAX(repl_no),0) + 1 FROM tb_reply WHERE brd_no = #{brdNo}) AS repl_no
             ,#{content} AS content
+            ,#{passwd} AS passwd
     </insert>
 
     <update id="updateReply" parameterType="com.odth.reply.ReplyVO">
@@ -41,4 +43,16 @@
         AND brd_no = #{brdNo}
         AND repl_no = #{replNo}
     </delete>
+
+    <select id="checkPassword" parameterType="com.odth.reply.ReplyVO" resultType="Boolean">
+        SELECT
+            (CASE WHEN
+                EXISTS(
+                    SELECT repl_no
+                    FROM tb_reply
+                    WHERE repl_no = #{replNo}
+                    AND passwd = #{passwd})
+            THEN 1 ELSE 0 END) AS yn
+
+    </select>
 </mapper>

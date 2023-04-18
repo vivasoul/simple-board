@@ -37,4 +37,10 @@ public class ReplyController {
         vo.setReplNo(replNo);
         return replyService.deleteReply(vo);
     }
+
+    @PostMapping("/{replNo}/check-pass")
+    public boolean checkReply(@PathVariable int brdNo, @RequestBody ReplyVO vo) {
+
+        return replyService.checkPassword(vo);
+    }
 }
