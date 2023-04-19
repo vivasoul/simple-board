@@ -14,6 +14,8 @@ public class BoardVO {
     private List<Integer> catNos;
     private String catNostr;
     private String regIp;
+    private String timeElapsed;
+    private int viewCnt;
     private String regDt;
     private String updDt;
     private int totCnt;

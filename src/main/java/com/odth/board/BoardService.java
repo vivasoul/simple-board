@@ -27,6 +27,7 @@ public class BoardService {
         BoardVO board = boardMapper.selectBoardDetail(brdNo);
         List<Integer> catNos = boardMapper.selectBoardCategory(brdNo);
         board.setCatNos(catNos);
+        boardMapper.increaseView(brdNo);
 
         return board;
     }

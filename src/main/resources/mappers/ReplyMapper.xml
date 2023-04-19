@@ -7,6 +7,7 @@
              ,repl_no
              ,content
              ,sf_mask_ip(reg_ip) AS reg_ip
+             ,sf_get_time_diff(reg_dt) AS time_elapsed
              ,reg_dt
              ,upd_dt
         FROM tb_reply

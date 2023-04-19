@@ -12,6 +12,8 @@ public interface BoardMapper {
 
     BoardVO selectBoardDetail(int brdNo);
 
+    int increaseView(int brdNo);
+
     List<Integer> selectBoardCategory(int brdNo);
 
     int insertBoard(BoardVO vo);

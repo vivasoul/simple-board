@@ -11,6 +11,7 @@ public class ReplyVO {
     private String content;
     private String passwd;
     private String regIp;
+    private String timeElapsed;
     private String regDt;
     private String updDt;
 }
