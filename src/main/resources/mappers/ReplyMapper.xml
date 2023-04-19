@@ -21,12 +21,14 @@
              ,repl_no
              ,content
              ,passwd
+             ,reg_ip
         )
         SELECT
              #{brdNo} AS brd_no
             ,(SELECT NVL(MAX(repl_no),0) + 1 FROM tb_reply WHERE brd_no = #{brdNo}) AS repl_no
             ,#{content} AS content
             ,#{passwd} AS passwd
+            ,#{regIp} AS reg_ip
     </insert>
 
     <update id="updateReply" parameterType="com.odth.reply.ReplyVO">

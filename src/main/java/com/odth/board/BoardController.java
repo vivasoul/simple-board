@@ -1,8 +1,10 @@
 package com.odth.board;
 
+import com.odth.util.HttpUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -25,7 +27,10 @@ public class BoardController {
     }
 
     @PostMapping
-    public int insertBoard(@RequestBody BoardVO vo) {
+    public int insertBoard(@RequestBody BoardVO vo, HttpServletRequest req) {
+
+        String userIp = HttpUtils.getRequestIP(req);
+        vo.setRegIp(userIp);
 
         return boardService.insertBoard(vo);
     }

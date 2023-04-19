@@ -81,9 +81,11 @@
         INSERT INTO tb_board (
            title
           ,content
+          ,reg_ip
         ) VALUES (
            #{title}
           ,#{content}
+          ,#{regIp}
         )
     </insert>
 
@@ -100,7 +102,7 @@
     <delete id="deleteBoard" parameterType="int">
         DELETE FROM tb_board
         WHERE 1=1
-        AND brdNo = #{brdNo}
+        AND brd_no = #{brdNo}
     </delete>
 
     <select id="getInsertedBrdNo" resultType="int">

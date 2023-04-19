@@ -1,8 +1,11 @@
 package com.odth.reply;
 
+import com.odth.util.HttpUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,7 +22,10 @@ public class ReplyController {
     }
 
     @PostMapping
-    public int insertReply(@PathVariable int brdNo, @RequestBody ReplyVO vo) {
+    public int insertReply(@PathVariable int brdNo, @RequestBody ReplyVO vo, HttpServletRequest req) {
+
+        String userIp = HttpUtils.getRequestIP(req);
+        vo.setRegIp(userIp);
 
         return replyService.insertReply(vo);
     }
