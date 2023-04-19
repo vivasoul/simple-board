@@ -18,5 +18,6 @@ export default {
 .body-container {
   padding: 0px 15px;
   background-color:#f9f4d8;
+  color:black;
 }
 </style>
