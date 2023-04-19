@@ -1,5 +1,6 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md category-container">
+    <board-category title="전체" url="/board"/>
     <board-category v-for="({catNo, catNm, url}) in items"
                    :key="catNo"
                    :catNo="catNo"
@@ -42,5 +43,9 @@ export default {
 </script>
 
 <style scoped>
-
+.category-container {
+  margin: 10px 0px;
+  /*background-color:#81C4B6;*/
+  background-color:#6C785F;
+}
 </style>

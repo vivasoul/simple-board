@@ -1,6 +1,6 @@
 <template>
   <div :style="{ display: inline ? 'inline-block' : 'block' }">
-    <q-badge v-for="(catNm, idx) in boardCats" :key="idx">{{catNm}}</q-badge>
+    <q-badge v-for="(catNm, idx) in boardCats" :key="idx" color="catsum">{{catNm}}</q-badge>
   </div>
 </template>
 
@@ -33,5 +33,7 @@ export default {
 </script>
 
 <style scoped>
-
+.bg-catsum {
+  background-color: #4a8595;
+}
 </style>

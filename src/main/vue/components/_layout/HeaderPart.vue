@@ -17,7 +17,7 @@ export default {
   height: 70px;
   line-height: 70px;
   padding: 0px 20px;
-  color: white;
+  color: #EBC447;
   font-size:23px;
   font-weight: 700;
 

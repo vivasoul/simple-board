@@ -18,7 +18,7 @@
     </q-list>
   <div class="q-pa-md q-gutter-y-md column items-end">
     <q-btn-group>
-      <q-btn color="secondary" label="신규" @click="createBoard"/>
+      <q-btn color="secondary" label="글쓰기" @click="createBoard"/>
     </q-btn-group>
   </div>
 <!--    <Pagination :curPage="curPage" :maxPage="maxPage" @page-click="loadBoards"/>-->

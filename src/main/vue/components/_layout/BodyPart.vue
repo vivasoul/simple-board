@@ -1,8 +1,6 @@
 <template>
+  <board-categories/>
   <div class="body-container">
-    <div>
-      <board-categories/>
-    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -19,5 +17,6 @@ export default {
 <style scoped>
 .body-container {
   padding: 0px 15px;
+  background-color:#f9f4d8;
 }
 </style>
