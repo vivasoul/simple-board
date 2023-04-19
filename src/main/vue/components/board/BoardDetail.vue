@@ -2,7 +2,7 @@
   <div class="board-detail">
     <div v-if="editable">
       <div class="q-pa-xs">
-        <q-input filled v-model="title" label="제목"/>
+        <q-input filled v-model="title" label="제목" dense/>
       </div>
       <board-cat-box v-model="catNo" @update:model-value="handleCatNoChange"/>
       <board-content-editor v-model="editContent" @update:model-value="handleContentChange" />
@@ -37,6 +37,7 @@ import ReplyList from "@/components/reply/ReplyList.vue";
 import ImageUploader from "@/components/board/ImageUploader.vue";
 import BoardCatBox from "@/components/board/BoardCatBox.vue"
 import BoardCatSum from "@/components/board/BoardCatSum.vue";
+import {useValidation} from "@/composables/useValidation";
 
 export default {
   name: "BoardDetail",
@@ -48,6 +49,13 @@ export default {
     ImageUploader
   },
   props: ["brdNo"],
+  setup() {
+    const {boardValidator} =  useValidation()
+
+    return {
+      boardValidator
+    }
+  },
   data() {
     return {
       title: "",
@@ -66,18 +74,22 @@ export default {
       if(catNos.length) this.catNo = catNos[0]
     },
     async updateBoard() {
-      const {brdNo, title, editContent} = this;
+      const {brdNo, title, editContent, catNo} = this;
       this.content = editContent
-      const catNos = [this.catNo];
+      const catNos = [catNo];
 
-      updateBoard({brdNo, title, content: this.content, catNos}).then((result) => {
-        if (result) {
-          console.log("수정 성공")
-          this.toggleEdit(false)
-        } else {
-          alert("수정 실패")
-        }
-      })
+      if(this.boardValidator({title, catNo, content: this.content})) {
+
+        updateBoard({brdNo, title, content: this.content, catNos}).then((result) => {
+          if (result) {
+            console.log("수정 성공")
+            this.toggleEdit(false)
+          } else {
+            alert("수정 실패")
+          }
+        })
+
+      }
     },
     async deleteBoard() {
       this.$q.dialog({

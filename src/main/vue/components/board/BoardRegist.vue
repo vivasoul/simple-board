@@ -1,7 +1,7 @@
 <template>
   <div class="board-detail">
     <div class="q-pa-xs">
-      <q-input filled v-model="title" label="제목" />
+      <q-input filled v-model="title" label="제목" dense/>
     </div>
     <board-cat-box v-model="catNo" @update:model-value="handleCatNoChange"/>
     <board-content-editor v-model="content" @update:model-value="handleContentChange" />
@@ -26,6 +26,7 @@ import { getTinymce } from '@tinymce/tinymce-vue/lib/cjs/main/ts/TinyMCE'
 import ImageUploader from "@/components/board/ImageUploader.vue"
 import BoardCatBox from "@/components/board/BoardCatBox.vue"
 import useCategory from "@/composables/useCategory"
+import {useValidation} from "@/composables/useValidation";
 
 export default {
   name: "BoardDetail",
@@ -36,9 +37,11 @@ export default {
   },
   setup() {
     const { category } = useCategory();
+    const { boardValidator } =  useValidation()
 
     return {
-      category
+      category,
+      boardValidator
     }
   },
   data() {
@@ -50,17 +53,20 @@ export default {
   },
   methods: {
     async createBoard() {
-      const { title, content } = this;
-      const catNos = [this.catNo];
+      const { title, content, catNo } = this;
+      const catNos = [catNo];
 
-      createBoard({ title, content, catNos }).then((result) => {
-        if(result) {
-          console.log("등록 성공")
-          this.goToList()
-        } else {
-          alert("등록 실패")
-        }
-      })
+      if(this.boardValidator({title, catNo, content})) {
+
+        createBoard({title, content, catNos}).then((result) => {
+          if (result) {
+            console.log("등록 성공")
+            this.goToList()
+          } else {
+            alert("등록 실패")
+          }
+        })
+      }
     },
     goToList() {
       this.$router.go(-1)
