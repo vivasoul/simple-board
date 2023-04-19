@@ -6,6 +6,7 @@
              brd_no
              ,repl_no
              ,content
+             ,sf_mask_ip(reg_ip) AS reg_ip
              ,reg_dt
              ,upd_dt
         FROM tb_reply

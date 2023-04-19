@@ -12,5 +12,6 @@
              ,upd_dt
         FROM tb_category
         WHERE 1=1
+        ORDER BY sort_odr
     </select>
 </mapper>

@@ -1,7 +1,13 @@
 <template>
   <div class="reply-list-title">댓글</div>
   <div class="reply-list">
-    <reply-box v-for="({updDt, content, replNo}) in replies" :key="replNo" :replNo="replNo" :desc="updDt" :content="content" @req-repl-delete="handleReplDelete"/>
+    <reply-box v-for="({updDt, content, replNo, regIp}) in replies"
+               :key="replNo"
+               :replNo="replNo"
+               :ip="regIp"
+               :desc="updDt"
+               :content="content"
+               @req-repl-delete="handleReplDelete"/>
     <reply-new-box :brdNo="brdNo" @reply-created="loadReply"/>
     <reply-del-pop v-if="delopen" :repl-no="delReplNo" :brd-no="brdNo" @del-pop-close="handleDelPopClose"/>
   </div>
@@ -43,13 +49,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.reply-list-title {
-  padding: 10px 20px 0px 20px;
-  font-size: 15px;
-  font-weight: 700;
-}
-.reply-list {
-  padding: 10px 20px;
-}
+<style lang="scss">
+@import "@/assets/css/reply.scss";
 </style>
