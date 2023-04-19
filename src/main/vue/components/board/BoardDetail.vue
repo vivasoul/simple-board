@@ -80,14 +80,19 @@ export default {
       })
     },
     async deleteBoard() {
-      deleteBoard(this.brdNo).then((result) => {
-        if (result) {
-          console.log("삭제 성공")
-          this.goToList()
-        } else {
-          alert("삭제 실패")
-        }
-      })
+      this.$q.dialog({
+        message: "현재 게시물을 삭제하시겠습니까?",
+        cancel: true
+      }).onOk(function(){
+        deleteBoard(this.brdNo).then(res => {
+          if (res) {
+            console.log("삭제 성공")
+            this.goToList()
+          } else {
+            alert("삭제 실패")
+          }
+        })
+      }.bind(this))
     },
     goToList() {
       this.$router.go(-1)
