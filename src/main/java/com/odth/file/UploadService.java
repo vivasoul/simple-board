@@ -1,7 +1,9 @@
 package com.odth.file;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service("uploadService")
+@RequiredArgsConstructor
 public class UploadService {
 
     @Value("${upload.temp.up-path}")
@@ -28,6 +31,8 @@ public class UploadService {
     @Value("${upload.ops.down-path}")
     private String DOWNLOAD_ROOT;
 
+    private final FileMapper fileMapper;
+
     public List<FileVO> uploadFiles(MultipartFile[] files) throws IllegalStateException, IOException{
         List<FileVO> fileList = new ArrayList<>();
 
@@ -37,6 +42,13 @@ public class UploadService {
         }
 
         return fileList;
+    }
+
+    @Transactional
+    public void insertFileInfo(List<FileVO> list) {
+        for(FileVO vo : list) {
+            fileMapper.insertFile(vo);
+        }
     }
 
     private FileVO uploadFile(MultipartFile mFile) throws IllegalStateException, IOException {

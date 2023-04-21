@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.odth.file.FileMapper">
+
+    <select id="insertFile" parameterType="com.odth.file.FileVO" statementType="CALLABLE">
+        CALL sp_insert_file(
+            #{downFileNm}, #{downFilePath}, #{fileExt}, #{fileSize},
+            #{fileId, jdbcType=INTEGER, jdbcTypeName=int, mode=OUT})
+    </select>
+
+</mapper>

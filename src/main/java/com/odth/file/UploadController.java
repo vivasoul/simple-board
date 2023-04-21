@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,11 +20,12 @@ public class UploadController {
 
     @PostMapping("/files/upload")
     @ResponseBody
-    public List<FileVO> uploadCommon(@RequestParam MultipartFile[] files) throws Exception{
+    public List<FileVO> uploadCommon(@RequestPart MultipartFile[] files) throws Exception{
         List<FileVO> list = null;
 
         if(files != null) {
             list = uploadService.uploadFiles(files);
+            uploadService.insertFileInfo(list);
         }
 
         return list;
