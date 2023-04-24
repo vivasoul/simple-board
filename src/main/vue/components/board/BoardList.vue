@@ -22,11 +22,10 @@
       <q-btn color="secondary" label="글쓰기" @click="createBoard"/>
     </q-btn-group>
   </div>
-<!--    <Pagination :curPage="curPage" :maxPage="maxPage" @page-click="loadBoards"/>-->
 </template>
 
 <script>
-//import Pagination from "@/components/Pagination.vue";
+
 import {getBoard } from "@/data/api/board"
 import useCategory from "@/composables/useCategory";
 import BoardCatSum from "@/components/board/BoardCatSum.vue";
