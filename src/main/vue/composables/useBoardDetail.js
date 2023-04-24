@@ -29,7 +29,6 @@ const init = function(initData) {
         _files.value = files || defaultData.files;
         _content.value = content || defaultData.content;
 
-        console.log("detail data reset")
     }
 }
 

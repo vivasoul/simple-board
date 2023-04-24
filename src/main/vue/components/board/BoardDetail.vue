@@ -9,6 +9,7 @@
         {{ title }}
         <board-cat-sum :cat-nos="[catNo]" inline />
       </div>
+      <board-gallery :list="files"/>
       <div class="board-content" v-html="content"></div>
     </div>
   </div>
@@ -33,12 +34,12 @@ import BoardHeadEditor from "@/components/board/BoardHeadEditor.vue"
 import BoardContentEditor from "@/components/board/BoardContentEditor.vue"
 import BoardCatSum from "@/components/board/BoardCatSum.vue"
 import ReplyList from "@/components/reply/ReplyList.vue"
-
-
+import BoardGallery from "@/components/board/BoardGallery.vue"
 
 export default {
   name: "BoardDetail",
   components: {
+    BoardGallery,
     BoardHeadEditor,
     BoardContentEditor,
     BoardCatSum,
@@ -48,7 +49,7 @@ export default {
   setup() {
     const {boardValidator} =  useValidation()
     const { title, catNo, files, content } = useBoardDetail()
-    console.log("SETUP DETAIL")
+
     return {
       boardValidator,
       title, catNo, files, content
@@ -61,14 +62,16 @@ export default {
   },
   methods: {
     async loadBoard() {
-      const {title, content, catNos} = await getBoardDetail(this.brdNo)
+      const {title, content, catNos, files} = await getBoardDetail(this.brdNo)
       this.title = title
       this.content = content
+      this.files = files
       if(catNos.length) this.catNo = catNos[0]
     },
     async updateBoard() {
-      const {brdNo, title, content, catNo, files} = this;
+      const {brdNo, title, content, catNo} = this;
       const catNos = [catNo];
+      const files = this.files.map(({fileId, thumbYn}) => ({fileId, thumbYn}))
 
       if(this.boardValidator({title, catNo, content})) {
 

@@ -135,6 +135,18 @@
         WHERE brd_no = #{brdNo}
     </delete>
 
+    <select id="selectBoardImages" parameterType="int" resultType="com.odth.board.BoardAttachVO">
+        SELECT
+            a.file_id,
+            b.file_path,
+            a.thumb_yn
+        FROM tb_board_attach a
+        INNER JOIN tb_attach_file b ON a.file_id = b.file_id
+        WHERE 1=1
+        AND brd_no = #{brdNo}
+        AND del_yn = 'N'
+    </select>
+
     <insert id="mergeBoardImages" parameterType="com.odth.board.BoardVO">
         INSERT INTO tb_board_attach ( brd_no, file_id, thumb_yn )
         VALUES

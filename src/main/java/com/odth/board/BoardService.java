@@ -27,6 +27,9 @@ public class BoardService {
         BoardVO board = boardMapper.selectBoardDetail(brdNo);
         List<Integer> catNos = boardMapper.selectBoardCategory(brdNo);
         board.setCatNos(catNos);
+        List<BoardAttachVO> files = boardMapper.selectBoardImages(brdNo);
+        board.setFiles(files);
+
         boardMapper.increaseView(brdNo);
 
         return board;
@@ -56,6 +59,10 @@ public class BoardService {
         if(!CollectionUtils.isEmpty(vo.getCatNos())) {
             res += boardMapper.mergeBoardCategory(vo);
             res += boardMapper.deleteUnusedCategory(vo);
+        }
+
+        if(!CollectionUtils.isEmpty(vo.getFiles())) {
+            res += boardMapper.mergeBoardImages(vo);
         }
 
         return res;

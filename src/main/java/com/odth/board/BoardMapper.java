@@ -30,5 +30,6 @@ public interface BoardMapper {
 
     int deleteBoardCategory(int brdNo);
 
+    List<BoardAttachVO> selectBoardImages(int brdNo);
     int mergeBoardImages(BoardVO vo);
 }
