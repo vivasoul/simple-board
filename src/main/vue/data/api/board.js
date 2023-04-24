@@ -20,8 +20,8 @@ export async function getBoardDetail(brdNo) {
     }
 }
 
-export async function createBoard({title, content, catNos}) {
-    const res = await axios.post("/board", {title, content, catNos})
+export async function createBoard({title, content, catNos, files}) {
+    const res = await axios.post("/board", {title, content, catNos, files})
 
     if(res.status == 200) {
         return true;
@@ -30,8 +30,8 @@ export async function createBoard({title, content, catNos}) {
     }
 }
 
-export async function updateBoard({brdNo, title, content, catNos}) {
-    const res = await axios.put(`/board/${brdNo}`, {brdNo, title, content, catNos})
+export async function updateBoard({brdNo, title, content, catNos, files}) {
+    const res = await axios.put(`/board/${brdNo}`, {brdNo, title, content, catNos, files})
 
     if(res.status == 200) {
         return true;

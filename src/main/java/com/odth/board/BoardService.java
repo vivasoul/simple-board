@@ -42,6 +42,9 @@ public class BoardService {
         if(!CollectionUtils.isEmpty(vo.getCatNos())) {
             res += boardMapper.mergeBoardCategory(vo);
         }
+        if(!CollectionUtils.isEmpty(vo.getFiles())) {
+            res += boardMapper.mergeBoardImages(vo);
+        }
 
         return res;
     }

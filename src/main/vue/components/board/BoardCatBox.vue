@@ -2,7 +2,7 @@
   <div class="q-pa-xs">
     <q-select
         outlined dense
-        v-model="catNo"
+        v-model="catObj"
         :options="categories"
         label="카테고리"
         bg-color="lime-3"
@@ -11,30 +11,32 @@
 </template>
 
 <script>
-import useCategory from "@/composables/useCategory";
-import useCategories from "@/composables/useCategories";
+import useCategories from "@/composables/useCategories"
+import useBoardDetail from "@/composables/useBoardDetail"
 
 export default {
   name: "BoardCatBox",
-  props:["modelValue"],
-  emits:["update:modelValue"],
+  emits:["updateCatNo"],
   setup() {
     const { categories, categoryMap }= useCategories()
+    const { catNo } = useBoardDetail()
     return {
       items : categories,
-      catMap: categoryMap
+      catMap: categoryMap,
+      catNo
     }
   },
   data() {
-    const value = this.modelValue
+    const value = this.catNo
 
     return {
-      catNo: { label: this.catMap[value], value }
+      catObj: { label: this.catMap[value], value }
     }
   },
   methods: {
     handleCatNoChange(val) {
-      this.$emit("update:modelValue", val.value)
+      this.catNo = val.value
+      //this.$emit("updateCatNo", val.value)
     }
   },
   computed: {

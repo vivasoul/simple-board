@@ -29,4 +29,6 @@ public interface BoardMapper {
     int deleteUnusedCategory(BoardVO vo);
 
     int deleteBoardCategory(int brdNo);
+
+    int mergeBoardImages(BoardVO vo);
 }

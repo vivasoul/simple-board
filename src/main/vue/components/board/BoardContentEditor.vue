@@ -1,16 +1,15 @@
 <template>
   <div class="q-pa-xs">
-    <q-input
-        v-if="$isMobile()"
-        v-model="content"
-        filled
-        type="textarea"
-        :input-style="{resize:'none',height:'300px'}"
-        clearable
-        @change="handleChange"
-    />
+<!--    <q-input-->
+<!--        v-if="$isMobile()"-->
+<!--        v-model="content"-->
+<!--        filled-->
+<!--        type="textarea"-->
+<!--        :input-style="{resize:'none',height:'300px'}"-->
+<!--        clearable-->
+<!--        @change="handleChange"-->
+<!--    />-->
     <tiny-editor
-        v-else
         :init="editorConfig"
         v-model="content"
         api-key="hos0gsqyxmwl1gdwx91tnhbgkkjcspt61n05og9kwkqrayd6"
@@ -21,16 +20,24 @@
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
+import useBoardDetail from "@/composables/useBoardDetail"
 export default {
   name: "BoardContentEditor",
   props:["modelValue"],
   emits:["update:modelValue"],
+  setup() {
+    const { content } = useBoardDetail()
+
+    return {
+      content
+    }
+  },
   components: {
     "tiny-editor": Editor
   },
   data(){
     return {
-      content: this.modelValue,
+     // content: this.modelValue,
       editorConfig: {
         plugins: "lists link image table code wordcount",
         toolbar: "styles | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link table",

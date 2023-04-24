@@ -134,4 +134,15 @@
         DELETE FROM tb_board_category
         WHERE brd_no = #{brdNo}
     </delete>
+
+    <insert id="mergeBoardImages" parameterType="com.odth.board.BoardVO">
+        INSERT INTO tb_board_attach ( brd_no, file_id, thumb_yn )
+        VALUES
+        <foreach item="item" collection="files" separator=",">
+            (#{brdNo}, #{item.fileId}, #{item.thumbYn})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+            thumb_yn = VALUES(thumb_yn),
+            upd_dt = NOW()
+    </insert>
 </mapper>

@@ -87,7 +87,7 @@ export default {
   padding: 20px 10px;
   border-bottom: 1px solid black;
 }*/
-.border-item {
+/*.border-item {
   border-bottom:1px solid $border-grey;
 }
 .board-list-addon {
@@ -96,5 +96,5 @@ export default {
 .board-detail-link:hover{
   text-decoration: underline;
   cursor:pointer;
-}
+}*/
 </style>

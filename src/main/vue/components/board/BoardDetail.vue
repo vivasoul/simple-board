@@ -1,12 +1,8 @@
 <template>
   <div class="board-detail">
     <div v-if="editable">
-      <div class="q-pa-xs">
-        <q-input filled v-model="title" label="제목" dense/>
-      </div>
-      <board-cat-box v-model="catNo" @update:model-value="handleCatNoChange"/>
-      <board-content-editor v-model="editContent" @update:model-value="handleContentChange" />
-      <image-uploader @preview-click="handlePreviewClick"/>
+      <board-head-editor/>
+      <board-content-editor/>
     </div>
     <div v-else>
       <div class="board-title">
@@ -31,37 +27,35 @@
 
 <script>
 import {getBoardDetail, updateBoard, deleteBoard} from "@/data/api/board"
-import BoardContentEditor from "@/components/board/BoardContentEditor.vue";
-import { getTinymce } from '@tinymce/tinymce-vue/lib/cjs/main/ts/TinyMCE'
-import ReplyList from "@/components/reply/ReplyList.vue";
-import ImageUploader from "@/components/board/ImageUploader.vue";
-import BoardCatBox from "@/components/board/BoardCatBox.vue"
-import BoardCatSum from "@/components/board/BoardCatSum.vue";
-import {useValidation} from "@/composables/useValidation";
+import {useValidation} from "@/composables/useValidation"
+import useBoardDetail from "@/composables/useBoardDetail"
+import BoardHeadEditor from "@/components/board/BoardHeadEditor.vue"
+import BoardContentEditor from "@/components/board/BoardContentEditor.vue"
+import BoardCatSum from "@/components/board/BoardCatSum.vue"
+import ReplyList from "@/components/reply/ReplyList.vue"
+
+
 
 export default {
   name: "BoardDetail",
   components: {
+    BoardHeadEditor,
     BoardContentEditor,
     BoardCatSum,
-    ReplyList,
-    BoardCatBox,
-    ImageUploader
+    ReplyList
   },
   props: ["brdNo"],
   setup() {
     const {boardValidator} =  useValidation()
-
+    const { title, catNo, files, content } = useBoardDetail()
+    console.log("SETUP DETAIL")
     return {
-      boardValidator
+      boardValidator,
+      title, catNo, files, content
     }
   },
   data() {
     return {
-      title: "",
-      content: "",
-      catNo: undefined,
-      editContent: "",
       editable: false
     }
   },
@@ -70,17 +64,15 @@ export default {
       const {title, content, catNos} = await getBoardDetail(this.brdNo)
       this.title = title
       this.content = content
-      this.editContent = content
       if(catNos.length) this.catNo = catNos[0]
     },
     async updateBoard() {
-      const {brdNo, title, editContent, catNo} = this;
-      this.content = editContent
+      const {brdNo, title, content, catNo, files} = this;
       const catNos = [catNo];
 
-      if(this.boardValidator({title, catNo, content: this.content})) {
+      if(this.boardValidator({title, catNo, content})) {
 
-        updateBoard({brdNo, title, content: this.content, catNos}).then((result) => {
+        updateBoard({brdNo, title, content, catNos, files}).then((result) => {
           if (result) {
             console.log("수정 성공")
             this.toggleEdit(false)
@@ -112,18 +104,8 @@ export default {
     toggleEdit(editable) {
       this.editable = editable
       if(!editable) {
-        this.editContent = this.content
+        this.loadBoard()
       }
-    },
-    handlePreviewClick(imgSrc) {
-      getTinymce().activeEditor.insertContent(`<img src="${imgSrc}" />`)
-    },
-    handleCatNoChange(catNo) {
-      console.log("catNo="+catNo)
-      this.catNo = catNo
-    },
-    handleContentChange(content) {
-      this.editContent = content
     }
   },
   mounted() {
@@ -131,7 +113,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import "@/assets/css/board.scss";
-</style>
