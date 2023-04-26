@@ -138,7 +138,7 @@
     <select id="selectBoardImages" parameterType="int" resultType="com.odth.board.BoardAttachVO">
         SELECT
             a.file_id,
-            b.file_path,
+            b.down_path,
             a.thumb_yn
         FROM tb_board_attach a
         INNER JOIN tb_attach_file b ON a.file_id = b.file_id

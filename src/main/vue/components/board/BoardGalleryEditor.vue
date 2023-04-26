@@ -1,11 +1,12 @@
 <template>
   <div class="q-ma-xs gallery-preview-list">
     <board-gallery-edit-item
-        v-for="({fileId, filePath, downFilePath, thumbYn}) in list"
+        v-for="({fileId, downPath, thumbYn}) in list"
         :key="fileId"
         :file-id="fileId"
-        :file-path="downFilePath || filePath"
+        :down-path="downPath"
         :thumb-yn="thumbYn"
+        @item-updated="handleThumbUpdate"
     />
   </div>
 </template>
@@ -20,6 +21,16 @@ export default {
     "list": {
       "type": Array,
       "default": []
+    }
+  },
+  methods: {
+    handleThumbUpdate(fileId, thumbYn) {
+      this.list.forEach( e => { e["thumbYn"] = "N" })
+
+      if(thumbYn == "Y") {
+        const file = this.list.find( e => e.fileId === fileId)
+        file.thumbYn = "Y"
+      }
     }
   }
 }

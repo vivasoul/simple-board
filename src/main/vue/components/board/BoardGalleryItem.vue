@@ -1,6 +1,6 @@
 <template>
   <div class="gallery-view-wrapper">
-    <img class="gallery-view-item" :src="filePath" />
+    <img class="gallery-view-item" :src="downPath" />
   </div>
 </template>
 
@@ -8,6 +8,6 @@
 export default {
   name: "BoardGalleryItem",
   emits: ["itemDeleted", "itemUpdated"],
-  props: ["fileId", "filePath", "thumbYn"]
+  props: ["fileId", "downPath", "thumbYn"]
 }
 </script>

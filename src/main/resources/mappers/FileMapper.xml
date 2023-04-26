@@ -4,7 +4,7 @@
 
     <select id="insertFile" parameterType="com.odth.file.FileVO" statementType="CALLABLE">
         CALL sp_insert_file(
-            #{downFileNm}, #{downFilePath}, #{fileExt}, #{fileSize},
+            #{filePath}, #{downNm}, #{downPath}, #{fileExt}, #{fileSize},
             #{fileId, jdbcType=INTEGER, jdbcTypeName=int, mode=OUT})
     </select>
 

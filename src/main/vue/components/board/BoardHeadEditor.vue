@@ -17,7 +17,6 @@ import BoardCatBox from "@/components/board/BoardCatBox.vue"
 import ImageUploaderEX from "@/components/upload/ImageUploaderEX.vue"
 import BoardGalleryEditor from "@/components/board/BoardGalleryEditor.vue"
 import useBoardDetail from "@/composables/useBoardDetail"
-import {getTinymce} from "@tinymce/tinymce-vue/lib/es2015/main/ts/TinyMCE"
 import useContentEditor from "@/composables/useContentEditor"
 
 export default {

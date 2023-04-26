@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class BoardAttachVO {
     private int fileId;
-    private String filePath;
+    private String downPath;
     private String thumbYn;
 }

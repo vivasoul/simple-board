@@ -85,12 +85,11 @@ public class UploadService {
         int height         = bimg.getHeight();*/
 
         FileVO vo = new FileVO();
-        vo.setFileNm(fileNm);
-        vo.setFilePath(subPath);
+        vo.setFilePath(file.getAbsolutePath());
+        vo.setDownNm(downloadNm);
+        vo.setDownPath(downloadPath+"/"+fileNm);
         vo.setFileExt(extension);
         vo.setFileSize(file.length());
-        vo.setDownFilePath(downloadPath+"/"+fileNm);
-        vo.setDownFileNm(downloadNm);
 
         return vo;
     }

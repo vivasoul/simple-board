@@ -9,7 +9,6 @@
         {{ title }}
         <board-cat-sum :cat-nos="[catNo]" inline />
       </div>
-<!--      <board-gallery :list="files"/>-->
       <div class="board-content" v-html="content"></div>
     </div>
   </div>
@@ -34,12 +33,10 @@ import BoardHeadEditor from "@/components/board/BoardHeadEditor.vue"
 import BoardContentEditor from "@/components/board/BoardContentEditor.vue"
 import BoardCatSum from "@/components/board/BoardCatSum.vue"
 import ReplyList from "@/components/reply/ReplyList.vue"
-import BoardGallery from "@/components/board/BoardGallery.vue"
 
 export default {
   name: "BoardDetail",
   components: {
-    BoardGallery,
     BoardHeadEditor,
     BoardContentEditor,
     BoardCatSum,
