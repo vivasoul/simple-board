@@ -1,6 +1,10 @@
 <template>
     <q-list padding>
-      <q-item v-for="({brdNo, title, catNostr, replyCnt, viewCnt, regIp, timeElapsed}) in boards" class="border-item"  style="">
+      <q-item v-for="({brdNo, title, catNostr, replyCnt, viewCnt, thumbPath ,regIp, timeElapsed}) in boards" class="border-item"  style="">
+        <q-item-section v-if="thumbPath" top thumbnail class="board-thumnail">
+          <img :src="thumbPath">
+        </q-item-section>
+
         <q-item-section>
           <q-item-label>
             <div class="board-detail-link" @click="loadBoardDetail(brdNo)">{{title}}</div>
@@ -81,20 +85,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-/*.board-list {
-  padding: 20px 10px;
-  border-bottom: 1px solid black;
-}*/
-/*.border-item {
-  border-bottom:1px solid $border-grey;
-}
-.board-list-addon {
-  text-align: right;
-}
-.board-detail-link:hover{
-  text-decoration: underline;
-  cursor:pointer;
-}*/
-</style>

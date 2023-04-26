@@ -6,4 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface FileMapper {
 
     void insertFile(FileVO vo);
+
+    int updateThumbId(FileVO vo);
+
+    String selectFilePath(int fileId);
 }

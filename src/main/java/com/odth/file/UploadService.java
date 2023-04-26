@@ -1,6 +1,10 @@
 package com.odth.file;
 
+import com.odth.util.ImageUtils;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +55,34 @@ public class UploadService {
         }
     }
 
+    public FileVO getThumbnail(int srcFileId) throws IOException {
+        String srcFilePath = fileMapper.selectFilePath(srcFileId);
+
+        if(StringUtils.isEmpty(srcFilePath)) {
+            throw new IOException("원본 파일이 존재하지 않습니다: "+srcFilePath);
+        } else {
+            return getThumbnail(srcFileId, srcFilePath);
+        }
+    }
+
+    public FileVO getThumbnail(int srcFileId, String srcFilePath) throws IOException {
+        File srcFile = new File(srcFilePath);
+        FileVO thumbVO = null;
+        if(srcFile.exists()) {
+            thumbVO = generateThumbnail(srcFile);
+            fileMapper.insertFile(thumbVO);
+            if(srcFileId > 0) {
+                FileVO oriVO = new FileVO();
+                oriVO.setFileId(srcFileId);
+                oriVO.setThumbId(thumbVO.getFileId());
+                fileMapper.updateThumbId(oriVO);
+            }
+            return thumbVO;
+        } else {
+            return null;
+        }
+    }
+
     private FileVO uploadFile(MultipartFile mFile) throws IllegalStateException, IOException {
         return uploadFile(UPLOAD_ROOT, DOWNLOAD_ROOT, mFile);
     }
@@ -60,7 +92,7 @@ public class UploadService {
     }
 
     private FileVO uploadFile(String uploadRoot, String downloadRoot, MultipartFile mFile) throws IllegalStateException, IOException {
-        String subPath = generateSubPath();
+        String subPath = generateSubPath(null);
         String uploadPath = uploadRoot + File.separator + subPath;
         String downloadPath = downloadRoot + "/" + subPath.replace(File.separator, "/");
 
@@ -71,11 +103,10 @@ public class UploadService {
         if (i >= 0) {
             extension = downloadNm.substring(i+1);
         }
-        String fileNm = UUID.randomUUID().toString()+"."+extension; // file_name for upload
+        String fileNm = genenrateFileName(extension); // file_name for upload
 
         File updDir = new File(uploadPath);
         if(!updDir.exists()) updDir.mkdirs();
-        System.out.println("##################"+uploadPath);
 
         File file = new File(uploadPath+File.separator+fileNm);
         mFile.transferTo(file); // 파일을 위에 지정 경로로 업로드
@@ -94,11 +125,56 @@ public class UploadService {
         return vo;
     }
 
-    private String generateSubPath() {
+    private FileVO generateThumbnail(File originalFile) throws IOException {
+
+        return generateThumbnail(UPLOAD_ROOT, DOWNLOAD_ROOT, originalFile);
+    }
+
+    private FileVO generateThumbnail(String uploadRoot, String downloadRoot, File originalFile) throws IOException {
+        String subPath = generateSubPath("thumbs");
+        String uploadPath = uploadRoot + File.separator + subPath;
+        String downloadPath = downloadRoot + "/" + subPath.replace(File.separator, "/");
+
+        String extension = "PNG";
+        String fileNm = genenrateFileName(extension); // file_name for thumbnail
+
+        File updDir = new File(uploadPath);
+        if(!updDir.exists()) updDir.mkdirs();
+        File file = new File(uploadPath+File.separator+fileNm);
+
+        BufferedImage image = ImageUtils.resizeImage(originalFile);
+        ImageIO.write(image, extension, file);
+
+        FileVO vo = new FileVO();
+        vo.setFilePath(file.getAbsolutePath());
+        vo.setDownNm(fileNm);
+        vo.setDownPath(downloadPath+"/"+fileNm);
+        vo.setFileExt(extension);
+        vo.setFileSize(file.length());
+
+        return vo;
+    }
+
+    private String generateSubPath(String subfixPath) {
         Calendar c = Calendar.getInstance();
         int yyyy = c.get(Calendar.YEAR);
         int mm = c.get(Calendar.MONTH) + 1;
+        StringBuilder subPath = new StringBuilder();
 
-        return yyyy+File.separator+mm;
+        subPath.append(yyyy)
+               .append(File.separator)
+               .append(mm);
+
+        if(!StringUtils.isEmpty(subfixPath)) {
+            subPath.append(File.separator)
+                   .append(subfixPath);
+        }
+
+        return subPath.toString();
+    }
+
+    private String genenrateFileName(String extension) {
+
+        return UUID.randomUUID() +"."+extension;
     }
 }

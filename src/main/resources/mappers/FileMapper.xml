@@ -8,4 +8,20 @@
             #{fileId, jdbcType=INTEGER, jdbcTypeName=int, mode=OUT})
     </select>
 
+    <update id="updateThumbId" parameterType="com.odth.file.FileVO">
+        UPDATE tb_attach_file
+        SET
+            thumb_id = #{thumbId}
+        WHERE 1=1
+        AND file_id = #{fileId}
+    </update>
+
+    <select id="selectFilePath" parameterType="int" resultType="String">
+        SELECT
+            file_path
+        FROM tb_attach_file
+        WHERE 1=1
+        AND file_id = #{fileId}
+        AND del_yn = 'N'
+    </select>
 </mapper>

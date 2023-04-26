@@ -3,9 +3,6 @@
 <mapper namespace="com.odth.board.BoardMapper">
 
     <select id="selectBoard" resultType="com.odth.board.BoardVO">
-        WITH TOT AS (
-            SELECT COUNT(*) AS tot_cnt FROM tb_board
-        )
         SELECT
              a.brd_no
             ,a.title
@@ -13,22 +10,13 @@
             ,sf_get_rpl_cnt(a.brd_no) AS reply_cnt
             ,sf_mask_ip(a.reg_ip) AS reg_ip
             ,sf_get_time_diff(a.reg_dt) AS time_elapsed
+            ,(SELECT down_path FROM tb_attach_file WHERE file_id = a.thumb_id) AS thumb_path
             ,a.view_cnt
-            ,t.tot_cnt
         FROM tb_board a
-        CROSS JOIN TOT t
         ORDER BY a.brd_no DESC
     </select>
 
     <select id="selectBoardByCategory" parameterType="int" resultType="com.odth.board.BoardVO">
-        WITH TOT AS (
-            SELECT COUNT(*) AS tot_cnt
-            FROM tb_board a
-            INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
-            INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
-            WHERE 1=1
-            AND c.cat_no = #{catNo}
-        )
         SELECT
              a.brd_no
              ,a.title
@@ -36,14 +24,13 @@
              ,sf_get_rpl_cnt(a.brd_no) AS reply_cnt
              ,sf_mask_ip(a.reg_ip) AS reg_ip
              ,sf_get_time_diff(a.reg_dt) AS time_elapsed
+             ,(SELECT down_path FROM tb_attach_file WHERE file_id = a.thumb_id) AS thumb_path
              ,a.view_cnt
-             ,t.tot_cnt
         FROM tb_board a
         INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
         INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
-        CROSS JOIN TOT t
         WHERE 1=1
-          AND c.cat_no = #{catNo}
+        AND c.cat_no = #{catNo}
         ORDER BY a.brd_no DESC
     </select>
 
@@ -81,10 +68,12 @@
         INSERT INTO tb_board (
            title
           ,content
+          ,thumb_id
           ,reg_ip
         ) VALUES (
            #{title}
           ,#{content}
+          ,#{thumbId}
           ,#{regIp}
         )
     </insert>
@@ -94,6 +83,7 @@
         SET
              title = #{title}
             ,content = #{content}
+            ,thumb_id = #{thumbId}
             ,upd_dt = current_timestamp()
         WHERE 1=1
         AND brd_no = #{brdNo}
@@ -138,6 +128,7 @@
     <select id="selectBoardImages" parameterType="int" resultType="com.odth.board.BoardAttachVO">
         SELECT
             a.file_id,
+            b.thumb_id,
             b.down_path,
             a.thumb_yn
         FROM tb_board_attach a

@@ -68,7 +68,7 @@ export default {
     async updateBoard() {
       const {brdNo, title, content, catNo} = this;
       const catNos = [catNo];
-      const files = this.files.map(({fileId, thumbYn}) => ({fileId, thumbYn}))
+      const files = this.files.map(({fileId, thumbId, thumbYn}) => ({fileId, thumbId, thumbYn}))
 
       if(this.boardValidator({title, catNo, content})) {
 
