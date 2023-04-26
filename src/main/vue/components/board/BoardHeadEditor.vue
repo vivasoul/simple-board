@@ -17,20 +17,26 @@ import BoardCatBox from "@/components/board/BoardCatBox.vue"
 import ImageUploaderEX from "@/components/upload/ImageUploaderEX.vue"
 import BoardGalleryEditor from "@/components/board/BoardGalleryEditor.vue"
 import useBoardDetail from "@/composables/useBoardDetail"
+import {getTinymce} from "@tinymce/tinymce-vue/lib/es2015/main/ts/TinyMCE"
+import useContentEditor from "@/composables/useContentEditor"
 
 export default {
   name: "BoardHeadEditor",
   components: {BoardGalleryEditor, ImageUploaderEX, BoardTitleBox, BoardCatBox},
   setup() {
     const { files }= useBoardDetail()
-
+    const { insertImage } = useContentEditor()
     return {
-      files
+      files,
+      insertImage
     }
   },
   methods: {
     handleUploadAdd(files) {
-      files.forEach( e => {e["thumbYn"] = "N"})
+      files.forEach( e => {
+        this.insertImage(e)
+        e["thumbYn"] = "N"
+      })
       this.files = this.files.concat(files)
     }
   }

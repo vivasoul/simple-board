@@ -1,6 +1,6 @@
 <template>
-  <div class="gallery-preview-wrapper">
-    <img class="gallery-preview-item" :src="filePath" />
+  <div class="gallery-view-wrapper">
+    <img class="gallery-view-item" :src="filePath" />
   </div>
 </template>
 

@@ -9,7 +9,7 @@
         {{ title }}
         <board-cat-sum :cat-nos="[catNo]" inline />
       </div>
-      <board-gallery :list="files"/>
+<!--      <board-gallery :list="files"/>-->
       <div class="board-content" v-html="content"></div>
     </div>
   </div>

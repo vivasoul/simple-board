@@ -1,5 +1,6 @@
 <template>
-  <q-btn
+<!--  <q-btn
+      v-if="list.length > 0"
       color="blue-9"
       icon="fullscreen"
       labe="확대"
@@ -8,7 +9,7 @@
       dense
       square
       push
-      @click="handleExpandClick" />
+      @click="handleExpandClick" />-->
   <div class="q-ma-xs gallery-preview-list">
     <board-gallery-item
         v-for="({fileId, filePath, thumbYn}) in list"
@@ -18,7 +19,7 @@
         :thumb-yn="thumbYn"
     />
   </div>
-  <q-dialog v-model="show">
+<!--  <q-dialog v-model="show">
     <div class="board-gallery-carousel">
       <q-carousel
           v-model="slide"
@@ -38,7 +39,7 @@
         </q-carousel-slide>
       </q-carousel>
     </div>
-  </q-dialog>
+  </q-dialog>-->
 </template>
 
 <script>
@@ -62,7 +63,6 @@ export default {
   methods: {
     handleExpandClick() {
       this.show = true
-      console.log(this.list)
     }
   }
 }
