@@ -21,8 +21,13 @@
       <q-btn v-else           style="background:#5DEB6B;color:white;" label="목록" @click="goToList"/>
     </q-btn-group>
   </div>
-
   <reply-list  v-if="!editable" :brd-no="brdNo" />
+<!--  <confirm-modal
+      v-if="modalShow"
+      :message="deletePopMsg"
+      @confirm-accept="handleDelConfirm"
+      @confirm-cancel="handleDelCancel"
+  />-->
 </template>
 
 <script>
@@ -54,7 +59,8 @@ export default {
   },
   data() {
     return {
-      editable: false
+      editable: false,
+      modalShow: false
     }
   },
   methods: {
@@ -83,7 +89,7 @@ export default {
 
       }
     },
-    async deleteBoard() {
+    deleteBoard() {
       this.$q.dialog({
         message: "현재 게시물을 삭제하시겠습니까?",
         cancel: true

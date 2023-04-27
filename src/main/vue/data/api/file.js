@@ -12,3 +12,18 @@ export async function uploadFiles(postData) {
         console.log(e)
     }
 }
+
+export async function deleteFile(fileId) {
+    try {
+        const res = await axios.delete(`/files/${fileId}`)
+
+        if (res.status == 200) {
+            return true
+        } else {
+            console.log(res.status+" : "+res.statusText)
+            return false
+        }
+    }catch(e) {
+        console.log(e)
+    }
+}

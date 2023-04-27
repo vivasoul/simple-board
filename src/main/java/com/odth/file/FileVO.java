@@ -13,7 +13,8 @@ public class FileVO {
     private long fileSize;
     private String fileExt;
     private int thumbId;
+    private String regDt;
     private String updDt;
-    private String sessionId;
+    private String delYn;
 
 }

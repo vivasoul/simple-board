@@ -9,10 +9,15 @@ import 'quasar/src/css/index.sass'  // Import Quasar css
 import VueMobileDetection from 'vue-mobile-detection'
 /* user-defined  */
 import './assets/main.scss'
-import router from "@/route";
+import router from "@/route"
+/* global component */
+import ConfirmModal from "@/components/_modal/ConfirmModal.vue"
+
 import App from './App.vue'
 
 const app = createApp(App)
+
+app.component('ConfirmModal', ConfirmModal)
 app.use(router)
 app.use(Quasar, {
     plugins: {

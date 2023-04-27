@@ -24,4 +24,17 @@
         AND file_id = #{fileId}
         AND del_yn = 'N'
     </select>
+
+    <delete id="deleteBoardAttach"  parameterType="int">
+        DELETE FROM tb_board_attach
+        WHERE file_id = #{fileId}
+    </delete>
+
+    <update id="deleteFile"  parameterType="int">
+        UPDATE tb_attach_file
+        SET
+            del_yn = 'Y'
+           ,upd_dt = current_timestamp()
+        WHERE file_id = #{fileId}
+    </update>
 </mapper>

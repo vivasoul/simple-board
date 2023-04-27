@@ -1,22 +1,20 @@
 package com.odth.board;
 
 import com.odth.file.FileVO;
-import com.odth.file.UploadService;
-import lombok.NoArgsConstructor;
+import com.odth.file.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service("boardService")
 public class BoardService {
 
-    private final UploadService uploadService;
+    private final FileService fileService;
 
     private final BoardMapper boardMapper;
 
@@ -71,8 +69,8 @@ public class BoardService {
     @Transactional
     public int deleteBoard(int brdNo) {
 
-        int res = boardMapper.deleteBoardCategory(brdNo);
-        res = boardMapper.deleteBoard(brdNo);
+        //int res = boardMapper.deleteBoardCategory(brdNo);
+        int res = boardMapper.deleteBoard(brdNo);
 
         return res;
     }
@@ -100,7 +98,7 @@ public class BoardService {
                     if (isThumbnail) {
                         thumbId = attachVO.getThumbId();
                         if (thumbId < 1) {
-                            FileVO thumbVO = uploadService.getThumbnail(attachVO.getFileId());
+                            FileVO thumbVO = fileService.getThumbnail(attachVO.getFileId());
                             thumbId = thumbVO.getFileId();
                         }
                         break;

@@ -2,9 +2,8 @@ package com.odth.file;
 
 import com.odth.util.ImageUtils;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +18,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-@Service("uploadService")
+@Service("fileService")
 @RequiredArgsConstructor
-public class UploadService {
+public class FileService {
 
     @Value("${upload.temp.up-path}")
     private String UPLOAD_TEMP_ROOT;
@@ -53,6 +52,16 @@ public class UploadService {
         for(FileVO vo : list) {
             fileMapper.insertFile(vo);
         }
+    }
+
+    @Transactional
+    public void deleteFile(FileVO vo) throws IOException {
+        int fileId = vo.getFileId();
+        String filePath = fileMapper.selectFilePath(fileId);
+        deleteUploadedFile(filePath);
+        fileMapper.deleteBoardAttach(fileId);
+        fileMapper.deleteFile(fileId);
+
     }
 
     public FileVO getThumbnail(int srcFileId) throws IOException {
@@ -171,6 +180,15 @@ public class UploadService {
         }
 
         return subPath.toString();
+    }
+
+    private void deleteUploadedFile(String filePath) throws IOException {
+        File file = new File(filePath);
+        if(file.exists()) {
+            file.delete();
+        } else {
+            throw new IOException("삭제할 파일이 존재하지 않습니다: "+filePath);
+        }
     }
 
     private String genenrateFileName(String extension) {

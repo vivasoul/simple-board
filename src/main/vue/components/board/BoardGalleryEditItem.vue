@@ -31,11 +31,17 @@
     </div>
     <img class="gallery-preview-item" :src="downPath"/>
   </div>
+  <confirm-modal
+      v-if="modalShow"
+      :message="deletePopMsg"
+      @confirm-accept="handleDelConfirm"
+      @confirm-cancel="handleDelCancel"
+  />
 </template>
 
 <script>
 import useContentEditor from "@/composables/useContentEditor"
-
+import {deleteFile} from "@/data/api/file"
 export default {
   name: "BoardGalleryEditItem",
   emits: ["itemDeleted", "itemUpdated"],
@@ -47,9 +53,34 @@ export default {
       insertImage
     }
   },
+  data() {
+    return {
+      "modalShow": false,
+      "deletePopMsg": "해당 이미지를 삭제하시겠습니까?<br/><div class='confirm-caption warning'>(* 본문에 해당 이미지가 추가된 경우,<br/>삭제 후에는 출력되지 않습니다.)</div>"
+    }
+  },
   methods: {
     handlePopDelete() {
+      if(this.thumbYn == "Y") {
+        this.$q.notify({
+          type: "negative",
+          message: "썸네일로 지정된 이미지는 삭제할 수 없습니다."
+        })
+      } else {
+        this.modalShow = true
+      }
+    },
+    async handleDelConfirm() {
+      this.modalShow = false
+      const { fileId } = this
+      const res = await deleteFile(fileId)
 
+      if(res) {
+        this.$emit("itemDeleted", fileId)
+      }
+    },
+    handleDelCancel() {
+      this.modalShow = false
     },
     handleAddImage() {
       const { downPath } = this

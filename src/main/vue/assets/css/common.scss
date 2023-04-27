@@ -1,0 +1,7 @@
+.confirm-caption {
+  font-size: 11px;
+  text-align:center;
+  &.warning {
+    color: $red-13
+  }
+}

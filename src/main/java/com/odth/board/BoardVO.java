@@ -18,6 +18,7 @@ public class BoardVO {
     private String thumbPath;
     private String timeElapsed;
     private int viewCnt;
+    private String delYn;
     private String regDt;
     private String updDt;
     private int totCnt;

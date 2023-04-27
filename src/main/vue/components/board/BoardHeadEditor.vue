@@ -8,7 +8,7 @@
       <image-uploader-e-x @uploaded-add="handleUploadAdd"/>
     </div>
   </div>
-  <board-gallery-editor :list="files"/>
+  <board-gallery-editor/>
 </template>
 
 <script>

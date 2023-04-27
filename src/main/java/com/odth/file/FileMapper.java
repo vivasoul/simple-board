@@ -10,4 +10,8 @@ public interface FileMapper {
     int updateThumbId(FileVO vo);
 
     String selectFilePath(int fileId);
+
+    int deleteBoardAttach(int fileId);
+
+    int deleteFile(int fileId);
 }

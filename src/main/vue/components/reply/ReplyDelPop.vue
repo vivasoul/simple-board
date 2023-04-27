@@ -1,5 +1,4 @@
 <template>
-
   <q-dialog v-model="show" @hide="handlePopClose">
     <div v-if="shouldChk">
       <q-card>
@@ -39,7 +38,7 @@ export default {
   emits:["delPopClose"],
   data() {
     return {
-      "show": true,
+      "show": false,
       "shouldChk": true,
       "passwd": "",
       "deleted": false
@@ -75,6 +74,9 @@ export default {
       this.deleted = true
       this.show = false
     }
+  },
+  mounted() {
+    this.show = true
   }
 }
 </script>
