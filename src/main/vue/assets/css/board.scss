@@ -34,12 +34,24 @@
 
 .board-title {
   border-bottom: 1px solid $border-grey;
-  padding:0px 15px;
+  padding:0px 15px 5px 15px;
   width: 100%;
   font-size: 20px;
   font-weight: 900;
   line-height: 50px;
-  height: 50px;
+  min-height: 50px;
+}
+
+.board-title-caption {
+  line-height: 20px;
+  font-size: 12px;
+  color: #3B3B3B;
+  display:flex;
+  justify-content: space-between;
+
+  .caption-item {
+
+  }
 }
 
 .board-content {
@@ -52,6 +64,15 @@
 .board-detail-addon {
   text-align: right;
   padding: 20px 10px;
+}
+
+.board-regist-addon {
+  text-align: right;
+  >.q-field {
+    display:inline-block;
+    margin-left: 5px;
+    background-color: white;
+  }
 }
 
 /** board-gallery  **/
@@ -88,4 +109,9 @@
 .board-gallery-carousel {
   width: 90% !important;
   min-width: 500px !important;;
+}
+
+
+@media(max-width: 1024px) {
+
 }

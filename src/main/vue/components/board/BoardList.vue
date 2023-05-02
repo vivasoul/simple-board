@@ -1,6 +1,6 @@
 <template>
     <q-list padding>
-      <q-item v-for="({brdNo, title, catNostr, replyCnt, viewCnt, thumbPath ,regIp, timeElapsed}) in boards" class="border-item"  style="">
+      <q-item v-for="({brdNo, title, catNostr, replyCnt, viewCnt, thumbPath ,regId, timeElapsed}) in boards" class="border-item"  style="">
         <q-item-section v-if="thumbPath" top thumbnail class="board-thumnail">
           <img :src="thumbPath">
         </q-item-section>
@@ -11,7 +11,7 @@
           </q-item-label>
           <q-item-label caption lines="2">
             <board-cat-sum :cat-nos="makeCatNoList(catNostr)" inline />
-            | {{regIp}} | {{timeElapsed}}
+            | {{regId}} | {{timeElapsed}}
           </q-item-label>
         </q-item-section>
 

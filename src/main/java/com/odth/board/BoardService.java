@@ -3,6 +3,8 @@ package com.odth.board;
 import com.odth.file.FileVO;
 import com.odth.file.FileService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -17,6 +19,9 @@ public class BoardService {
     private final FileService fileService;
 
     private final BoardMapper boardMapper;
+
+    @Value("${odth.board.default-pass}")
+    private String DEFAULT_PASS;
 
     public List<BoardVO> getBoard(Integer catNo) {
         if(catNo != null) {
@@ -43,6 +48,10 @@ public class BoardService {
         /* get thumbnail image-id before insert */
         int thumbId = getThumbId(vo.getFiles());
         vo.setThumbId(thumbId);
+
+        if(StringUtils.isEmpty(vo.getPasswd())) {
+            vo.setPasswd(DEFAULT_PASS);
+        }
 
         int res = boardMapper.insertBoard(vo);
         int brdNo = boardMapper.getInsertedBrdNo();

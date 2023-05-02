@@ -9,6 +9,7 @@
             ,sf_get_cat_nos(a.brd_no) AS cat_nostr
             ,sf_get_rpl_cnt(a.brd_no) AS reply_cnt
             ,sf_mask_ip(a.reg_ip) AS reg_ip
+            ,NVL(a.reg_id, '익명') AS reg_id
             ,sf_get_time_diff(a.reg_dt) AS time_elapsed
             ,(SELECT down_path FROM tb_attach_file WHERE file_id = a.thumb_id) AS thumb_path
             ,a.view_cnt
@@ -25,6 +26,7 @@
              ,sf_get_cat_nos(a.brd_no) AS cat_nostr
              ,sf_get_rpl_cnt(a.brd_no) AS reply_cnt
              ,sf_mask_ip(a.reg_ip) AS reg_ip
+             ,NVL(a.reg_id, '익명') AS reg_id
              ,sf_get_time_diff(a.reg_dt) AS time_elapsed
              ,(SELECT down_path FROM tb_attach_file WHERE file_id = a.thumb_id) AS thumb_path
              ,a.view_cnt
@@ -43,8 +45,11 @@
              brd_no
             ,title
             ,content
-            ,reg_dt
-            ,upd_dt
+            ,NVL(reg_id, '익명') AS reg_id
+            ,sf_get_rpl_cnt(brd_no) AS reply_cnt
+            ,view_cnt
+            ,DATE_FORMAT(reg_dt, '%Y-%m-%d %H:%i:%s') AS reg_dt
+            ,DATE_FORMAT(upd_dt, '%Y-%m-%d %H:%i:%s') AS upd_dt
             ,del_yn
         FROM tb_board
         WHERE 1=1
@@ -73,11 +78,15 @@
            title
           ,content
           ,thumb_id
+          ,passwd
+          ,reg_id
           ,reg_ip
         ) VALUES (
            #{title}
           ,#{content}
           ,#{thumbId}
+          ,#{passwd}
+          ,(CASE WHEN #{regId} = '' THEN NULL ELSE #{regId} END)
           ,#{regIp}
         )
     </insert>

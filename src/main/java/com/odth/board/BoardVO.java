@@ -16,6 +16,8 @@ public class BoardVO {
     private String regIp;
     private int thumbId;
     private String thumbPath;
+    private String regId;
+    private String passwd;
     private String timeElapsed;
     private int viewCnt;
     private String delYn;

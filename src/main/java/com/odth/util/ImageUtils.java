@@ -4,14 +4,12 @@ import net.coobird.thumbnailator.Thumbnails;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
 public final class ImageUtils {
-    private static final int THUMBNAIL_WIDTH = 60;
-    private static final int THUMBNAIL_HEIGHT = 60;
+    private static final int THUMBNAIL_WIDTH = 160;
+    private static final int THUMBNAIL_HEIGHT = 160;
 
     public static BufferedImage resizeImage(File imageFile) throws IOException {
 

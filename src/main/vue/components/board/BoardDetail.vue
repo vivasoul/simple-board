@@ -8,6 +8,12 @@
       <div class="board-title">
         {{ title }}
         <board-cat-sum :cat-nos="[catNo]" inline />
+        <board-title-caption
+          :reg-dt="regDt"
+          :reg-id="regId"
+          :view-cnt="viewCnt"
+          :reply-cnt="replyCnt"
+        />
       </div>
       <div class="board-content" v-html="content"></div>
     </div>
@@ -38,10 +44,12 @@ import BoardHeadEditor from "@/components/board/BoardHeadEditor.vue"
 import BoardContentEditor from "@/components/board/BoardContentEditor.vue"
 import BoardCatSum from "@/components/board/BoardCatSum.vue"
 import ReplyList from "@/components/reply/ReplyList.vue"
+import BoardTitleCaption from "@/components/board/BoardTitleCaption.vue"
 
 export default {
   name: "BoardDetail",
   components: {
+    BoardTitleCaption,
     BoardHeadEditor,
     BoardContentEditor,
     BoardCatSum,
@@ -60,16 +68,25 @@ export default {
   data() {
     return {
       editable: false,
-      modalShow: false
+      modalShow: false,
+      regId: "",
+      regDt: "",
+      viewCnt: 0,
+      replyCnt: 0
     }
   },
   methods: {
     async loadBoard() {
-      const {title, content, catNos, files} = await getBoardDetail(this.brdNo)
+      const {title, content, catNos, files, regId, regDt, viewCnt, replyCnt} = await getBoardDetail(this.brdNo)
       this.title = title
       this.content = content
       this.files = files
       if(catNos.length) this.catNo = catNos[0]
+
+      this.regId = regId
+      this.regDt = regDt
+      this.viewCnt = viewCnt
+      this.replyCnt = replyCnt
     },
     async updateBoard() {
       const {brdNo, title, content, catNo} = this;

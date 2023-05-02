@@ -14,10 +14,10 @@ export default function useCategories() {
                 categoryMap.value[catNo] = catNm
             })
         })
-        console.log("fetch")
+        //console.log("fetch")
     } else {
         /* DO NOTHING */
-        console.log("cache")
+        //console.log("cache")
     }
 
     return {

@@ -20,8 +20,8 @@ export async function getBoardDetail(brdNo) {
     }
 }
 
-export async function createBoard({title, content, catNos, files}) {
-    const res = await axios.post("/board", {title, content, catNos, files})
+export async function createBoard({title, content, catNos, regId, passwd, files}) {
+    const res = await axios.post("/board", {title, content, catNos, regId, passwd, files})
 
     if(res.status == 200) {
         return true;

@@ -5,7 +5,7 @@ export function useValidation() {
     const $q = useQuasar()
 
     return {
-        boardValidator({title, catNo, content}) {
+        boardValidator({title, catNo, content, passwd}, isNew) {
             let chk = false;
             if (!title) {
                 $q.notify({
@@ -21,6 +21,11 @@ export function useValidation() {
                 $q.notify({
                     type: "negative",
                     message: "내용을 입력해주세요."
+                })
+            } else if(isNew && !passwd){
+                $q.notify({
+                    type: "negative",
+                    message: "수정 비밀번호를 입력해주세요."
                 })
             } else {
                 chk = true

@@ -40,3 +40,7 @@ upload:
   ops:
     down-path: /download/ops
     up-path: D:/upload/ops
+
+odth:
+  board:
+    default-pass: 0000
