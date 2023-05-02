@@ -15,7 +15,6 @@
 <script>
 import BoardGalleryEditItem from "@/components/board/BoardGalleryEditItem.vue"
 import useBoardDetail from "@/composables/useBoardDetail"
-import useContentEditor from "@/composables/useContentEditor"
 
 export default {
   name: "BoardGalleryEditor",

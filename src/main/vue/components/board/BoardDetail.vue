@@ -21,19 +21,15 @@
   <div class="q-pa-md q-gutter-y-md column items-end">
     <q-btn-group>
       <q-btn v-if="editable"  style="background:#69D44A;color:white;" label="저장" @click="updateBoard"/>
-      <q-btn v-else           style="background:#69D44A;color:white;" label="수정" @click="toggleEdit(true)"/>
-      <q-btn                  style="background:#4AD47F;color:white;" label="삭제" @click="deleteBoard"/>
+      <board-update-btn v-else :brd-no="brdNo" @update-mode-confirmed="toggleEdit(true)"/>
+<!--      <q-btn v-else           style="background:#69D44A;color:white;" label="수정" @click="toggleEdit(true)"/>-->
+<!--      <q-btn                  style="background:#4AD47F;color:white;" label="삭제" @click="deleteBoard"/>-->
+      <board-delete-btn :brd-no="brdNo" @delete-confirmed="deleteBoard"/>
       <q-btn v-if="editable"  style="background:#5DEB6B;color:white;" label="취소" @click="toggleEdit(false)"/>
       <q-btn v-else           style="background:#5DEB6B;color:white;" label="목록" @click="goToList"/>
     </q-btn-group>
   </div>
   <reply-list  v-if="!editable" :brd-no="brdNo" />
-<!--  <confirm-modal
-      v-if="modalShow"
-      :message="deletePopMsg"
-      @confirm-accept="handleDelConfirm"
-      @confirm-cancel="handleDelCancel"
-  />-->
 </template>
 
 <script>
@@ -45,10 +41,14 @@ import BoardContentEditor from "@/components/board/BoardContentEditor.vue"
 import BoardCatSum from "@/components/board/BoardCatSum.vue"
 import ReplyList from "@/components/reply/ReplyList.vue"
 import BoardTitleCaption from "@/components/board/BoardTitleCaption.vue"
+import BoardUpdateBtn from "@/components/board/button/BoardUpdateBtn.vue"
+import BoardDeleteBtn from "@/components/board/button/BoardDeleteBtn.vue"
 
 export default {
   name: "BoardDetail",
   components: {
+    BoardDeleteBtn,
+    BoardUpdateBtn,
     BoardTitleCaption,
     BoardHeadEditor,
     BoardContentEditor,
@@ -106,20 +106,15 @@ export default {
 
       }
     },
-    deleteBoard() {
-      this.$q.dialog({
-        message: "현재 게시물을 삭제하시겠습니까?",
-        cancel: true
-      }).onOk(function(){
-        deleteBoard(this.brdNo).then(res => {
-          if (res) {
-            console.log("삭제 성공")
-            this.goToList()
-          } else {
-            alert("삭제 실패")
-          }
-        })
-      }.bind(this))
+    deleteBoard(brdNo) {
+      deleteBoard(brdNo).then(res => {
+        if (res) {
+          console.log("삭제 성공")
+          this.goToList()
+        } else {
+          alert("삭제 실패")
+        }
+      })
     },
     goToList() {
       this.$router.go(-1)

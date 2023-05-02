@@ -35,7 +35,7 @@
       v-if="modalShow"
       :message="deletePopMsg"
       @confirm-accept="handleDelConfirm"
-      @confirm-cancel="handleDelCancel"
+      @confirm-close="handleDelClose"
   />
 </template>
 
@@ -71,7 +71,6 @@ export default {
       }
     },
     async handleDelConfirm() {
-      this.modalShow = false
       const { fileId } = this
       const res = await deleteFile(fileId)
 
@@ -79,7 +78,7 @@ export default {
         this.$emit("itemDeleted", fileId)
       }
     },
-    handleDelCancel() {
+    handleDelClose() {
       this.modalShow = false
     },
     handleAddImage() {

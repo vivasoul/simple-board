@@ -1,7 +1,7 @@
 package com.odth.board;
 
-import com.odth.file.FileVO;
 import com.odth.file.FileService;
+import com.odth.file.FileVO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -118,5 +118,10 @@ public class BoardService {
             ie.printStackTrace();
         }
         return thumbId;
+    }
+
+    public boolean checkPassword(BoardVO vo) {
+
+        return boardMapper.checkPassword(vo);
     }
 }

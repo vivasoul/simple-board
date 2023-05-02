@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="show" @hide="handelConfirmCacnel">
+  <q-dialog v-model="show" @hide="handelClose">
     <q-card>
       <q-card-section class="row items-center">
         <span class="q-ml-sm" v-html="message"></span>
@@ -24,7 +24,7 @@ export default {
     },
     "modalShow": Boolean
   },
-  emits:["confirmAccept","confirmCancel"],
+  emits:["confirmAccept","confirmClose"],
   data() {
     return {
       "show": false
@@ -34,8 +34,8 @@ export default {
     handelConfirm() {
       this.$emit("confirmAccept")
     },
-    handelConfirmCacnel() {
-      this.$emit("confirmCancel")
+    handelClose() {
+      this.$emit("confirmClose")
     }
   },
   mounted() {

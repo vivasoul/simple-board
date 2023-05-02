@@ -32,4 +32,6 @@ public interface BoardMapper {
 
     List<BoardAttachVO> selectBoardImages(int brdNo);
     int mergeBoardImages(BoardVO vo);
+
+    boolean checkPassword(BoardVO vo);
 }

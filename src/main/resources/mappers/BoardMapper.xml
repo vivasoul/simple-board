@@ -164,4 +164,17 @@
             thumb_yn = VALUES(thumb_yn),
             upd_dt = NOW()
     </insert>
+
+
+    <select id="checkPassword" parameterType="com.odth.board.BoardVO" resultType="Boolean">
+        SELECT
+            (CASE WHEN
+                      EXISTS(
+                              SELECT brd_no
+                              FROM tb_board
+                              WHERE brd_no = #{brdNo}
+                                AND passwd = #{passwd})
+                      THEN 1 ELSE 0 END) AS yn
+
+    </select>
 </mapper>

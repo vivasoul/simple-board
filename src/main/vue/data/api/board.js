@@ -49,3 +49,13 @@ export async function deleteBoard(brdNo) {
         return false;
     }
 }
+
+export async function checkBoard({brdNo, passwd}) {
+    const res = await axios.post(`/board/${brdNo}/check-pass`, {brdNo, passwd})
+
+    if(res.status == 200) {
+        return res.data;
+    } else {
+        return false;
+    }
+}

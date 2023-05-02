@@ -1,5 +1,6 @@
 package com.odth.board;
 
+import com.odth.reply.ReplyVO;
 import com.odth.util.HttpUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -45,5 +46,11 @@ public class BoardController {
     public int deleteBoard(@PathVariable int brdNo) {
 
         return boardService.deleteBoard(brdNo);
+    }
+
+    @PostMapping("/{brdNo}/check-pass")
+    public boolean checkBoard(@PathVariable int brdNo, @RequestBody BoardVO vo) {
+
+        return boardService.checkPassword(vo);
     }
 }
