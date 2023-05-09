@@ -9,7 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,9 +28,10 @@ public class BoardController {
     }
 
     @GetMapping("/{brdNo}")
-    public BoardVO getBoardDetail(@PathVariable int brdNo) {
+    public BoardVO getBoardDetail(@PathVariable int brdNo, HttpSession session) {
+        boolean alreadyRead = checkBoardsInSession(brdNo, session);
 
-        return boardService.getBoardDetail(brdNo);
+        return boardService.getBoardDetail(brdNo, alreadyRead);
     }
 
     @PostMapping
@@ -55,5 +59,25 @@ public class BoardController {
     public boolean checkBoard(@PathVariable int brdNo, @RequestBody BoardVO vo) {
 
         return boardService.checkPassword(vo);
+    }
+
+    private boolean checkBoardsInSession(int brdNo, HttpSession session) {
+        boolean alreayRead = false;
+        Set<Integer> viewCahce = null;
+
+        if(session.getAttribute("viewCache") == null) {
+            viewCahce = new HashSet<Integer>();
+            session.setAttribute("viewCache", viewCahce);
+        } else {
+            viewCahce = (Set<Integer>) session.getAttribute("viewCache");
+        }
+
+        if(viewCahce.contains(brdNo)) {
+            alreayRead = true;
+        } else {
+            viewCahce.add(brdNo);
+        }
+
+        return alreayRead;
     }
 }

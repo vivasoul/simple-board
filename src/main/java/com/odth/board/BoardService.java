@@ -45,14 +45,15 @@ public class BoardService {
         return result;
     }
 
-    public BoardVO getBoardDetail(int brdNo) {
+    public BoardVO getBoardDetail(int brdNo, boolean alreadyRead) {
         BoardVO board = boardMapper.selectBoardDetail(brdNo);
         List<Integer> catNos = boardMapper.selectBoardCategory(brdNo);
         board.setCatNos(catNos);
         List<BoardAttachVO> files = boardMapper.selectBoardImages(brdNo);
         board.setFiles(files);
-
-        boardMapper.increaseView(brdNo);
+        if(!alreadyRead) {
+            boardMapper.increaseView(brdNo);
+        }
 
         return board;
     }
