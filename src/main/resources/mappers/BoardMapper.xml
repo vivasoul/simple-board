@@ -30,7 +30,7 @@
 
     <select id="selectBoardMaxPage" parameterType="com.odth.board.vo.BoardSearchVO" resultType="int">
         SELECT
-            COUNT(*)/#{rowPerPage} AS max_page
+            CEIL(COUNT(*)/#{rowPerPage}) AS max_page
         FROM tb_board a
         INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
         INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
