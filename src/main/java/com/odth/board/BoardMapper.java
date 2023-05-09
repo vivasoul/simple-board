@@ -1,14 +1,17 @@
 package com.odth.board;
 
+import com.odth.board.vo.BoardAttachVO;
+import com.odth.board.vo.BoardSearchVO;
+import com.odth.board.vo.BoardVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    List<BoardVO> selectBoard();
+    List<BoardVO> selectBoard(BoardSearchVO searchVO);
 
-    List<BoardVO> selectBoardByCategory(int catNo);
+    int selectBoardMaxPage(BoardSearchVO searchVO);
 
     BoardVO selectBoardDetail(int brdNo);
 

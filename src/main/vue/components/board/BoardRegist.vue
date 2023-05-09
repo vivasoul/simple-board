@@ -3,7 +3,7 @@
     <board-head-editor/>
     <board-content-editor/>
     <div class="q-pa-md q-gutter-y-md board-regist-addon">
-      <q-input v-model="regId" type="text" label="등록 아이디" maxlength="10" outlined dense/>
+<!--      <q-input v-model="regId" type="text" label="등록 아이디" maxlength="10" outlined dense/>-->
       <q-input v-model="passwd" type="password" label="수정 비밀번호" maxlength="20" outlined dense/>
     </div>
   </div>

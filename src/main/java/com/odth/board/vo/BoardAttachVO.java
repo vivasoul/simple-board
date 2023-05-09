@@ -1,4 +1,4 @@
-package com.odth.board;
+package com.odth.board.vo;
 
 import lombok.Getter;
 import lombok.Setter;

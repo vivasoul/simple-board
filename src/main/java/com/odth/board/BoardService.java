@@ -1,5 +1,9 @@
 package com.odth.board;
 
+import com.odth.board.vo.BoardAttachVO;
+import com.odth.board.vo.BoardListVO;
+import com.odth.board.vo.BoardSearchVO;
+import com.odth.board.vo.BoardVO;
 import com.odth.file.FileService;
 import com.odth.file.FileVO;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +27,22 @@ public class BoardService {
     @Value("${odth.board.default-pass}")
     private String DEFAULT_PASS;
 
-    public List<BoardVO> getBoard(Integer catNo) {
-        if(catNo != null) {
-            return boardMapper.selectBoardByCategory(catNo);
-        } else {
-            return boardMapper.selectBoard();
-        }
+    private int ROW_PER_PAGE = 15;
+
+    @Transactional
+    public BoardListVO getBoard(BoardSearchVO searchVO) {
+        BoardListVO result = new BoardListVO();
+
+        searchVO.setRowPerPage(ROW_PER_PAGE);
+        searchVO.setOffset(getOffSet(searchVO));
+
+        List<BoardVO> boards = boardMapper.selectBoard(searchVO);
+        int maxPage = boardMapper.selectBoardMaxPage(searchVO);
+
+        result.setBoards(boards);
+        result.setPage(searchVO.getCurPage(), maxPage);
+
+        return result;
     }
 
     public BoardVO getBoardDetail(int brdNo) {
@@ -123,5 +137,15 @@ public class BoardService {
     public boolean checkPassword(BoardVO vo) {
 
         return boardMapper.checkPassword(vo);
+    }
+
+    private int getOffSet(BoardSearchVO searchVO) {
+        int curPage = searchVO.getCurPage();
+        int rowPerPage = searchVO.getRowPerPage();
+        if(curPage > 0) {
+            return (curPage - 1) * rowPerPage;
+        } else {
+            return 0;
+        }
     }
 }

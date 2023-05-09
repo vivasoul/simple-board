@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.odth.board.BoardMapper">
+    <sql id="searchCondition">
+        #TO DO THINGS
+    </sql>
 
-    <select id="selectBoard" resultType="com.odth.board.BoardVO">
-        SELECT
-             a.brd_no
-            ,a.title
-            ,sf_get_cat_nos(a.brd_no) AS cat_nostr
-            ,sf_get_rpl_cnt(a.brd_no) AS reply_cnt
-            ,sf_mask_ip(a.reg_ip) AS reg_ip
-            ,NVL(a.reg_id, '익명') AS reg_id
-            ,sf_get_time_diff(a.reg_dt) AS time_elapsed
-            ,(SELECT down_path FROM tb_attach_file WHERE file_id = a.thumb_id) AS thumb_path
-            ,a.view_cnt
-        FROM tb_board a
-        WHERE 1=1
-        AND a.del_yn = 'N'
-        ORDER BY a.brd_no DESC
-    </select>
-
-    <select id="selectBoardByCategory" parameterType="int" resultType="com.odth.board.BoardVO">
+    <select id="selectBoard" parameterType="com.odth.board.vo.BoardSearchVO" resultType="com.odth.board.vo.BoardVO">
         SELECT
              a.brd_no
              ,a.title
@@ -35,12 +21,27 @@
         INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
         WHERE 1=1
         AND a.del_yn = 'N'
-        AND c.cat_no = #{catNo}
+        <if test="catNo gt 0">
+            AND c.cat_no = #{catNo}
+        </if>
         ORDER BY a.brd_no DESC
+        LIMIT #{offset}, #{rowPerPage}
     </select>
 
+    <select id="selectBoardMaxPage" parameterType="com.odth.board.vo.BoardSearchVO" resultType="int">
+        SELECT
+            COUNT(*)/#{rowPerPage} AS max_page
+        FROM tb_board a
+        INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
+        INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
+        WHERE 1=1
+        AND a.del_yn = 'N'
+        <if test="catNo gt 0">
+        AND c.cat_no = #{catNo}
+        </if>
+    </select>
 
-    <select id="selectBoardDetail" parameterType="int" resultType="com.odth.board.BoardVO">
+    <select id="selectBoardDetail" parameterType="int" resultType="com.odth.board.vo.BoardVO">
         SELECT
              brd_no
             ,title
@@ -73,7 +74,7 @@
           AND brd_no = #{brdNo}
     </update>
 
-    <insert id="insertBoard" parameterType="com.odth.board.BoardVO">
+    <insert id="insertBoard" parameterType="com.odth.board.vo.BoardVO">
         INSERT INTO tb_board (
            title
           ,content
@@ -91,7 +92,7 @@
         )
     </insert>
 
-    <update id="updateBoard" parameterType="com.odth.board.BoardVO">
+    <update id="updateBoard" parameterType="com.odth.board.vo.BoardVO">
         UPDATE tb_board
         SET
              title = #{title}
@@ -115,7 +116,7 @@
         SELECT LAST_INSERT_ID() AS brd_no
     </select>
 
-    <insert id="mergeBoardCategory" parameterType="com.odth.board.BoardVO">
+    <insert id="mergeBoardCategory" parameterType="com.odth.board.vo.BoardVO">
         INSERT INTO tb_board_category ( cat_no, brd_no )
         VALUES
         <foreach item="catNo" collection="catNos" separator=",">
@@ -125,7 +126,7 @@
         reg_dt = reg_dt
     </insert>
 
-    <delete id="deleteUnusedCategory" parameterType="com.odth.board.BoardVO">
+    <delete id="deleteUnusedCategory" parameterType="com.odth.board.vo.BoardVO">
         DELETE FROM tb_board_category
         WHERE brd_no = #{brdNo}
         <if test="catNos != null">
@@ -141,7 +142,7 @@
         WHERE brd_no = #{brdNo}
     </delete>
 
-    <select id="selectBoardImages" parameterType="int" resultType="com.odth.board.BoardAttachVO">
+    <select id="selectBoardImages" parameterType="int" resultType="com.odth.board.vo.BoardAttachVO">
         SELECT
             a.file_id,
             b.thumb_id,
@@ -154,7 +155,7 @@
         AND del_yn = 'N'
     </select>
 
-    <insert id="mergeBoardImages" parameterType="com.odth.board.BoardVO">
+    <insert id="mergeBoardImages" parameterType="com.odth.board.vo.BoardVO">
         INSERT INTO tb_board_attach ( brd_no, file_id, thumb_yn )
         VALUES
         <foreach item="item" collection="files" separator=",">
@@ -166,7 +167,7 @@
     </insert>
 
 
-    <select id="checkPassword" parameterType="com.odth.board.BoardVO" resultType="Boolean">
+    <select id="checkPassword" parameterType="com.odth.board.vo.BoardVO" resultType="Boolean">
         SELECT
             (CASE WHEN
                       EXISTS(

@@ -1,8 +1,11 @@
 package com.odth.board;
 
-import com.odth.reply.ReplyVO;
+import com.odth.board.vo.BoardListVO;
+import com.odth.board.vo.BoardSearchVO;
+import com.odth.board.vo.BoardVO;
 import com.odth.util.HttpUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +19,9 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public List<BoardVO> getBoard(@RequestParam(value = "catNo",required = false) Integer catNo) {
+    public BoardListVO getBoard(@ModelAttribute BoardSearchVO searchVO) {
 
-        return boardService.getBoard(catNo);
+        return boardService.getBoard(searchVO);
     }
 
     @GetMapping("/{brdNo}")
