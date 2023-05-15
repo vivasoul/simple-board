@@ -1,6 +1,6 @@
 spring:
   application:
-    name: OYWMS Server
+    name: Outdoors Server
   output:
     ansi:
       enabled: always
@@ -9,27 +9,19 @@ spring:
     hikari:
       master:
         driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-        #        driver-class-name: oracle.jdbc.xa.client.OracleXADataSource
-        jdbc-url: jdbc:log4jdbc:oracle:thin:@121.254.164.75:1533/PNBDEV
-        username: OYWMSDEV
-        password: oywmsdev05!%
+        jdbc-url: jdbc:log4jdbc:mariadb://13.209.13.134/outdoors
+        username: outuser
+        password: customdoors1!
         minimumIdle: 10
         maximumPoolSize: 100
         maxLifetime: 3540000
         mybatis:
           config-location: classpath:mybatis-config-master.xml
-      slave:
-        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-        url: jdbc:log4jdbc:mariadb://mrlee-database-test.cl1qpbs1xffv.ap-northeast-2.rds.amazonaws.com/tempdb
-        username: vivas
-        password: 123456
-        minimumIdle: 10
-        maximumPoolSize: 100
-        maxLifetime: 3540000
-        mybatis:
-          config-location: classpath:mybatis-config-slave.xml
     #    auto-commit: false
-
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
   web:
     resources:
       chain:
@@ -37,9 +29,28 @@ spring:
         strategy:
           content:
             paths: /nexa/**
+server:
+  port: 80
 
 springdoc:
   api-docs:
-    enabled: false
+    enabled: true
   swagger-ui:
-    enabled: false
+    enabled: true
+
+upload:
+  temp:
+    down-path: /download/temp
+    up-path: /home/ec2-user/upload/temp
+  ops:
+    down-path: /download/ops
+    up-path: /home/ec2-user/upload/ops
+
+odth:
+  board:
+    default-pass: 0000
+
+logging:
+  file:
+    path: /home/ec2-user/logs
+    name: was-log

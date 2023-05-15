@@ -16,7 +16,7 @@
         label="이미지업로드(이미지당 최대 1MB)"
         color="amber"
         text-color="black"
-        max-file-size="1048576"
+        max-file-size="2097152"
         multiple
         batch
         auto-upload
