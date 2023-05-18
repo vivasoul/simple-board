@@ -13,10 +13,11 @@
     <q-uploader
         url="/files/upload"
         field-name="files"
-        label="이미지업로드(이미지당 최대 2MB)"
+        :label="uploadLabel"
         color="amber"
         text-color="black"
-        max-file-size="2097152"
+        accept="image/*"
+        :max-file-size="1048576*maxSize"
         multiple
         batch
         auto-upload
@@ -30,6 +31,12 @@
 export default {
   name: "ImageUploaderEX",
   emits:["uploadedAdd"],
+  props: {
+    "maxSize": {
+      "type": Number,
+      "default": 1
+    }
+  },
   data() {
     return {
       show: false
@@ -44,6 +51,11 @@ export default {
         const res = JSON.parse(xhr.response);
         this.$emit("uploadedAdd", res);
       }
+    }
+  },
+  computed: {
+    uploadLabel() {
+      return `이미지업로드(이미지당 최대 ${this.maxSize}MB)`;
     }
   }
 }

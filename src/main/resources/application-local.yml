@@ -18,7 +18,10 @@ spring:
         mybatis:
           config-location: classpath:mybatis-config-master.xml
     #    auto-commit: false
-
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
   web:
     resources:
       chain:

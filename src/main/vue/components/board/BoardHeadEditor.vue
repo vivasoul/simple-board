@@ -5,7 +5,9 @@
       <board-cat-box/>
     </div>
     <div class="col-xs-4 col-md-2">
-      <image-uploader-e-x @uploaded-add="handleUploadAdd"/>
+      <image-uploader-e-x
+          :max-size="5"
+          @uploaded-add="handleUploadAdd"/>
     </div>
   </div>
   <board-gallery-editor/>
