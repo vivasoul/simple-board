@@ -20,4 +20,9 @@ export default {
   background-color:#f9f4d8;
   color:black;
 }
+@media(max-width: 850px) {
+  .body-container {
+    padding: 0px 5px;
+  }
+}
 </style>

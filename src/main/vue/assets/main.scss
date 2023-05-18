@@ -51,13 +51,13 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 850px) {
   body {
     display: flex;
     place-items: start;
   }
   main, footer {
-    width: 1024px;
+    width: 850px;
     margin:0 auto;
   }
 /*  #app {

@@ -13,7 +13,7 @@
     <q-uploader
         url="/files/upload"
         field-name="files"
-        label="이미지업로드(이미지당 최대 1MB)"
+        label="이미지업로드(이미지당 최대 2MB)"
         color="amber"
         text-color="black"
         max-file-size="2097152"

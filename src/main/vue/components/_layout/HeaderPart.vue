@@ -1,7 +1,7 @@
 <template>
   <router-link to="/">
     <div class="header-container">
-      OUTDO🌎RS
+      OUTDD🌎
     </div>
   </router-link>
 </template>
@@ -22,9 +22,9 @@ export default {
   font-weight: 700;
 
 }
-@media (min-width: 1024px) {
+@media (min-width: 850px) {
   .header-container {
-    width:1024px;
+    width: 850px;
     margin:0 auto;
     font-size: 30px;
   }

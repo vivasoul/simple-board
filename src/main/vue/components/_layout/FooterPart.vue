@@ -2,12 +2,12 @@
   <div class="footer-container">
     <q-breadcrumbs gutter="sm" active-color="black" class="text-black" align="center">
       <q-breadcrumbs-el icon="home" to="/" />
-      <q-breadcrumbs-el label="개인정보처리방침" />
-      <q-breadcrumbs-el label="이용약관" />
+      <q-breadcrumbs-el :style="{fontWeight:900}" label="개인정보처리방침" to="/privite-cond" />
+      <q-breadcrumbs-el label="이용약관" to="/terms-cond" />
     </q-breadcrumbs>
     <div class="footer-desc">
-      <div class="footer-desc-item">Copyright © Outdoors. All rights reserved</div>
-      <div class="footer-desc-item">Email : webmaster@outdoors.com</div>
+      <div class="footer-desc-item">Copyright © Outddo. All rights reserved</div>
+      <div class="footer-desc-item">Email : webmaster@outddo.com</div>
     </div>
     <q-ajax-bar :hijack-filter="myFilterFn" />
   </div>
