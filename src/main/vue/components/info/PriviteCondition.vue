@@ -102,7 +102,7 @@
         회사는 고객의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 아래와 같이 개인정보관리책임자를 지정하고 있습니다.<br/>
         이용자는 "아우또"의 서비스를 이용하며 발생하는 모든 개인정보보호 관련 민원을 개인정보 관리책임자에게 신고하실 수 있습니다.<br/>
         개인정보관리책임자<br/>
-        운영자 메일 : <a href="mailto:webmaster@outdoo.com">webmaster@outdoo.com</a><br/>
+        운영자 메일 : <a href="mailto:webmaster@outddo.com">webmaster@outddo.com</a><br/>
         기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.<br/><br/>
         개인정보침해신고센터 (privacy.kisa.or.kr / 국번없이 118)<br/>
         대검찰청 사이버수사과 (www.spo.go.kr / 국번없이 1301)<br/>

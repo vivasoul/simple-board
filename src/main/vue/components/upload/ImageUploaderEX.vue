@@ -50,6 +50,7 @@ export default {
       if(xhr.status == 200) {
         const res = JSON.parse(xhr.response);
         this.$emit("uploadedAdd", res);
+        this.show = false
       }
     }
   },

@@ -1,7 +1,7 @@
 <template>
   <router-link to="/">
     <div class="header-container">
-      OUTDD🌎
+      <img src="@/assets/image/outddo_logo_m.png" style="padding:10px 0px;"/>
     </div>
   </router-link>
 </template>

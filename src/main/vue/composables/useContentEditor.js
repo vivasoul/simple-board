@@ -5,6 +5,11 @@ export default function useContentEditor() {
     return {
         insertImage({downPath}) {
             getTinymce().activeEditor.insertContent(`<img src="${downPath}" style="max-width:100%;object-fit: scale-down"/>`)
+        },
+        insertNewLine() {
+            const editor = getTinymce().activeEditor
+            editor.insertContent("<br/>")
+            editor.focus(false)
         }
     }
 }

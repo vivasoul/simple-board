@@ -6,7 +6,7 @@
     </div>
     <div class="col-xs-4 col-md-2">
       <image-uploader-e-x
-          :max-size="5"
+          :max-size="20"
           @uploaded-add="handleUploadAdd"/>
     </div>
   </div>
@@ -26,10 +26,11 @@ export default {
   components: {BoardGalleryEditor, ImageUploaderEX, BoardTitleBox, BoardCatBox},
   setup() {
     const { files }= useBoardDetail()
-    const { insertImage } = useContentEditor()
+    const { insertImage, insertNewLine } = useContentEditor()
     return {
       files,
-      insertImage
+      insertImage,
+      insertNewLine
     }
   },
   methods: {
@@ -38,6 +39,7 @@ export default {
         this.insertImage(e)
         e["thumbYn"] = "N"
       })
+      this.insertNewLine()
       this.files = this.files.concat(files)
     }
   }
