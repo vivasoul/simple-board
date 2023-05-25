@@ -129,7 +129,7 @@ export default {
     this.loadBoard()
   },
   unmounted() {
-    this.initDetail()
+    this.initDetail(null)
   }
 }
 </script>

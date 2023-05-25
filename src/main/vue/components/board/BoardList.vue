@@ -58,7 +58,6 @@ export default {
   },
   methods: {
     async loadBoards(catNo, curPage) {
-      this.category = catNo
       //this.curPage = pageNo
       //this.boards = getBoards(pageNo)
       const {boards, page} = await getBoard({catNo, curPage})
@@ -80,10 +79,14 @@ export default {
     }
   },
   mounted() {
+    this.category = this.catNo
     this.loadBoards(this.catNo, 1)
   },
   updated() {
-    this.loadBoards(this.catNo, 1)
+    if(this.category != this.catNo) {
+      this.category = this.catNo
+      this.loadBoards(this.catNo, 1)
+    }
   }
 }
 </script>

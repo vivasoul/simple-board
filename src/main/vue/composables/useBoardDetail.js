@@ -18,7 +18,7 @@ const defaultData = {
 const init = function(initData) {
 
     let _data;
-    if(initData == null) {
+    if(initData === null) {
         _data = defaultData;
     } else if(typeof initData === "object") {
         _data = initData;
