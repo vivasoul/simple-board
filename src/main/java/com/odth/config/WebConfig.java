@@ -1,8 +1,12 @@
 package com.odth.config;
 
+import com.odth.common.listener.DailyVisitListener;
+import com.odth.common.mapper.CommonMapper;
 import com.odth.common.view.FixedUrlBasedView;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -100,6 +104,15 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureHandlerExceptionResolvers(
             List<HandlerExceptionResolver> resolvers) {
         /* DO NOTHING */
+    }
+
+    @Bean
+    public ServletListenerRegistrationBean<DailyVisitListener> sessionListenerDailyVisit(ApplicationContext applicationContext) {
+        ServletListenerRegistrationBean<DailyVisitListener> listenerRegBean =
+                new ServletListenerRegistrationBean<>();
+        CommonMapper commonMapper = applicationContext.getBean(CommonMapper.class);
+        listenerRegBean.setListener(new DailyVisitListener(commonMapper));
+        return listenerRegBean;
     }
 }
 
