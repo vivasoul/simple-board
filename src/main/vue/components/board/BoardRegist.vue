@@ -32,11 +32,12 @@ export default {
   setup() {
     const { category } = useCategory()
     const { boardValidator } =  useValidation()
-    const { title, catNo, files, content } = useBoardDetail({catNo: category})
+    const { title, catNo, files, content, goToList } = useBoardDetail({catNo: category})
 
     return {
       boardValidator,
-      title, catNo, files, content
+      title, catNo, files, content,
+      goToList
     }
   },
   data() {
@@ -62,9 +63,6 @@ export default {
           }
         })
       }
-    },
-    goToList() {
-      this.$router.go(-1)
     },
     toggleEdit(editable) {
       this.editable = editable

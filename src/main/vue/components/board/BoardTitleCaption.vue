@@ -1,7 +1,7 @@
 <template>
   <div class="board-title-caption">
     <div class="caption-item">{{regId}} | {{regDt}}</div>
-    <div class="caption-item">{{viewCnt}} 조회 | {{replyCnt}} 댓글</div>
+    <div class="caption-item">{{replyCnt}} 댓글</div>
   </div>
 </template>
 

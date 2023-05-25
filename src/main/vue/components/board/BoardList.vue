@@ -18,7 +18,7 @@
 
       <q-item-section side top>
         <q-item-label caption>{{ replyCnt }} 댓글</q-item-label>
-        <q-item-label caption>{{ viewCnt }} 조회</q-item-label>
+<!--        <q-item-label caption>{{ viewCnt }} 조회</q-item-label>-->
       </q-item-section>
     </q-item>
   </q-list>
@@ -66,10 +66,10 @@ export default {
       this.maxPage = page.maxPage
     },
     loadBoardDetail(brdNo) {
-      this.$router.push(`/board/${brdNo}`)
+      this.$router.push(`/boards/${brdNo}`)
     },
     createBoard() {
-      this.$router.push("/board-new")
+      this.$router.push("/boards-new")
     },
     makeCatNoList(catNos) {
       if (catNos) return catNos.split(",")

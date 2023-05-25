@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md category-container">
-    <board-category title="전체" url="/board"/>
+    <board-category title="전체" url="/boards"/>
     <board-category v-for="({catNo, catNm, url}) in items"
                    :key="catNo"
                    :catNo="catNo"

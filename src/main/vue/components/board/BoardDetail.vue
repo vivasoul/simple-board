@@ -58,11 +58,13 @@ export default {
   props: ["brdNo"],
   setup() {
     const {boardValidator} =  useValidation()
-    const { title, catNo, files, content } = useBoardDetail()
+    const { title, catNo, files, content, init, goToList  } = useBoardDetail()
 
     return {
       boardValidator,
-      title, catNo, files, content
+      title, catNo, files, content,
+      goToList,
+      initDetail: init
     }
   },
   data() {
@@ -116,9 +118,6 @@ export default {
         }
       })
     },
-    goToList() {
-      this.$router.go(-1)
-    },
     toggleEdit(editable) {
       this.editable = editable
       if(!editable) {
@@ -128,6 +127,9 @@ export default {
   },
   mounted() {
     this.loadBoard()
+  },
+  unmounted() {
+    this.initDetail()
   }
 }
 </script>

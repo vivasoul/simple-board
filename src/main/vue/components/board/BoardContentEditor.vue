@@ -43,7 +43,8 @@ export default {
         toolbar: "styles | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link table",
         //images_upload_url: "http://localhost",
         menubar: false,
-        language: "ko_KR"
+        language: "ko_KR",
+        convert_urls: false
       }
     }
   },

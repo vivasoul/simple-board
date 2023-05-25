@@ -1,6 +1,6 @@
 <template>
   <div class="gallery-view-wrapper">
-    <img class="gallery-view-item" :src="downPath" />
+    <img class="gallery-view-item" :src="'/'+downPath" />
   </div>
 </template>
 

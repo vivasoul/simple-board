@@ -1,5 +1,5 @@
 <template>
-  <q-chip square @click="handleCategoryClick" clickable :color="category == catNo ? 'catchip': 'white'" text-color="black">{{title}}</q-chip>
+  <q-chip square @click="handleCategoryClick" clickable :color="category == catNo ? 'catchip': 'white'">{{title}}</q-chip>
 </template>
 
 <script>
@@ -36,10 +36,5 @@ export default {
 </script>
 
 <style scoped>
-.text-catchip {
-  color:black;
-}
-.bg-catchip {
-  background-color:#EBC447;
-}
+
 </style>

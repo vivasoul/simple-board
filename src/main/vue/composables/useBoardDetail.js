@@ -1,4 +1,5 @@
 import {ref} from "vue"
+import { useRouter } from 'vue-router'
 
 const _title = ref("")
 const _catNo = ref(1)
@@ -17,7 +18,7 @@ const defaultData = {
 const init = function(initData) {
 
     let _data;
-    if(initData === null) {
+    if(initData == null) {
         _data = defaultData;
     } else if(typeof initData === "object") {
         _data = initData;
@@ -36,6 +37,7 @@ const init = function(initData) {
 }
 
 export default function useBoardDetail(initData) {
+    const router = useRouter()
 
     init(initData)
 
@@ -45,6 +47,13 @@ export default function useBoardDetail(initData) {
         files: _files,
         content: _content,
         passwd: _passwd,
-        init
+        init,
+        goToList() {
+            if(history.state.back == null) {
+                router.push("/")
+            } else {
+                router.go(-1)
+            }
+        }
     }
 }

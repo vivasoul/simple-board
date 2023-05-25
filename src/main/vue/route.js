@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 
 import BoardList from "@/components/board/BoardList.vue"
 import BoardDetail from "@/components/board/BoardDetail.vue"
@@ -8,16 +8,16 @@ import TermsCondition from "@/components/info/TermsCondition.vue"
 
 const routes = [
     {path: "/", component: BoardList},
-    {path: "/board", component: BoardList, props: (route) => ({ catNo: route.query.catNo })},
-    {path: "/board-new", component: BoardRegist},
-    {path: "/board/:brdNo", component: BoardDetail, props: true},
-    {path: "/privite-cond", component: PriviteCondition},
-    {path: "/terms-cond", component: TermsCondition }
+    {path: "/boards", component: BoardList, props: (route) => ({ catNo: route.query.catNo })},
+    {path: "/boards-new", component: BoardRegist},
+    {path: "/boards/:brdNo", component: BoardDetail, props: true},
+    {path: "/cond/privite", component: PriviteCondition},
+    {path: "/cond/terms", component: TermsCondition }
 ]
 
 const router = createRouter({
     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes, // short for `routes: routes`
 })
 

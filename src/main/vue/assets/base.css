@@ -36,6 +36,11 @@
   --section-gap: 160px;
 }
 
+.bg-catchip {
+  background-color:#FFC107 !important;
+  /*color:white !important;*/
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-black);

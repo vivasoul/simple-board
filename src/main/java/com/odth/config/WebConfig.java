@@ -73,8 +73,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/vue/**")
                 .addResourceLocations("classpath:/vue/");
 
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("/nowhere");
+        registry.addResourceHandler("/favicon/**")
+                .addResourceLocations("classpath:/static/favicon/");
 
         registry.addResourceHandler(DOWNLOAD_TEMP_ROOT+"/**")
                 .addResourceLocations("file:///"+UPLOAD_TEMP_ROOT+"/");

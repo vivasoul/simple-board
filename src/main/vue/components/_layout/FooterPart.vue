@@ -2,8 +2,8 @@
   <div class="footer-container">
     <q-breadcrumbs gutter="sm" active-color="black" class="text-black" align="center">
       <q-breadcrumbs-el icon="home" to="/" />
-      <q-breadcrumbs-el :style="{fontWeight:900}" label="개인정보처리방침" to="/privite-cond" />
-      <q-breadcrumbs-el label="이용약관" to="/terms-cond" />
+      <q-breadcrumbs-el :style="{fontWeight:900}" label="개인정보처리방침" to="/cond/privite" />
+      <q-breadcrumbs-el label="이용약관" to="/cond/terms" />
     </q-breadcrumbs>
     <div class="footer-desc">
       <div class="footer-desc-item">Copyright © Outddo. All rights reserved</div>
