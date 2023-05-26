@@ -9,7 +9,7 @@
       </div>
     </q-btn>
   </div>
-  <q-dialog v-model="show">
+  <q-dialog v-model="show" @hide="handleUploadClose">
     <q-uploader
         url="/files/upload"
         field-name="files"
@@ -28,13 +28,22 @@
 </template>
 
 <script>
+import useContentEditor from "@/composables/useContentEditor"
+
 export default {
   name: "ImageUploaderEX",
-  emits:["uploadedAdd"],
+  emits:["uploadedAdd", "uploaderClose"],
   props: {
     "maxSize": {
       "type": Number,
       "default": 1
+    }
+  },
+  setup() {
+    const { focusLast } = useContentEditor()
+
+    return {
+      focusLast
     }
   },
   data() {
@@ -44,14 +53,19 @@ export default {
   },
   methods: {
     handleUploadClick() {
+      this.focusLast()
       this.show = true
     },
     handleUploadComplete({xhr}) {
       if(xhr.status == 200) {
+        this.show = false
         const res = JSON.parse(xhr.response);
         this.$emit("uploadedAdd", res);
-        this.show = false
       }
+    },
+    handleUploadClose(){
+
+      this.$emit("uploaderClose");
     }
   },
   computed: {

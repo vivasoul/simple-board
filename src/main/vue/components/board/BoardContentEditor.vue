@@ -21,13 +21,13 @@
 <script>
 import Editor from '@tinymce/tinymce-vue'
 import useBoardDetail from "@/composables/useBoardDetail"
+import useContentEditor from "@/composables/useContentEditor"
 export default {
   name: "BoardContentEditor",
   props:["modelValue"],
   emits:["update:modelValue"],
   setup() {
     const { content } = useBoardDetail()
-
     return {
       content
     }

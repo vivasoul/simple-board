@@ -10,6 +10,12 @@ export default function useContentEditor() {
             const editor = getTinymce().activeEditor
             editor.insertContent("<br/>")
             editor.focus(false)
+        },
+        focusLast() {
+            const editor = getTinymce().activeEditor
+            editor.selection.select(editor.getBody(), true)
+            editor.selection.collapse(false)
+            editor.focus()
         }
     }
 }

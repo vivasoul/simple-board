@@ -2,7 +2,7 @@
 import { createApp } from 'vue'
 //import Meta from 'vue-meta'
 /* qusar framework */
-import { Quasar, Notify, Dialog } from 'quasar'
+import { Quasar, Notify, Dialog, Dark } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'   // Import icon libraries
 import 'quasar/src/css/index.sass'  // Import Quasar css
 /* mobile-detect */
@@ -33,4 +33,6 @@ app.use(VueMobileDetection)
 /*app.use(Meta, {
 
 })*/
+Dark.set(false)
+
 app.mount('#app')

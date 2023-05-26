@@ -6,6 +6,8 @@
         :options="categories"
         label="카테고리"
         bg-color="lime-3"
+        color="dark"
+        :popup-content-style="{ color: '#000000' }"
         @update:model-value="handleCatNoChange"></q-select>
   </div>
 </template>
