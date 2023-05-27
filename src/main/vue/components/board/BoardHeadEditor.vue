@@ -27,10 +27,11 @@ export default {
   components: {BoardGalleryEditor, ImageUploaderEX, BoardTitleBox, BoardCatBox},
   setup() {
     const { files }= useBoardDetail()
-    const { insertImage, focusLast } = useContentEditor()
+    const { insertImage, insertNewLine, focusLast } = useContentEditor()
     return {
       files,
       insertImage,
+      insertNewLine,
       focusLast
     }
   },
@@ -40,10 +41,11 @@ export default {
         this.insertImage(e)
         e["thumbYn"] = "N"
       })
+      this.insertNewLine()
       this.files = this.files.concat(files)
     },
     handleUploadClose() {
-      this.focusLast()
+      this.focusLast(true)
     }
   }
 }
