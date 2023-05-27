@@ -10,7 +10,7 @@
         square
         push>
       <q-menu anchor="bottom end" self="top end" transition-duration="0">
-        <q-list style="min-width: 100px">
+        <q-list style="min-width: 100px;color:#3E3E3E;">
           <q-item clickable v-close-popup @click="handlePopDelete">
             <q-item-section>삭제</q-item-section>
           </q-item>

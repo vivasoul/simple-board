@@ -1,7 +1,7 @@
 <template>
   <router-link to="/">
     <div class="header-container">
-      <img src="@/assets/image/outddo_logo_m3.png" style="padding:10px 0px;"/>
+      <img src="@/assets/image/outddo_logo_m4.png" style="padding:10px 0px;"/>
     </div>
   </router-link>
 </template>

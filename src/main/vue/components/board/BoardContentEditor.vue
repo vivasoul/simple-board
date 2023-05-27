@@ -44,7 +44,8 @@ export default {
         //images_upload_url: "http://localhost",
         menubar: false,
         language: "ko_KR",
-        convert_urls: false
+        convert_urls: false,
+        content_style: "body { padding: 0px 10px; }"
       }
     }
   },
