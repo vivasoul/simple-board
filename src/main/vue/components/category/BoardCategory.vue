@@ -1,5 +1,5 @@
 <template>
-  <q-chip square @click="handleCategoryClick" clickable :color="category == catNo ? 'catchip': 'white'">{{title}}</q-chip>
+  <q-chip square @click="handleCategoryClick" clickable :color="category == catNo ? selColor: 'white'">{{title}}</q-chip>
 </template>
 
 <script>
@@ -12,7 +12,7 @@ export default {
       "icon": String,
       "color": {
         "type": String,
-        "default": "white"
+        "default": "catchip"
       },
       "url": {
         "type": String,
@@ -30,6 +30,11 @@ export default {
   methods:{
     handleCategoryClick(){
       this.$router.push(this.url)
+    }
+  },
+  computed: {
+    selColor() {
+      return this.color || "catchip"
     }
   }
 }

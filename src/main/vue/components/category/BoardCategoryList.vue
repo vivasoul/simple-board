@@ -1,10 +1,11 @@
 <template>
   <div class="q-pa-md category-container">
     <board-category title="전체" url="/boards"/>
-    <board-category v-for="({catNo, catNm, url}) in items"
+    <board-category v-for="({catNo, catNm, url, color}) in items"
                    :key="catNo"
                    :catNo="catNo"
                    :title="catNm"
+                   :color="color"
                    :url="url"/>
   </div>
 </template>

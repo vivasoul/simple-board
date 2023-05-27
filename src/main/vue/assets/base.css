@@ -38,7 +38,17 @@
 
 .bg-catchip {
   background-color:#FFC107 !important;
-  /*color:white !important;*/
+  color:black !important;
+}
+
+.bg-blood {
+  background-color:#f44336 !important;
+  color:black !important;
+}
+
+.bg-nature {
+  background-color:#acd64b !important;
+  color:black !important;
 }
 
 @media (prefers-color-scheme: dark) {
