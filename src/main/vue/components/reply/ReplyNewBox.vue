@@ -51,6 +51,7 @@ export default {
 
         if(result) {
           this.content = ""
+          this.passwd = ""
           this.$emit("replyCreated")
         } else {
           alert("댓글 작성 실패")

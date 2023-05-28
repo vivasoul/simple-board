@@ -86,7 +86,7 @@
            #{title}
           ,#{content}
           ,#{thumbId}
-          ,#{passwd}
+          ,SHA2(#{passwd}, 256)
           ,(CASE WHEN #{regId} = '' THEN NULL ELSE #{regId} END)
           ,#{regIp}
         )
@@ -174,7 +174,7 @@
                               SELECT brd_no
                               FROM tb_board
                               WHERE brd_no = #{brdNo}
-                                AND passwd = #{passwd})
+                                AND passwd = SHA2(#{passwd}, 256))
                       THEN 1 ELSE 0 END) AS yn
 
     </select>

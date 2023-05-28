@@ -27,7 +27,7 @@
              #{brdNo} AS brd_no
             ,(SELECT NVL(MAX(repl_no),0) + 1 FROM tb_reply WHERE brd_no = #{brdNo}) AS repl_no
             ,#{content} AS content
-            ,#{passwd} AS passwd
+            ,SHA2(#{passwd}, 256) AS passwd
             ,#{regIp} AS reg_ip
     </insert>
 
@@ -55,7 +55,7 @@
                     SELECT repl_no
                     FROM tb_reply
                     WHERE repl_no = #{replNo}
-                    AND passwd = #{passwd})
+                    AND passwd = SHA2(#{passwd}, 256))
             THEN 1 ELSE 0 END) AS yn
 
     </select>
