@@ -27,6 +27,7 @@
       <q-btn color="secondary" label="글쓰기" @click="createBoard"/>
     </q-btn-group>
   </div>
+  <board-search-box />
   <board-pagination :max-page="maxPage" @page-changed="handlePageChange"/>
 </template>
 
@@ -37,12 +38,13 @@ import useCategory from "@/composables/useCategory"
 import BoardCatSum from "@/components/board/BoardCatSum.vue"
 import BoardPagination from "@/components/board/BoardPagination.vue"
 import usePagination from "@/composables/usePagination"
+import BoardSearchBox from "@/components/board/BoardSearchBox.vue"
 
 const ROW_PER_PAGE = 10
 
 export default {
   name: "BoardList",
-  components: {BoardPagination, BoardCatSum},
+  components: {BoardSearchBox, BoardPagination, BoardCatSum},
   props: ["catNo"],
   setup() {
     const {category} = useCategory()
