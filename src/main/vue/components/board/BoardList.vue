@@ -27,7 +27,7 @@
       <q-btn color="secondary" label="글쓰기" @click="createBoard"/>
     </q-btn-group>
   </div>
-  <board-search-box />
+  <board-search-box @post-search="handleSearch"/>
   <board-pagination :max-page="maxPage" @page-changed="handlePageChange"/>
 </template>
 
@@ -55,14 +55,16 @@ export default {
   data() {
     return {
       boards: [],
-      maxPage: 1
+      maxPage: 1,
+      mode: 0,
+      text: ""
     }
   },
   methods: {
-    async loadBoards(catNo, curPage) {
+    async loadBoards(catNo, curPage, mode, text) {
       //this.curPage = pageNo
       //this.boards = getBoards(pageNo)
-      const {boards, page} = await getBoard({catNo, curPage})
+      const {boards, page} = await getBoard({catNo, curPage, mode, text})
       this.boards = boards
       this.maxPage = page.maxPage
     },
@@ -78,6 +80,9 @@ export default {
     },
     handlePageChange(curPage) {
       this.loadBoards(this.catNo, curPage)
+    },
+    handleSearch(mode, text) {
+      this.loadBoards(this.catNo, 1, mode, text)
     }
   },
   mounted() {

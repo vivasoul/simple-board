@@ -2,7 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.odth.board.BoardMapper">
     <sql id="searchCondition">
-        #TO DO THINGS
+        <if test="catNo gt 0">
+            AND c.cat_no = #{catNo}
+        </if>
+        <choose>
+            <when test="mode eq 0">
+                AND a.title LIKE CONCAT('%', #{text}, '%')
+            </when>
+            <when test="mode eq 1">
+                AND (
+                a.title LIKE CONCAT('%', #{text}, '%')  OR a.content LIKE CONCAT('%', #{text}, '%')
+                )
+            </when>
+            <when test="mode eq 2">
+                AND a.content LIKE CONCAT('%', #{text}, '%')
+            </when>
+        </choose>
     </sql>
 
     <select id="selectBoard" parameterType="com.odth.board.vo.BoardSearchVO" resultType="com.odth.board.vo.BoardVO">
@@ -21,9 +36,7 @@
         INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
         WHERE 1=1
         AND a.del_yn = 'N'
-        <if test="catNo gt 0">
-            AND c.cat_no = #{catNo}
-        </if>
+        <include refid="searchCondition" />
         ORDER BY a.brd_no DESC
         LIMIT #{offset}, #{rowPerPage}
     </select>
@@ -36,9 +49,7 @@
         INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
         WHERE 1=1
         AND a.del_yn = 'N'
-        <if test="catNo gt 0">
-        AND c.cat_no = #{catNo}
-        </if>
+        <include refid="searchCondition" />
     </select>
 
     <select id="selectBoardDetail" parameterType="int" resultType="com.odth.board.vo.BoardVO">

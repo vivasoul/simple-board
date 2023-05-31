@@ -1,7 +1,10 @@
 import axios from "axios"
 
-export async function getBoard({catNo, curPage}) {
-    const res = await axios.get(`/board?catNo=${catNo || -1}&curPage=${curPage}`)
+export async function getBoard({catNo, curPage, mode, text}) {
+    const _mode = text === undefined ? "" : (mode || "")
+    const _text = encodeURIComponent(text || "")
+
+    const res = await axios.get(`/board?catNo=${catNo || -1}&curPage=${curPage}&mode=${_mode}&text=${_text}`)
 
     if(res.status == 200) {
         return  res.data
