@@ -11,7 +11,7 @@ const routes = [
     {path: "/boards", component: BoardList, props: (route) => ({ catNo: route.query.catNo })},
     {path: "/boards-new", component: BoardRegist},
     {path: "/boards/:brdNo", component: BoardDetail, props: true},
-    {path: "/cond/privite", component: PriviteCondition},
+    {path: "/cond/private", component: PriviteCondition},
     {path: "/cond/terms", component: TermsCondition }
 ]
 

@@ -2,7 +2,7 @@
   <div class="footer-container">
     <q-breadcrumbs gutter="sm" active-color="black" class="text-black" align="center">
       <q-breadcrumbs-el icon="home" to="/" />
-      <q-breadcrumbs-el :style="{fontWeight:900}" label="개인정보처리방침" to="/cond/privite" />
+      <q-breadcrumbs-el :style="{fontWeight:900}" label="개인정보처리방침" to="/cond/private" />
       <q-breadcrumbs-el label="이용약관" to="/cond/terms" />
     </q-breadcrumbs>
     <div class="footer-desc">
@@ -18,8 +18,7 @@ export default {
   name: "FooterPart",
   methods:{
     myFilterFn(url){
-      // console.log("filtered="+url)
-      return /^http:\/\/localhost:8080/.test(url)
+      return /^https:\/\/outddo.com/.test(url)
     }
   }
 }
