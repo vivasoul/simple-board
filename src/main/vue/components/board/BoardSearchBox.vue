@@ -11,7 +11,7 @@
         style="width:120px;margin-right:5px;"
     />
     <q-input
-        v-model="searchText"
+        v-model="sText"
         filled
         dense
         bg-color="white"
@@ -29,9 +29,19 @@
 </template>
 
 <script>
+import useBoardSearch from "@/composables/useBoardSearch"
+
 export default {
   name: "BoardSearchBox",
-  emits: ["postSearch"],
+  setup() {
+    const { sMode, sText, searchText } = useBoardSearch()
+
+    return {
+      sMode,
+      sText,
+      searchText
+    }
+  },
   data() {
     return {
       "modes": [
@@ -39,8 +49,7 @@ export default {
         {"label": "제목+내용", "value": 1},
         {"label": "내용", "value": 2}
       ],
-      "searchMode": {"label": "제목", "value": 0},
-      "searchText": ""
+      "searchMode": {"label": "제목", "value": 0}
     }
   },
   methods: {
@@ -50,7 +59,14 @@ export default {
       }
     },
     search() {
-      this.$emit("postSearch", this.searchMode.value, this.searchText)
+      this.searchText(this.sMode, this.sText)
+      //this.$emit("postSearch", this.searchMode.value, this.sText)
+    }
+  },
+  computed: {
+    searchMode() {
+      const mode = this.sMode;
+      return this.modes.find(e => e.value == mode)
     }
   }
 }

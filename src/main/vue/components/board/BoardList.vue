@@ -70,9 +70,6 @@ export default {
     makeCatNoList(catNos) {
       if (catNos) return catNos.split(",")
       else return null
-    },
-    handleSearch(mode, text) {
-      this.searchText(mode, text)
     }
   },
   mounted() {
