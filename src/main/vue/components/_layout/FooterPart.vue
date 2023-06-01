@@ -1,7 +1,7 @@
 <template>
   <div class="footer-container">
     <q-breadcrumbs gutter="sm" active-color="black" class="text-black" align="center">
-      <q-breadcrumbs-el icon="home" to="/" />
+      <q-breadcrumbs-el icon="home" to="/" @click="searchAll"/>
       <q-breadcrumbs-el :style="{fontWeight:900}" label="개인정보처리방침" to="/cond/private" />
       <q-breadcrumbs-el label="이용약관" to="/cond/terms" />
     </q-breadcrumbs>
@@ -14,8 +14,17 @@
 </template>
 
 <script>
+import useBoardSearch from "@/composables/useBoardSearch"
+
 export default {
   name: "FooterPart",
+  setup() {
+    const { searchAll } = useBoardSearch()
+
+    return {
+      searchAll
+    }
+  },
   methods:{
     myFilterFn(url){
       return /^https:\/\/outddo.com/.test(url)

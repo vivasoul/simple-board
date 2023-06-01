@@ -1,9 +1,9 @@
 <template>
   <div class="q-pa-md category-container">
-    <board-category title="전체" url="/boards"/>
+    <board-category title="전체" url="/boards" cat-no="-1"/>
     <board-category v-for="({catNo, catNm, url, color}) in items"
                    :key="catNo"
-                   :catNo="catNo"
+                   :cat-no="catNo"
                    :title="catNm"
                    :color="color"
                    :url="url"/>

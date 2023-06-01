@@ -1,14 +1,23 @@
 <template>
   <router-link to="/">
-    <div class="header-container">
+    <div class="header-container" @click="searchAll">
       <img src="@/assets/image/outddo_logo_m4.png" style="padding:10px 0px;"/>
     </div>
   </router-link>
 </template>
 
 <script>
+import useBoardSearch from "@/composables/useBoardSearch"
+
 export default {
-  name: "HeaderPart"
+  name: "HeaderPart",
+  setup() {
+    const { searchAll } = useBoardSearch()
+
+    return {
+      searchAll
+    }
+  }
 }
 </script>
 

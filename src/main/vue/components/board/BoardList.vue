@@ -28,46 +28,39 @@
     </q-btn-group>
   </div>
   <board-search-box @post-search="handleSearch"/>
-  <board-pagination :max-page="maxPage" @page-changed="handlePageChange"/>
+  <board-pagination />
 </template>
 
 <script>
 
-import {getBoard} from "@/data/api/board"
-import useCategory from "@/composables/useCategory"
 import BoardCatSum from "@/components/board/BoardCatSum.vue"
 import BoardPagination from "@/components/board/BoardPagination.vue"
-import usePagination from "@/composables/usePagination"
 import BoardSearchBox from "@/components/board/BoardSearchBox.vue"
+import {useMeta} from "quasar"
+import useBoardSearch from "@/composables/useBoardSearch"
 
 const ROW_PER_PAGE = 10
 
 export default {
   name: "BoardList",
   components: {BoardSearchBox, BoardPagination, BoardCatSum},
-  props: ["catNo"],
   setup() {
-    const {category} = useCategory()
+    const { searchCategory, searchText, searchPage, boards } = useBoardSearch()
+
     return {
-      category
+      searchCategory,
+      searchText,
+      searchPage,
+      boards
     }
   },
-  data() {
-    return {
-      boards: [],
-      maxPage: 1,
-      mode: 0,
-      text: ""
+  props: {
+    "catNo": {
+      type: "String",
+      default: "-1"
     }
   },
   methods: {
-    async loadBoards(catNo, curPage, mode, text) {
-      //this.curPage = pageNo
-      //this.boards = getBoards(pageNo)
-      const {boards, page} = await getBoard({catNo, curPage, mode, text})
-      this.boards = boards
-      this.maxPage = page.maxPage
-    },
     loadBoardDetail(brdNo) {
       this.$router.push(`/boards/${brdNo}`)
     },
@@ -78,22 +71,12 @@ export default {
       if (catNos) return catNos.split(",")
       else return null
     },
-    handlePageChange(curPage) {
-      this.loadBoards(this.catNo, curPage)
-    },
     handleSearch(mode, text) {
-      this.loadBoards(this.catNo, 1, mode, text)
+      this.searchText(mode, text)
     }
   },
   mounted() {
-    this.category = this.catNo
-    this.loadBoards(this.catNo, 1)
-  },
-  updated() {
-    if(this.category != this.catNo) {
-      this.category = this.catNo
-      this.loadBoards(this.catNo, 1)
-    }
+    this.searchCategory(this.catNo)
   }
 }
 </script>

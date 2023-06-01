@@ -1,9 +1,10 @@
 <template>
-  <q-chip square @click="handleCategoryClick" clickable :color="category == catNo ? selColor: 'white'">{{title}}</q-chip>
+  <q-chip square @click="handleCategoryClick" clickable :color="sCatNo == catNo ? selColor: 'white'">{{title}}</q-chip>
 </template>
 
 <script>
 import useCategory from "@/composables/useCategory";
+import useBoardSearch from "@/composables/useBoardSearch"
 
 export default {
   name: "BoardCategory",
@@ -21,14 +22,16 @@ export default {
       "catNo": String
   },
   setup() {
-    const { category } = useCategory()
+    const { sCatNo, searchCategory } = useBoardSearch()
 
     return {
-      category
+      sCatNo,
+      searchCategory
     }
   },
   methods:{
     handleCategoryClick(){
+      this.searchCategory(this.catNo)
       this.$router.push(this.url)
     }
   },

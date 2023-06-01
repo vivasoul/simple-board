@@ -1,8 +1,8 @@
 /* vue-default */
 import { createApp } from 'vue'
-//import Meta from 'vue-meta'
+//import { createMetaManager } from 'vue-meta'
 /* qusar framework */
-import { Quasar, Notify, Dialog, Dark } from 'quasar'
+import { Quasar, Notify, Dialog, Meta, Dark } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'   // Import icon libraries
 import 'quasar/src/css/index.sass'  // Import Quasar css
 /* mobile-detect */
@@ -19,9 +19,10 @@ const app = createApp(App)
 
 app.component('ConfirmModal', ConfirmModal)
 app.use(router)
+//app.use(createMetaManager())
 app.use(Quasar, {
     plugins: {
-        Notify, Dialog
+        Notify, Dialog, Meta
     },
     config: {
         notify: {

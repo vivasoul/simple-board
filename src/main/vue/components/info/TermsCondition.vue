@@ -4,7 +4,7 @@
     <div class="info-package">
       <div class="info-name">제1조 목적</div>
       <div class="info-item">
-        이 서비스 약관은 이용자가 "아우또"에서 제공하는 인터넷 사이트 (https://outdd.com)서비스를 이용함에 있어 운영자와 이용자간의 권리, 의무 및 책임사항 등을 규정함을 목적으로 합니다.
+        이 서비스 약관은 이용자가 "아우또"에서 제공하는 인터넷 사이트 (https://outddo.com)서비스를 이용함에 있어 운영자와 이용자간의 권리, 의무 및 책임사항 등을 규정함을 목적으로 합니다.
       </div>
     </div>
     <div class="info-package">

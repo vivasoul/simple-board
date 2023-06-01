@@ -17,11 +17,11 @@
 
 <script>
 import {createBoard} from "@/data/api/board"
-import useCategory from "@/composables/useCategory"
 import useBoardDetail from "@/composables/useBoardDetail"
 import {useValidation} from "@/composables/useValidation"
 import BoardHeadEditor from "@/components/board/BoardHeadEditor.vue"
 import BoardContentEditor from "@/components/board/BoardContentEditor.vue"
+import useBoardSearch from "@/composables/useBoardSearch"
 
 export default {
   name: "BoardDetail",
@@ -30,11 +30,12 @@ export default {
     BoardContentEditor
   },
   setup() {
-    const { category } = useCategory()
+    const { sCatNo } = useBoardSearch()
     const { boardValidator } =  useValidation()
-    const { title, catNo, files, content, goToList } = useBoardDetail({catNo: category})
+    const { title, catNo, files, content, goToList } = useBoardDetail({catNo: sCatNo})
 
     return {
+      sCatNo,
       boardValidator,
       title, catNo, files, content,
       goToList

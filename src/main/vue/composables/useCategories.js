@@ -3,6 +3,10 @@ import {ref} from "vue"
 
 const categories = ref([])
 const categoryMap = ref({})
+const getCategoryName = function(key) {
+
+    return categoryMap.value[key];
+}
 export default function useCategories() {
 
     if(!categories.value.length) {
@@ -22,6 +26,7 @@ export default function useCategories() {
 
     return {
         categories,
-        categoryMap
+        categoryMap,
+        getCategoryName
     }
 }

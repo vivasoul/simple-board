@@ -4,7 +4,7 @@
         v-model="curPage"
         color="green"
         :max="maxPage"
-        :max-pages="5"
+        :max-pages="8"
         boundary-numbers
         @update:model-value="handlePageChange"
     />
@@ -13,18 +13,22 @@
 
 <script>
 
+import useBoardSearch from "@/composables/useBoardSearch"
+
 export default {
   name: "BoardPagination",
-  props:["maxPage"],
-  emits:["pageChanged"],
-  data() {
+  setup() {
+    const { sCurPage, maxPage, searchPage } = useBoardSearch()
+
     return {
-      curPage: 1
+      curPage: sCurPage,
+      maxPage,
+      searchPage
     }
   },
   methods: {
     handlePageChange() {
-      this.$emit("pageChanged", this.curPage)
+      this.searchPage()
     }
   }
 }
