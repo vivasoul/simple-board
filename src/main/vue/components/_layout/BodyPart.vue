@@ -2,15 +2,27 @@
   <board-categories/>
   <div class="body-container">
     <router-view></router-view>
+    <side-ad
+        ad-slot="3006959528"
+        top="0px"
+        left="-220px"
+    />
+    <side-ad
+        ad-slot="2208883172"
+        top="0px"
+        right="-220px"
+    />
   </div>
+
 </template>
 
 <script>
-import BoardCategories from "@/components/category/BoardCategoryList.vue";
+import BoardCategories from "@/components/category/BoardCategoryList.vue"
+import SideAd from "@/components/_ads/SideAd.vue"
 
 export default {
   name: "BodyPart",
-  components: {BoardCategories}
+  components: {SideAd, BoardCategories}
 }
 </script>
 

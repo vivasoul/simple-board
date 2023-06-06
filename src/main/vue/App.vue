@@ -20,6 +20,7 @@ import FooterPart from "@/components/_layout/FooterPart.vue"
   <footer>
     <footer-part/>
   </footer>
+
 </template>
 
 <style scoped lang="scss">
