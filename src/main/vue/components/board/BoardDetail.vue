@@ -29,6 +29,10 @@
       <q-btn v-else           style="background:#5DEB6B;color:white;" label="목록" @click="goToList"/>
     </q-btn-group>
   </div>
+  <content-ad
+      ad-slot="1603196751"
+      height="150px"
+  />
   <reply-list  v-if="!editable" :brd-no="brdNo" />
 </template>
 
@@ -43,10 +47,12 @@ import ReplyList from "@/components/reply/ReplyList.vue"
 import BoardTitleCaption from "@/components/board/BoardTitleCaption.vue"
 import BoardUpdateBtn from "@/components/board/button/BoardUpdateBtn.vue"
 import BoardDeleteBtn from "@/components/board/button/BoardDeleteBtn.vue"
+import ContentAd from "@/components/_ads/ContentAd.vue"
 
 export default {
   name: "BoardDetail",
   components: {
+    ContentAd,
     BoardDeleteBtn,
     BoardUpdateBtn,
     BoardTitleCaption,

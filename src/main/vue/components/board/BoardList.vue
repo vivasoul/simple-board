@@ -22,12 +22,16 @@
       </q-item-section>
     </q-item>
   </q-list>
+  <content-ad
+      ad-slot="1894022555"
+      height="150px"
+  />
   <div class="q-pa-md q-gutter-y-md column items-end">
     <q-btn-group>
       <q-btn color="secondary" label="글쓰기" @click="createBoard"/>
     </q-btn-group>
   </div>
-  <board-search-box @post-search="handleSearch"/>
+  <board-search-box />
   <board-pagination />
 </template>
 
@@ -38,12 +42,13 @@ import BoardPagination from "@/components/board/BoardPagination.vue"
 import BoardSearchBox from "@/components/board/BoardSearchBox.vue"
 import {useMeta} from "quasar"
 import useBoardSearch from "@/composables/useBoardSearch"
+import ContentAd from "@/components/_ads/ContentAd.vue"
 
 const ROW_PER_PAGE = 10
 
 export default {
   name: "BoardList",
-  components: {BoardSearchBox, BoardPagination, BoardCatSum},
+  components: {ContentAd, BoardSearchBox, BoardPagination, BoardCatSum},
   setup() {
     const { searchCategory, searchText, searchPage, boards } = useBoardSearch()
 

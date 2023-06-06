@@ -2,7 +2,7 @@
   <ad-sense
     position="relative"
     width="100%"
-    height="100px"
+    :height="height"
     :slot="adSlot"
     :top="top"
     :right="right"
@@ -17,7 +17,7 @@ import AdSense from "@/components/_ads/AdSense.vue"
 export default {
   name: "ContentAd",
   components: {AdSense},
-  props: ["adSlot", "top", "right", "bottom", "left"]
+  props: ["adSlot", "top", "right", "bottom", "left", "height"]
 }
 </script>
 
