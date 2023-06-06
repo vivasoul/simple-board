@@ -3,13 +3,11 @@
   <div class="body-container">
     <content-ad
         ad-slot="8168605109"
-        top="10px"
-        height="150px"
+        format="horizontal"
     />
     <router-view></router-view>
     <content-ad
         ad-slot="9290115084"
-        height="200px"
     />
     <side-ad
         ad-slot="3006959528"
@@ -38,13 +36,13 @@ export default {
 
 <style scoped>
 .body-container {
-  padding: 0px 15px;
+  padding: 10px 15px;
   background-color:#f9f4d8;
   color:black;
 }
 @media(max-width: 850px) {
   .body-container {
-    padding: 0px 5px;
+    padding: 5px 5px;
   }
 }
 </style>

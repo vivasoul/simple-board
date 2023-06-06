@@ -31,7 +31,6 @@
   </div>
   <content-ad
       ad-slot="1603196751"
-      height="150px"
   />
   <reply-list  v-if="!editable" :brd-no="brdNo" />
 </template>

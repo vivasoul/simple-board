@@ -24,7 +24,6 @@
   </q-list>
   <content-ad
       ad-slot="1894022555"
-      height="150px"
   />
   <div class="q-pa-md q-gutter-y-md column items-end">
     <q-btn-group>

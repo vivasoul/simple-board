@@ -2,18 +2,31 @@
   <ins class="adsbygoogle"
        :style="style"
        data-ad-client="ca-pub-2970146614296196"
-       data-ad-format="auto"
-       data-full-width-responsive="true"
+       :data-ad-format="adFormat"
+       :data-full-width-responsive="isResponsive"
        :data-ad-slot="this.slot">
   </ins>
 </template>
 <script>
+import useAdsByGoogle from "@/composables/useAdsByGoogle"
+
 export default{
   name: "AdSense",
+  setup() {
+    const adsByGoole = useAdsByGoogle()
+
+    return {
+      adsByGoole
+    }
+  },
   props:{
     position: {
       type: "String",
       default: "absolute"
+    },
+    format: {
+      type: String,
+      default: "auto"
     },
     slot : String,
     width: Number,
@@ -23,30 +36,30 @@ export default{
     bottom: Number,
     left: Number
   },
-  data() {
-    return {
-      adsbygoogle: null
-    }
-  },
   computed: {
     style() {
       const { position, width, height, top, right, bottom, left } = this
-      const st = {
+
+      return {
         position,
-        display: "inline-block",
+        display: this.isResponsive ? "block" : "inline-block",
+        top,
+        right,
+        bottom,
+        left,
         width,
         height
       }
-      if(top) st["top"] = top
-      if(right) st["right"] = right
-      if(bottom) st["bottom"] = bottom
-      if(left) st["left"] = left
-
-      return st
+    },
+    adFormat() {
+      return this.isResponsive ? this.format : undefined
+    },
+    isResponsive() {
+      return this.width === undefined
     }
   },
   mounted(){
-    (this.adsbygoogle = window.adsbygoogle || []).push({});
+    (this.adsByGoogle = window.adsbygoogle || []).push({});
   }
 }
 </script>
