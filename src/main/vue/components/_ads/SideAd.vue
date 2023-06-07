@@ -1,5 +1,6 @@
 <template>
   <ad-sense
+    v-if="isShow"
     class="outddo-side-ad"
     width="200px"
     height="700px"
@@ -20,7 +21,7 @@ export default {
   props: ["adSlot", "top", "right", "bottom", "left"],
   methods: {
     isShow() {
-      return window.document.body.clientWidth > 1300
+      return !this.$isMobile()
     }
   }
 }

@@ -29,9 +29,9 @@
       <q-btn v-else           style="background:#5DEB6B;color:white;" label="목록" @click="goToList"/>
     </q-btn-group>
   </div>
-  <content-ad
+<!--  <content-ad
       ad-slot="1603196751"
-  />
+  />-->
   <reply-list  v-if="!editable" :brd-no="brdNo" />
 </template>
 

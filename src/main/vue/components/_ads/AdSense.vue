@@ -13,10 +13,10 @@ import useAdsByGoogle from "@/composables/useAdsByGoogle"
 export default{
   name: "AdSense",
   setup() {
-    const adsByGoole = useAdsByGoogle()
+    const {pushAd} = useAdsByGoogle()
 
     return {
-      adsByGoole
+      pushAd
     }
   },
   props:{
@@ -59,7 +59,7 @@ export default{
     }
   },
   mounted(){
-    (this.adsByGoogle = window.adsbygoogle || []).push({});
+    this.pushAd()
   }
 }
 </script>

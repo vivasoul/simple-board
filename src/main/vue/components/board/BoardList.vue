@@ -22,9 +22,9 @@
       </q-item-section>
     </q-item>
   </q-list>
-  <content-ad
+<!--  <content-ad
       ad-slot="1894022555"
-  />
+  />-->
   <div class="q-pa-md q-gutter-y-md column items-end">
     <q-btn-group>
       <q-btn color="secondary" label="글쓰기" @click="createBoard"/>

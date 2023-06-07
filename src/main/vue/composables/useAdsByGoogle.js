@@ -1,10 +1,11 @@
-import {ref} from "vue"
+window.adsbygoogle = window.adsbygoogle || []
 
-const adsByGoogle = ref([])
-
+const pushAd = function() {
+    window.adsbygoogle.push({})
+}
 export default function useAdsByGoogle() {
 
     return {
-        adsByGoogle
+        pushAd
     }
 }

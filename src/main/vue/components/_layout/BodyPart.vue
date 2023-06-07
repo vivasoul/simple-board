@@ -1,13 +1,14 @@
 <template>
   <board-categories/>
   <div class="body-container">
-    <content-ad
+<!--    <content-ad
         ad-slot="8168605109"
         format="horizontal"
-    />
+    />-->
     <router-view></router-view>
     <content-ad
         ad-slot="9290115084"
+        format="horizontal"
     />
     <side-ad
         ad-slot="3006959528"
