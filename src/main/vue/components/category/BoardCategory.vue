@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import useCategory from "@/composables/useCategory";
 import useBoardSearch from "@/composables/useBoardSearch"
 
 export default {

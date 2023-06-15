@@ -2,8 +2,8 @@
   <ad-sense
     v-if="isShow"
     class="outddo-side-ad"
-    width="200px"
-    height="700px"
+    width="160px"
+    height="600px"
     :slot="adSlot"
     :top="top"
     :right="right"

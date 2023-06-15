@@ -1,7 +1,7 @@
 import {ref} from "vue"
 import {getBoard} from "@/data/api/board"
 /* search-input */
-const sCatNo = ref(null)
+const sCatNo = ref(-1)
 const sCurPage = ref(1)
 const sMode = ref(0)
 const sText = ref("")

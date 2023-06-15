@@ -1,6 +1,7 @@
 @import './base.css';
 body {
-  background:#91A27A;
+  //background:#91A27A;
+  background: #ffe7ba7a;
 }
 .main-background {
   position: fixed;
@@ -68,5 +69,6 @@ a,
 }
 
 @import "@/assets/css/common.scss";
+@import "@/assets/css/header.scss";
 @import "@/assets/css/board.scss";
 @import "@/assets/css/reply.scss";

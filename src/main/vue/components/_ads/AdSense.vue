@@ -48,7 +48,8 @@ export default{
         bottom,
         left,
         width,
-        height
+        height,
+        background: this.isLocal ? "white" : undefined
       }
     },
     adFormat() {
@@ -56,10 +57,15 @@ export default{
     },
     isResponsive() {
       return this.width === undefined
+    },
+    isLocal() {
+      return location.host.indexOf("localhost") > -1
     }
   },
   mounted(){
-    this.pushAd()
+    if(!this.isLocal) {
+      this.pushAd()
+    }
   }
 }
 </script>

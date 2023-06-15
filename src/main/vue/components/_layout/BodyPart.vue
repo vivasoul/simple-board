@@ -38,7 +38,8 @@ export default {
 <style scoped>
 .body-container {
   padding: 10px 15px;
-  background-color:#f9f4d8;
+  /*background-color:#f9f4d8;*/
+  background-color:transparent;
   color:black;
 }
 @media(max-width: 850px) {

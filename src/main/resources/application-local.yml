@@ -1,6 +1,6 @@
 spring:
   application:
-    name: OYWMS Local Server
+    name: Outdoors Local Server
   output:
     ansi:
       enabled: always
