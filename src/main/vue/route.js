@@ -5,9 +5,10 @@ import BoardDetail from "@/components/board/BoardDetail.vue"
 import BoardRegist from "@/components/board/BoardRegist.vue"
 import PriviteCondition from "@/components/info/PriviteCondition.vue"
 import TermsCondition from "@/components/info/TermsCondition.vue"
+import CategoryPanel from "@/components/category/CategoryPanel.vue"
 
 const routes = [
-    {path: "/", component: BoardList},
+    {path: "/", component: CategoryPanel},
     {path: "/boards", component: BoardList, props: (route) => ({ catNo: route.query.catNo })},
     {path: "/boards-new", component: BoardRegist},
     {path: "/boards/:brdNo", component: BoardDetail, props: true},

@@ -1,15 +1,18 @@
 <template>
   <div class="" style="background:#91A27A;">
     <div class="header-container" style="">
-      <img src="@/assets/image/outddo_logo_m4.png" style="padding:10px 0px;width:250px;vertical-align: top"/>
-      <span style="line-height: 35px;font-size:15px;vertical-align: bottom">
-        최신글/인기글/공지사항
-      </span>
+      <router-link :active-class="false" to="/">
+          <img src="@/assets/image/outddo_logo_m4.png" style="padding:10px 0px;width:250px;vertical-align: top"/>
+      </router-link>
+
     </div>
   </div>
   <div style="background: #6c785f">
-    <div class="header-container" style="font-size:13px;line-height: 35px;height: 35px;font-weight: 500">
-      + 카테고리 열기
+    <div class="header-container sub-header-container">
+      <q-breadcrumbs active-color="white" class="text-white" align="left">
+        <q-breadcrumbs-el label="최신글"/>
+        <q-breadcrumbs-el label="인기글"/>
+      </q-breadcrumbs>
     </div>
   </div>
 </template>

@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class CategoryVO {
     private int catNo;
+    private int catType;
     private String catNm;
     private String url;
     private String icon;

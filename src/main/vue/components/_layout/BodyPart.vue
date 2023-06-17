@@ -1,5 +1,5 @@
 <template>
-  <board-categories/>
+<!--  <board-categories/>-->
   <div class="body-container">
 <!--    <content-ad
         ad-slot="8168605109"
@@ -37,14 +37,15 @@ export default {
 
 <style scoped>
 .body-container {
-  padding: 10px 15px;
+  padding: 10px 0px;
   /*background-color:#f9f4d8;*/
   background-color:transparent;
   color:black;
 }
 @media(max-width: 850px) {
   .body-container {
-    padding: 5px 5px;
+    /*padding: 5px 5px;*/
+    padding: 0px;
   }
 }
 </style>

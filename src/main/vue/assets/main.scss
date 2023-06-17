@@ -1,7 +1,8 @@
 @import './base.css';
 body {
   //background:#91A27A;
-  background: #ffe7ba7a;
+  //background: #ffe7ba7a;
+  background: transparent;
 }
 .main-background {
   position: fixed;
@@ -38,7 +39,7 @@ main  {
 footer {
   //background-color: $green-10;
 }
-
+/*
 a,
 .green {
   text-decoration: none;
@@ -51,7 +52,7 @@ a,
     background-color: hsla(160, 100%, 37%, 0.2);
   }
 }
-
+*/
 @media (min-width: 850px) {
   body {
     display: flex;

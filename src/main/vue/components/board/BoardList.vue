@@ -1,5 +1,8 @@
 <template>
-  <q-list padding>
+  <div class="board-empty-text" v-if="!boards || !boards.length">
+    해당 카테고리의 게시물이 없습니다.
+  </div>
+  <q-list v-else padding>
     <q-item v-for="({brdNo, title, catNostr, replyCnt, viewCnt, thumbPath ,regId, timeElapsed}) in boards"
             class="border-item" style="">
       <q-item-section v-if="thumbPath" top thumbnail class="board-thumnail">
@@ -25,7 +28,7 @@
 <!--  <content-ad
       ad-slot="1894022555"
   />-->
-  <div class="q-pa-md q-gutter-y-md column items-end">
+  <div class="q-pa-md q-gutter-y-md column items-end" v-if="catNo > 0">
     <q-btn-group>
       <q-btn color="secondary" label="글쓰기" @click="createBoard"/>
     </q-btn-group>
@@ -74,10 +77,16 @@ export default {
     makeCatNoList(catNos) {
       if (catNos) return catNos.split(",")
       else return null
+    },
+    isEmpty() {
+      return !this.boards || !this.boards.length
     }
   },
   mounted() {
     this.searchCategory(this.catNo)
+  },
+  unmounted() {
+    this.boards = []
   }
 }
 </script>

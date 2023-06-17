@@ -15,35 +15,39 @@
 <script>
 import useCategories from "@/composables/useCategories"
 import useBoardDetail from "@/composables/useBoardDetail"
+import useBoardSearch from "@/composables/useBoardSearch"
 
 export default {
   name: "BoardCatBox",
-  emits:["updateCatNo"],
   setup() {
-    const { categories, categoryMap }= useCategories()
+    const { getCategories, getCategoryType, categoryMap }= useCategories()
     const { catNo } = useBoardDetail()
+
+    const catType = getCategoryType(catNo.value)
+    const categories = getCategories(catType)
+
     return {
-      items : categories,
-      catMap: categoryMap,
+      items: categories,
+      categoryMap,
       catNo
     }
   },
   data() {
     const value = this.catNo
+    const cat = this.categoryMap[value] || {}
 
     return {
-      catObj: { label: this.catMap[value], value }
+      catObj: { label: cat["catNm"] , value }
+    }
+  },
+  computed: {
+    categories() {
+      return Array.prototype.map.call(this.items, e => ({ "label": e.catNm, "value": e.catNo }))
     }
   },
   methods: {
     handleCatNoChange(val) {
       this.catNo = val.value
-      //this.$emit("updateCatNo", val.value)
-    }
-  },
-  computed: {
-    categories() {
-      return this.items.map( e => ({ "label": e.catNm, "value": e.catNo }) )
     }
   }
 }

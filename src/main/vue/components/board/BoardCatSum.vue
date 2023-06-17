@@ -1,6 +1,6 @@
 <template>
   <div :style="{ display: inline ? 'inline-block' : 'block' }">
-    <q-badge v-for="(catNm, idx) in boardCats" :key="idx" color="catsum">{{catNm}}</q-badge>
+    <q-badge v-for="(obj, idx) in boardCats" :key="idx" color="catsum">{{obj ? obj.catNm : ""}}</q-badge>
   </div>
 </template>
 
@@ -24,8 +24,7 @@ export default {
   },
   computed: {
     boardCats() {
-      const cMap = this.catMap;
-
+      const cMap = this.catMap
       return this.catNos.map( e => cMap[e] )
     }
   }

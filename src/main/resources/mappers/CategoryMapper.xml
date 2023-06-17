@@ -4,6 +4,7 @@
     <select id="selectCategory" resultType="com.odth.category.CategoryVO">
         SELECT
               cat_no
+             ,cat_type
              ,cat_nm
              ,url
              ,color
@@ -13,6 +14,6 @@
         FROM tb_category
         WHERE 1=1
         AND use_yn = 'Y'
-        ORDER BY sort_odr
+        ORDER BY cat_type, sort_odr
     </select>
 </mapper>

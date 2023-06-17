@@ -32,7 +32,7 @@ export default {
   setup() {
     const { sCatNo } = useBoardSearch()
     const { boardValidator } =  useValidation()
-    const { title, catNo, files, content, goToList } = useBoardDetail({catNo: sCatNo})
+    const { title, catNo, files, content, goToList } = useBoardDetail({catNo: sCatNo.value})
 
     return {
       sCatNo,

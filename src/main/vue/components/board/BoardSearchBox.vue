@@ -3,7 +3,7 @@
     <q-select
         v-model="searchMode"
         :options="modes"
-        filled
+        outlined
         dense
         bg-color="white"
         color="black"
@@ -12,7 +12,7 @@
     />
     <q-input
         v-model="sText"
-        filled
+        outlined
         dense
         bg-color="white"
         color="black"

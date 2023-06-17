@@ -111,10 +111,17 @@
   min-width: 500px !important;;
 }
 
+.board-empty-text {
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #5f5f5f;
+  background-color: rgb(145 162 122 / 29%);
+}
 
 @media(max-width: 850px) {
   .board-content {
-    padding: 5px 0px;
+    padding: 5px;
     font-size: 0.85em;
   }
 }

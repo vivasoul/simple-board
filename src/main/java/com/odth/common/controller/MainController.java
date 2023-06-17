@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MainController {
 
-	@GetMapping({"/", "/boards*", "/boards/*", "/cond/*" })
+	@GetMapping({"/", "/boards*", "/boards/*", "/cond/*", "/main" })
 	public String nexaView(HttpServletRequest request) {
 
 		HttpSession session = request.getSession(false);
