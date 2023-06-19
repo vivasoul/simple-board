@@ -1,7 +1,7 @@
 <template>
   <router-link to="/">
     <div class="header-container" @click="searchAll">
-      <img src="@/assets/image/outddo_logo_m4.png" style="padding:10px 0px;"/>
+      <img class="logo-image" src="@/assets/image/outddo_logo_m4.png" />
     </div>
   </router-link>
   <!--  <div class="header-container ad-container">

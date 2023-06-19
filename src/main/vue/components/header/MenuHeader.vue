@@ -1,18 +1,15 @@
 <template>
-  <div class="" style="background:#91A27A;">
-    <div class="header-container" style="">
+  <div style="background:#152E4A;">
+    <div class="header-container">
       <router-link :active-class="false" to="/">
-          <img src="@/assets/image/outddo_logo_m4.png" style="padding:10px 0px;width:250px;vertical-align: top"/>
+          <img class="logo-image" src="@/assets/image/outddo_logo_m5.png" style=""/>
+          <span class="logo-text">아우또</span>
       </router-link>
-
     </div>
   </div>
-  <div style="background: #6c785f">
+  <div style="background: rgb(21 46 74 / 75%)">
     <div class="header-container sub-header-container">
-      <q-breadcrumbs active-color="white" class="text-white" align="left">
-        <q-breadcrumbs-el label="최신글"/>
-        <q-breadcrumbs-el label="인기글"/>
-      </q-breadcrumbs>
+      현재게시판
     </div>
   </div>
 </template>

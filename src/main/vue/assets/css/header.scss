@@ -1,26 +1,50 @@
 .header-container {
-  height: 70px;
-  line-height: 70px;
-  padding: 0px 20px;
+  height: 44px;
+  line-height: 35px;
+  padding: 0px 5px;
   font-size:23px;
   font-weight: 700;
 }
 
 .header-container.sub-header-container {
-  height: 35px;
+  height: 20px;
   line-height: 20px;
   padding: 0px 20px;
   font-size:12px;
-  font-weight: 600;
+  font-weight: 500;
+  color:white;
 }
 .header-container.ad-container {
   padding: 0px;
   margin-top:20px;
 }
 
+.header-container {
+  a {
+    text-decoration: none;
+    color: white;
+    :hover {
+      color: white;
+    }
+  }
+}
+
+.logo-image {
+  margin: 7px 0px;
+  width: 30px;
+  vertical-align: top;
+  border-radius: 5px
+}
+.logo-text {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0px 10px;
+}
+
 @media (min-width: 850px) {
   .header-container {
     width: 850px;
     margin:0 auto;
+    padding: 0px 0px;
   }
 }

@@ -108,7 +108,7 @@
 
 .board-gallery-carousel {
   width: 90% !important;
-  min-width: 500px !important;;
+  min-width: 500px !important;
 }
 
 .board-empty-text {
@@ -116,7 +116,8 @@
   border-radius: 10px;
   text-align: center;
   color: #5f5f5f;
-  background-color: rgb(145 162 122 / 29%);
+  background-color: #7aa1a24a;
+  margin-top: 10px;
 }
 
 @media(max-width: 850px) {
