@@ -47,6 +47,7 @@ import BoardTitleCaption from "@/components/board/BoardTitleCaption.vue"
 import BoardUpdateBtn from "@/components/board/button/BoardUpdateBtn.vue"
 import BoardDeleteBtn from "@/components/board/button/BoardDeleteBtn.vue"
 import ContentAd from "@/components/_ads/ContentAd.vue"
+import useBoardSearch from "@/composables/useBoardSearch"
 
 export default {
   name: "BoardDetail",
@@ -64,12 +65,14 @@ export default {
   setup() {
     const {boardValidator} =  useValidation()
     const { title, catNo, files, content, init, goToList  } = useBoardDetail()
+    const { sCatNo } = useBoardSearch()
 
     return {
       boardValidator,
       title, catNo, files, content,
       goToList,
-      initDetail: init
+      initDetail: init,
+      sCatNo
     }
   },
   data() {
@@ -88,7 +91,12 @@ export default {
       this.title = title
       this.content = content
       this.files = files
-      if(catNos.length) this.catNo = catNos[0]
+
+      const _catNo = catNos[0];
+      if(catNos.length) {
+        this.catNo = _catNo
+        this.sCatNo = _catNo
+      }
 
       this.regId = regId
       this.regDt = regDt
@@ -135,6 +143,7 @@ export default {
   },
   unmounted() {
     this.initDetail(null)
+    this.sCatNo = -1
   }
 }
 </script>
