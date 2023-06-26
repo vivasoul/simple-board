@@ -1,0 +1,30 @@
+.category-container {
+  border: 1px solid #AEAEAE;
+  >div:first-child {
+    border-right: 1px solid #AEAEAE;
+  }
+}
+
+.category-header {
+  padding: 1px 10px;
+  border-bottom: 1px solid #AEAEAE;
+  text-align: center;
+  color:white;
+  font-size:13px;
+  font-weight: 900;
+}
+.category-content {
+  padding: 10px;
+  font-size:13px;
+  line-height:25px;
+}
+.category-content a {
+  color: #333;
+  text-decoration: none;
+}
+.category-content a:hover {
+  color: #333;
+}
+.category-item-enhanced {
+  font-weight: 900;
+}

@@ -1,24 +1,49 @@
 import {getCategories as loadCategories} from "@/data/api/category"
 import {ref} from "vue"
 
+const MOUNTAIN_CATEGORY_TYPE = 1
+const MYSTERTY_CATEGORY_TYPE = 2
+
+const pseudoCatMap = {
+    "-2": {
+        catNm: "베스트글(등산)",
+        catType: MOUNTAIN_CATEGORY_TYPE
+    },
+    "-3": {
+        catNm: "전체글(등산)",
+        catType: MOUNTAIN_CATEGORY_TYPE
+    },
+    "-4": {
+        catNm: "베스트글(미스터리)",
+        catType: MYSTERTY_CATEGORY_TYPE
+    }
+}
 const categories = ref([])
 const mountainCats = ref([])
 const mysteryCats = ref([])
 const categoryMap = ref({})
 const getCategory = function(key) {
-    return categoryMap.value[key] || {}
+    let cat = null
+
+    if(key < -1) {
+        cat = pseudoCatMap[key]
+    } else {
+        cat = categoryMap.value[key]
+    }
+
+    return cat || {}
 }
 const getCategoryName = function(key) {
 
-    return getCategory(key)["catNm"]
+    return getCategory(key)["catNm"] || ""
 }
 const getCategoryType = function(key) {
-    return getCategory(key)["catType"]
+    return getCategory(key)["catType"] || 0
 }
 const getCategories = function(catType) {
-    if(catType == 1) {
+    if(catType == MOUNTAIN_CATEGORY_TYPE) {
         return mountainCats
-    } else if(catType == 2) {
+    } else if(catType == MYSTERTY_CATEGORY_TYPE) {
         return mysteryCats
     } else {
         return categories

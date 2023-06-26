@@ -52,13 +52,14 @@ export default {
   name: "BoardList",
   components: {ContentAd, BoardSearchBox, BoardPagination, BoardCatSum},
   setup() {
-    const { searchCategory, searchText, searchPage, boards } = useBoardSearch()
+    const { searchCategory, searchText, searchPage, boards, sCatNo } = useBoardSearch()
 
     return {
       searchCategory,
       searchText,
       searchPage,
-      boards
+      boards,
+      sCatNo
     }
   },
   props: {
@@ -87,6 +88,7 @@ export default {
   },
   unmounted() {
     this.boards = []
+    this.sCatNo = -1
   }
 }
 </script>

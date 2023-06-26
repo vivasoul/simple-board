@@ -7,16 +7,33 @@
       </router-link>
     </div>
   </div>
-  <div style="background: rgb(21 46 74 / 75%)">
+  <div v-if="boardTitle" style="background: rgb(21 46 74 / 75%)">
     <div class="header-container sub-header-container">
-      현재게시판
+      {{ boardTitle }}
     </div>
   </div>
 </template>
 
 <script>
+import useCategories from "@/composables/useCategories"
+import useBoardSearch from "@/composables/useBoardSearch"
+
 export default {
-  name: "MenuHeader"
+  name: "MenuHeader",
+  setup() {
+    const { getCategoryName } = useCategories()
+    const { sCatNo } = useBoardSearch()
+
+    return {
+      getCategoryName,
+      sCatNo
+    }
+  },
+  computed: {
+    boardTitle() {
+      return this.getCategoryName(this.sCatNo)
+    }
+  }
 }
 </script>
 

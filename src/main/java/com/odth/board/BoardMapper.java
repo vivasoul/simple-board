@@ -13,6 +13,7 @@ public interface BoardMapper {
 
     int selectBoardMaxPage(BoardSearchVO searchVO);
 
+    List<BoardVO> selectBestBoard(BoardSearchVO searchVO);
     BoardVO selectBoardDetail(int brdNo);
 
     int increaseView(int brdNo);

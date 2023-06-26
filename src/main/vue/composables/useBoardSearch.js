@@ -1,5 +1,6 @@
 import {ref} from "vue"
 import {getBoard} from "@/data/api/board"
+import useCategories from "@/composables/useCategories"
 /* search-input */
 const sCatNo = ref(-1)
 const sCurPage = ref(1)
@@ -10,8 +11,11 @@ const boards = ref([])
 const maxPage = ref(0)
 
 async function loadBoards() {
+    const {getCategoryType} = useCategories()
+    const catNo = sCatNo.value
     const postData = {
-        catNo: sCatNo.value,
+        catNo,
+        catType: getCategoryType(catNo),
         curPage: sCurPage.value,
         mode: sMode.value,
         text: sText.value

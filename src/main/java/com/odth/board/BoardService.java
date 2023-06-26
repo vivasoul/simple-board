@@ -28,16 +28,29 @@ public class BoardService {
     private String DEFAULT_PASS;
 
     private int ROW_PER_PAGE = 15;
+    private final int BEST_MOUNTAIN_BOARDS = -2;
+    private final int BEST_MYSTERY_BOARDS = -4;
 
     @Transactional
     public BoardListVO getBoard(BoardSearchVO searchVO) {
         BoardListVO result = new BoardListVO();
+        int catNo = searchVO.getCatNo();
 
         searchVO.setRowPerPage(ROW_PER_PAGE);
-        searchVO.setOffset(getOffSet(searchVO));
+        List<BoardVO> boards;
+        int maxPage;
 
-        List<BoardVO> boards = boardMapper.selectBoard(searchVO);
-        int maxPage = boardMapper.selectBoardMaxPage(searchVO);
+        switch(catNo) {
+            case BEST_MOUNTAIN_BOARDS:
+            case BEST_MYSTERY_BOARDS:
+                boards = boardMapper.selectBestBoard(searchVO);
+                maxPage = 1;
+                break;
+            default:
+                searchVO.setOffset(getOffSet(searchVO));
+                boards = boardMapper.selectBoard(searchVO);
+                maxPage = boardMapper.selectBoardMaxPage(searchVO);
+        }
 
         result.setBoards(boards);
         result.setPage(searchVO.getCurPage(), maxPage);

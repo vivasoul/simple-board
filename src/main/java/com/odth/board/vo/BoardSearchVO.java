@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class BoardSearchVO extends BoardVO{
     private int catNo;
+    private int catType;
     private int curPage;
     private String mode;
     private String text;

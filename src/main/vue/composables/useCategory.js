@@ -1,9 +1,11 @@
 import {ref} from "vue"
 
-const category = ref(null)
+const name = ref("")
+const key = ref("")
 export default function useCategory() {
 
     return {
-        category
+        name,
+        key
     }
 }
