@@ -2,7 +2,8 @@
   <div class="q-pa-lg flex flex-center">
     <q-pagination
         v-model="curPage"
-        color="green"
+        outline
+        color="outddo1"
         :max="maxPage"
         :max-pages="8"
         boundary-numbers

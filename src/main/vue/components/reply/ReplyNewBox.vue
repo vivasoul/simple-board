@@ -13,7 +13,7 @@
         <div class="reply-pass">
           <q-input v-model="passwd" type="password" label="댓글 비밀번호" maxlength="10" outlined dense/>
         </div>
-        <q-btn color="brown-5" label="댓글" @click="createReplyBox"/>
+        <q-btn outline color="outddo1" label="댓글" @click="createReplyBox"/>
       </div>
     </div>
   </div>

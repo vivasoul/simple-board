@@ -69,6 +69,24 @@ a,
   }*/
 }
 
+$outddo-base1: rgb(21, 46, 74);
+$outddo-base2: rgb(159, 52, 52);
+
+.bg-outddo1 {
+  background-color: rgba(21, 46, 74, 0.75) !important;
+}
+
+.text-outddo1 {
+  color: $outddo-base1 !important;
+}
+
+.bg-outddo2 {
+  background-color: rgb(159, 52, 52, 0.75) !important;
+}
+
+.text-outddo2 {
+  color: $outddo-base2 !important;
+}
 
 @import "@/assets/css/common.scss";
 @import "@/assets/css/header.scss";

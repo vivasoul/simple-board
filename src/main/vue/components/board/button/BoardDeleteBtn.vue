@@ -1,6 +1,6 @@
 <template>
   <q-btn
-      style="background:#4AD47F;color:white;"
+      outline color="outddo2"
       label="삭제"
       @click="handlePassOpen"/>
   <board-pass-modal

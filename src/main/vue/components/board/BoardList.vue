@@ -28,9 +28,9 @@
 <!--  <content-ad
       ad-slot="1894022555"
   />-->
-  <div class="q-pa-md q-gutter-y-md column items-end" v-if="catNo > 0">
+  <div class="q-pa-md q-gutter-y-md column items-end board-addon" v-if="catNo > 0">
     <q-btn-group>
-      <q-btn color="secondary" label="글쓰기" @click="createBoard"/>
+      <q-btn outline text-color="outddo1" label="글쓰기" @click="createBoard"/>
     </q-btn-group>
   </div>
   <board-search-box />

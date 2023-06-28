@@ -18,15 +18,15 @@
       <div class="board-content" v-html="content"></div>
     </div>
   </div>
-  <div class="q-pa-md q-gutter-y-md column items-end">
+  <div class="q-pa-md q-gutter-y-md column items-end board-addon">
     <q-btn-group>
-      <q-btn v-if="editable"  style="background:#69D44A;color:white;" label="저장" @click="updateBoard"/>
+      <q-btn v-if="editable"  outline color="outddo1" label="저장" @click="updateBoard"/>
       <board-update-btn v-else :brd-no="brdNo" @update-mode-confirmed="toggleEdit(true)"/>
 <!--      <q-btn v-else           style="background:#69D44A;color:white;" label="수정" @click="toggleEdit(true)"/>-->
 <!--      <q-btn                  style="background:#4AD47F;color:white;" label="삭제" @click="deleteBoard"/>-->
       <board-delete-btn :brd-no="brdNo" @delete-confirmed="deleteBoard"/>
-      <q-btn v-if="editable"  style="background:#5DEB6B;color:white;" label="취소" @click="toggleEdit(false)"/>
-      <q-btn v-else           style="background:#5DEB6B;color:white;" label="목록" @click="goToList"/>
+      <q-btn v-if="editable"  outline color="outddo2" label="취소" @click="toggleEdit(false)"/>
+      <q-btn v-else           outline color="outddo1" label="목록" @click="goToList"/>
     </q-btn-group>
   </div>
 <!--  <content-ad

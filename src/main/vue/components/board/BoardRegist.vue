@@ -7,10 +7,10 @@
       <q-input v-model="passwd" type="password" label="수정 비밀번호" maxlength="20" outlined dense/>
     </div>
   </div>
-  <div class="q-pa-md q-gutter-y-md column items-end">
+  <div class="q-pa-md q-gutter-y-md column items-end board-addon">
     <q-btn-group>
-      <q-btn style="background:#69D44A;color:white;" label="등록" @click="createBoard"/>
-      <q-btn style="background:#5DEB6B;color:white;" label="취소" @click="goToList"/>
+      <q-btn outline color="outddo1" label="등록" @click="createBoard"/>
+      <q-btn outline color="outddo2" label="취소" @click="goToList"/>
     </q-btn-group>
   </div>
 </template>

@@ -70,6 +70,12 @@
   font-size:13px;
 }
 
+.reply-addon {
+  button {
+    font-size:12px !important;
+  }
+}
+
 @media (max-width: 850px) {
   .reply-list {
     padding: 5px 0px;
