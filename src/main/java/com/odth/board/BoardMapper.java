@@ -12,8 +12,12 @@ public interface BoardMapper {
     List<BoardVO> selectBoard(BoardSearchVO searchVO);
 
     int selectBoardMaxPage(BoardSearchVO searchVO);
-
     List<BoardVO> selectBestBoard(BoardSearchVO searchVO);
+
+    List<BoardVO> selectRecentBoard(BoardSearchVO searchVO);
+
+    int selectRecentBoardMaxPage(BoardSearchVO searchVO);
+
     BoardVO selectBoardDetail(int brdNo);
 
     int increaseView(int brdNo);

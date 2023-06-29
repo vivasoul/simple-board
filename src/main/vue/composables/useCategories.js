@@ -1,6 +1,7 @@
 import {getCategories as loadCategories} from "@/data/api/category"
 import {ref} from "vue"
 
+const ALL_CATEGORY_TYPE = 0
 const MOUNTAIN_CATEGORY_TYPE = 1
 const MYSTERTY_CATEGORY_TYPE = 2
 
@@ -16,6 +17,14 @@ const pseudoCatMap = {
     "-4": {
         catNm: "베스트글(미스터리)",
         catType: MYSTERTY_CATEGORY_TYPE
+    },
+    "-5": {
+        catNm: "최신글",
+        catType: ALL_CATEGORY_TYPE
+    },
+    "-6": {
+        catNm: "베스트글",
+        catType: ALL_CATEGORY_TYPE
     }
 }
 const categories = ref([])

@@ -30,6 +30,8 @@ public class BoardService {
     private int ROW_PER_PAGE = 15;
     private final int BEST_MOUNTAIN_BOARDS = -2;
     private final int BEST_MYSTERY_BOARDS = -4;
+    private final int RECENT_ALL_BOARDS = -5;
+    private final int BEST_ALL_BOARDS = -6;
 
     @Transactional
     public BoardListVO getBoard(BoardSearchVO searchVO) {
@@ -43,8 +45,14 @@ public class BoardService {
         switch(catNo) {
             case BEST_MOUNTAIN_BOARDS:
             case BEST_MYSTERY_BOARDS:
+            case BEST_ALL_BOARDS:
                 boards = boardMapper.selectBestBoard(searchVO);
                 maxPage = 1;
+                break;
+            case RECENT_ALL_BOARDS:
+                searchVO.setOffset(getOffSet(searchVO));
+                boards = boardMapper.selectRecentBoard(searchVO);
+                maxPage = boardMapper.selectRecentBoardMaxPage(searchVO);
                 break;
             default:
                 searchVO.setOffset(getOffSet(searchVO));

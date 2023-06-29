@@ -3,8 +3,10 @@
     <div class="header-container">
       <router-link :active-class="false" to="/">
           <img class="logo-image" src="@/assets/image/outddo_logo_m5.png" style=""/>
-          <span class="logo-text">아우또</span>
+<!--          <span class="logo-text">아우또</span>-->
       </router-link>
+      <router-link class="head-link" :active-class="false" to="/boards/all/recent">최신글</router-link>
+      <router-link class="head-link" :active-class="false" to="/boards/all/best">베스트글</router-link>
     </div>
   </div>
   <div v-if="boardTitle" style="background: rgb(21 46 74 / 75%)">

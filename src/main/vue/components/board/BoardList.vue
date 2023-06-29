@@ -89,6 +89,11 @@ export default {
   unmounted() {
     this.boards = []
     this.sCatNo = -1
+  },
+  updated() {
+    if(this.catNo != this.sCatNo) {
+      this.searchCategory(this.catNo)
+    }
   }
 }
 </script>

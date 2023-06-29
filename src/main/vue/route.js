@@ -10,6 +10,10 @@ import CategoryPanel from "@/components/category/CategoryPanel.vue"
 const routes = [
     {path: "/", component: CategoryPanel},
     {path: "/boards", component: BoardList, props: (route) => ({ catNo: route.query.catNo })},
+    {path: "/boards/all/recent", component: BoardList, props: () => ({ catNo: -5 })},
+    {path: "/boards/all/best", component: BoardList, props: () => ({ catNo: -6 })},
+    {path: "/boards/mt/best", component: BoardList, props: () => ({ catNo: -2 })},
+    {path: "/boards/ms/best", component: BoardList, props: () => ({ catNo: -4 })},
     {path: "/boards-new", component: BoardRegist},
     {path: "/boards/:brdNo", component: BoardDetail, props: true},
     {path: "/cond/private", component: PriviteCondition},

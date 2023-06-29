@@ -23,6 +23,10 @@
         </choose>
     </sql>
 
+    <sql id="recentCondition">
+        AND a.reg_dt > DATE_ADD(current_timestamp(), INTERVAL -1 MONTH)
+    </sql>
+
     <select id="selectBoard" parameterType="com.odth.board.vo.BoardSearchVO" resultType="com.odth.board.vo.BoardVO">
         SELECT
              a.brd_no
@@ -75,6 +79,40 @@
         <include refid="searchCondition" />
         ORDER BY a.view_cnt DESC
         LIMIT #{rowPerPage}
+    </select>
+
+    <select id="selectRecentBoard" parameterType="com.odth.board.vo.BoardSearchVO" resultType="com.odth.board.vo.BoardVO">
+        SELECT
+        a.brd_no
+        ,a.title
+        ,sf_get_cat_nos(a.brd_no) AS cat_nostr
+        ,sf_get_rpl_cnt(a.brd_no) AS reply_cnt
+        ,sf_mask_ip(a.reg_ip) AS reg_ip
+        ,NVL(a.reg_id, '익명') AS reg_id
+        ,sf_get_time_diff(a.reg_dt) AS time_elapsed
+        ,(SELECT down_path FROM tb_attach_file WHERE file_id = a.thumb_id) AS thumb_path
+        ,a.view_cnt
+        FROM tb_board a
+        INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
+        INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
+        WHERE 1=1
+        AND a.del_yn = 'N'
+        <include refid="recentCondition" />
+        <include refid="searchCondition" />
+        ORDER BY a.brd_no DESC
+        LIMIT #{offset}, #{rowPerPage}
+    </select>
+
+    <select id="selectRecentBoardMaxPage" parameterType="com.odth.board.vo.BoardSearchVO" resultType="int">
+        SELECT
+        CEIL(COUNT(*)/#{rowPerPage}) AS max_page
+        FROM tb_board a
+        INNER JOIN tb_board_category b ON (a.brd_no = b.brd_no)
+        INNER JOIN tb_category c ON (b.cat_no = c.cat_no)
+        WHERE 1=1
+        AND a.del_yn = 'N'
+        <include refid="recentCondition" />
+        <include refid="searchCondition" />
     </select>
 
     <select id="selectBoardDetail" parameterType="int" resultType="com.odth.board.vo.BoardVO">
