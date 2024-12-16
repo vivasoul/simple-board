@@ -11,7 +11,7 @@ spring:
         driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
         jdbc-url: jdbc:log4jdbc:mariadb://13.209.13.134/outdoors
         username: outuser
-        password: customdoors1!
+     #   password: ????
         minimumIdle: 10
         maximumPoolSize: 100
         maxLifetime: 3540000
